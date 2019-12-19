@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 
 import createSagaMiddleware from "redux-saga";
 import rootSaga from "modules/sagas";
+import { GlobalStyle } from "./lib/styles/StyledGlobal";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -27,6 +28,7 @@ console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
+    <GlobalStyle />
     <App />
   </Provider>,
   document.getElementById("root")

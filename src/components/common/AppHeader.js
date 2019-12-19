@@ -28,7 +28,7 @@ const AppHeader = ({ match }) => {
 
       <UserAvatar>
         <img src={Avatar} alt="avatar" />
-        <span>{`조혜형`}</span>
+        <span>{`Hyehyeong`}</span>
       </UserAvatar>
     </HeaderContainer>
   );
@@ -37,7 +37,9 @@ const AppHeader = ({ match }) => {
 export default withRouter(AppHeader);
 
 const HeaderContainer = styled.div`
-  height: 8vh;
+  padding: 0 2rem;
+  margin: 1rem 0;
+  height: 10vh;
   display: grid;
   grid-template-columns: 10rem 7rem 7rem 7rem 7rem 1fr 10rem;
 `;
@@ -75,8 +77,8 @@ grid-column-end: -1;
     height: 2.5rem;
   }
   & span {
-    margin-left: 1rem;
-    font-size: 1.5rem;
+    margin-left: 0.7rem;
+    font-size: 1.2rem;
     color: ${pallete.teal5};
   }
 `;

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
 export const StyledPageLayout = styled.div`
-  min-height: 500px;
+  padding: 0 2rem;
+  min-height: 350px;
 `;
