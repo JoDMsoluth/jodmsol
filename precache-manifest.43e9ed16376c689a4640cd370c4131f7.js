@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f55c43ac5d4e2c32f5184d52d3b04c75",
+    "revision": "620963a8c4fb3333350975c7de2f60c4",
     "url": "/jodmsol/index.html"
   },
   {
-    "revision": "0faca9283a1a5ea71942",
+    "revision": "363ba1f4e5a993ae5113",
     "url": "/jodmsol/static/css/main.bdeee7b1.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jodmsol/static/js/2.d56feab6.chunk.js.LICENSE"
   },
   {
-    "revision": "0faca9283a1a5ea71942",
-    "url": "/jodmsol/static/js/main.97db48fe.chunk.js"
+    "revision": "363ba1f4e5a993ae5113",
+    "url": "/jodmsol/static/js/main.532d2e66.chunk.js"
   },
   {
     "revision": "0021104730d0716421ac",
