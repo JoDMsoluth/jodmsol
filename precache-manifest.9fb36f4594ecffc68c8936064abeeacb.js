@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "825a10d0278cceec71287081525d3ec2",
+    "revision": "ec5d94a20ba88a71c433db137cac3e10",
     "url": "/jodmsol/index.html"
   },
   {
-    "revision": "b9ee9d8f688dceaa3fb2",
+    "revision": "d7f2d9c256dc666486b7",
     "url": "/jodmsol/static/css/main.bdeee7b1.chunk.css"
   },
   {
-    "revision": "e5bd33e4d8b51f71243c",
-    "url": "/jodmsol/static/js/2.ef9f684a.chunk.js"
+    "revision": "26cb1ba64a29aacdc361",
+    "url": "/jodmsol/static/js/2.4bac327e.chunk.js"
   },
   {
     "revision": "372f806ff62710440693f6d8e67bbb57",
-    "url": "/jodmsol/static/js/2.ef9f684a.chunk.js.LICENSE"
+    "url": "/jodmsol/static/js/2.4bac327e.chunk.js.LICENSE"
   },
   {
-    "revision": "b9ee9d8f688dceaa3fb2",
-    "url": "/jodmsol/static/js/main.2d4b29a9.chunk.js"
+    "revision": "d7f2d9c256dc666486b7",
+    "url": "/jodmsol/static/js/main.14a222d0.chunk.js"
   },
   {
     "revision": "0021104730d0716421ac",
@@ -76,6 +76,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jodmsol/static/media/introduceImg.13dc9744.jpg"
   },
   {
+    "revision": "a55c4568f651d97d58acf6669f739148",
+    "url": "/jodmsol/static/media/jodsolProject.a55c4568.PNG"
+  },
+  {
     "revision": "d22d3c050c1218e6363b27c3e5479bfa",
     "url": "/jodmsol/static/media/kakao.d22d3c05.PNG"
   },
@@ -86,6 +90,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "a0855d5236057e56234a03e10a840ea0",
     "url": "/jodmsol/static/media/kickVillage.a0855d52.png"
+  },
+  {
+    "revision": "c1694e4fac95dc53dbdd2406bbb9d019",
+    "url": "/jodmsol/static/media/kickVillageProject.c1694e4f.PNG"
   },
   {
     "revision": "fa0b404b0ff93043d9705103b060840c",

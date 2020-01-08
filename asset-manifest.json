@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/jodmsol/static/css/main.bdeee7b1.chunk.css",
-    "main.js": "/jodmsol/static/js/main.2d4b29a9.chunk.js",
-    "main.js.map": "/jodmsol/static/js/main.2d4b29a9.chunk.js.map",
+    "main.js": "/jodmsol/static/js/main.14a222d0.chunk.js",
+    "main.js.map": "/jodmsol/static/js/main.14a222d0.chunk.js.map",
     "runtime-main.js": "/jodmsol/static/js/runtime-main.942cb3b7.js",
     "runtime-main.js.map": "/jodmsol/static/js/runtime-main.942cb3b7.js.map",
-    "static/js/2.ef9f684a.chunk.js": "/jodmsol/static/js/2.ef9f684a.chunk.js",
-    "static/js/2.ef9f684a.chunk.js.map": "/jodmsol/static/js/2.ef9f684a.chunk.js.map",
+    "static/js/2.4bac327e.chunk.js": "/jodmsol/static/js/2.4bac327e.chunk.js",
+    "static/js/2.4bac327e.chunk.js.map": "/jodmsol/static/js/2.4bac327e.chunk.js.map",
     "index.html": "/jodmsol/index.html",
-    "precache-manifest.c6f52760c447631de5fafad8b92ce0f6.js": "/jodmsol/precache-manifest.c6f52760c447631de5fafad8b92ce0f6.js",
+    "precache-manifest.9fb36f4594ecffc68c8936064abeeacb.js": "/jodmsol/precache-manifest.9fb36f4594ecffc68c8936064abeeacb.js",
     "service-worker.js": "/jodmsol/service-worker.js",
     "static/css/main.bdeee7b1.chunk.css.map": "/jodmsol/static/css/main.bdeee7b1.chunk.css.map",
-    "static/js/2.ef9f684a.chunk.js.LICENSE": "/jodmsol/static/js/2.ef9f684a.chunk.js.LICENSE",
+    "static/js/2.4bac327e.chunk.js.LICENSE": "/jodmsol/static/js/2.4bac327e.chunk.js.LICENSE",
     "static/media/Avatar.jpg": "/jodmsol/static/media/Avatar.1ee4ddd9.jpg",
     "static/media/back.PNG": "/jodmsol/static/media/back.80ff154f.PNG",
     "static/media/cardHead.PNG": "/jodmsol/static/media/cardHead.ea9270d5.PNG",
@@ -25,9 +25,11 @@
     "static/media/instagram.PNG": "/jodmsol/static/media/instagram.fb924836.PNG",
     "static/media/introBgCenter.png": "/jodmsol/static/media/introBgCenter.7761b70a.png",
     "static/media/introduceImg.jpg": "/jodmsol/static/media/introduceImg.13dc9744.jpg",
+    "static/media/jodsolProject.PNG": "/jodmsol/static/media/jodsolProject.a55c4568.PNG",
     "static/media/kakao.PNG": "/jodmsol/static/media/kakao.d22d3c05.PNG",
     "static/media/kakaotalk.png": "/jodmsol/static/media/kakaotalk.e31cd119.png",
     "static/media/kickVillage.png": "/jodmsol/static/media/kickVillage.a0855d52.png",
+    "static/media/kickVillageProject.PNG": "/jodmsol/static/media/kickVillageProject.c1694e4f.PNG",
     "static/media/logo.png": "/jodmsol/static/media/logo.fa0b404b.png",
     "static/media/mongodb.png": "/jodmsol/static/media/mongodb.b0fa845b.png",
     "static/media/mysql.png": "/jodmsol/static/media/mysql.05767a51.png",
@@ -42,8 +44,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.942cb3b7.js",
-    "static/js/2.ef9f684a.chunk.js",
+    "static/js/2.4bac327e.chunk.js",
     "static/css/main.bdeee7b1.chunk.css",
-    "static/js/main.2d4b29a9.chunk.js"
+    "static/js/main.14a222d0.chunk.js"
   ]
 }
