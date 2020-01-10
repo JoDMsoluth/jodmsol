@@ -1,0 +1,13 @@
+.input-icon {
+  position: absolute;
+  top: 51%;
+  left: 12px;
+  transform: translateY(-50%);
+}
+
+.vertical-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
