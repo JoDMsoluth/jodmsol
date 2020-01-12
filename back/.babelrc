@@ -1,0 +1,27 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [".ts"],
+        "root": ["./src"],
+        "alias": {
+          "~/*": "./src"
+        }
+      }
+    ]
+  ],
+  "comments": false,
+  "ignore": ["./src/__tests__"]
+}

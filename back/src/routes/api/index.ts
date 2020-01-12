@@ -1,7 +1,9 @@
-import express, { Router } from "express";
+import { Router, Request, Response } from "express";
 import post from "./post";
-const router = express.Router();
+import posts from "./posts";
+const api = Router();
 
-router.use("/post", post);
+api.use("/post", post);
+api.use("/posts", posts);
 
-export default router;
+export default api;

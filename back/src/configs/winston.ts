@@ -1,4 +1,4 @@
-const appRoot = require("app-root-path");
+import appRoot from "app-root-path";
 import * as winston from "winston";
 
 const { combine, timestamp, label, printf } = winston.format;
@@ -44,4 +44,4 @@ if (process.env.NODE_ENV !== "production") {
   logger.add(new winston.transports.Console(options.console)); // 개발 시 console로도 출력
 }
 
-module.exports = logger;
+export default logger;

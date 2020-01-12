@@ -1,6 +1,6 @@
 {
-  "watch": ["src"],
-  "ext": "ts",
-  "ignore": ["src/**/*.spec.ts"],
-  "exec": "ts-node ./src/index.ts"
+  "ignore": ["node_modules"],
+  "watch": ["src", "package-lock"],
+  "exec": "babel-node --extensions \".ts\" src/server.ts",
+  "ext": "ts"
 }
