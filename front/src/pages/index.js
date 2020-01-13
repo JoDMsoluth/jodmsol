@@ -4,3 +4,4 @@ export { default as ProfilePage } from "pages/ProfilePage";
 export { default as ProjectPage } from "pages/ProjectPage";
 export { default as WritePost } from "src/pages/WritePost";
 export { default as NotFoundPage } from "pages/NotFoundPage";
+export { default as PostPage } from "pages/PostPage";

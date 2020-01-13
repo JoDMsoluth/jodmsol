@@ -14,6 +14,9 @@ import api from "routes/api";
 import dotenv from "dotenv";
 dotenv.config();
 
+import createDummyData from "./createDummyData";
+import router from "routes/indes";
+
 // connect to mongodb
 const MongoStore: mongo.MongoStoreFactory = mongo(session);
 export const mongoUrl: string =
@@ -29,6 +32,7 @@ mongoose
   })
   .then(() => {
     console.log("  MongoDB is connected successfully.");
+    //createDummyData();
   })
   .catch(err => {
     console.error(
@@ -70,6 +74,6 @@ if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
 }
 
-app.use("/", api);
+app.use("/", router);
 
 export default app;
