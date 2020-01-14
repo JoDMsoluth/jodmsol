@@ -2,9 +2,11 @@ import { Request, Response } from "express";
 import PostCollection from "models/post/PostCollection";
 import PostDocument from "models/post/PostDocument";
 import Joi from "joi";
+import sanitizeHtml from "sanitize-html";
+import { sanitizeOption } from "lib/sanitizeHtml";
 
 //read
-export async function readPost(req: Request, res: Response) {
+export async function loadPost(req: Request, res: Response) {
   const { id } = req.params;
   try {
     const getPost: PostDocument | null = await PostCollection.findById(
@@ -21,23 +23,30 @@ export async function readPost(req: Request, res: Response) {
   }
 }
 //write
-export async function writePost(req: Request, res: Response) {
+export async function addPost(req: Request, res: Response) {
   const schema: Joi.ObjectSchema = Joi.object().keys({
+    coverImg: Joi.string(),
     title: Joi.string().required(),
     markdown: Joi.string().required(),
-    tags: Joi.string()
+    tags: Joi.string(),
+    category: Joi.string(),
+    series: Joi.string()
   });
   const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
   if (joiResult.error) {
-    res.status(400).send("bad request");
+    res.status(400).send(joiResult.error);
     return;
   }
 
   const { title, markdown, tags } = req.body;
+  const hashtags: string[] = tags.match(/#[^\s]+/g);
   const newPost: PostDocument = new PostCollection({
+    coverImg: "",
     title,
-    markdown,
-    tags,
+    markdown: sanitizeHtml(markdown, sanitizeOption),
+    tags: hashtags,
+    series: "",
+    category: "study",
     likes: 0
   });
   try {
@@ -62,21 +71,32 @@ export async function deletePost(req: Request, res: Response) {
 }
 //update
 export async function updatePost(req: Request, res: Response) {
+  const { id } = req.params;
+  // const a = JSON.parse(req.body);
+  // res.send(a);
+  // return;
   const schema: Joi.ObjectSchema = Joi.object().keys({
+    coverImg: Joi.string(),
     title: Joi.string(),
     markdown: Joi.string(),
-    tags: Joi.string()
+    tags: Joi.string(),
+    category: Joi.string(),
+    series: Joi.string()
   });
+
   const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
   if (joiResult.error) {
-    res.status(400).send("bad request");
+    res.status(400).send(joiResult.error);
     return;
   }
-  const { id } = req.params;
+  const updateData = Object.assign({}, req.body);
+  if (updateData.body) {
+    updateData.body = sanitizeHtml(updateData.body);
+  }
   try {
     const newPost: PostDocument | null = await PostCollection.findByIdAndUpdate(
       id,
-      req.body,
+      updateData,
       {
         new: true
       }
@@ -93,8 +113,8 @@ export async function updatePost(req: Request, res: Response) {
 }
 
 const postController = {
-  readPost,
-  writePost,
+  loadPost,
+  addPost,
   deletePost,
   updatePost
 };

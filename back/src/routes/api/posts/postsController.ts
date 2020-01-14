@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
 import PostCollection from "models/post/PostCollection";
 import PostDocument from "models/post/PostDocument";
+import { removeHtmlAndShorten } from "lib/sanitizeHtml";
 
-async function readAllPosts(req: Request, res: Response) {
+async function loadAllPosts(req: Request, res: Response) {
   const page: number = parseInt(req.query.page || "1", 10);
   if (page < 1) {
     res.status(400).send("bad request");
@@ -19,10 +20,7 @@ async function readAllPosts(req: Request, res: Response) {
     res.set("Last-Page", Math.ceil(postCount / 10).toString());
     getPosts.map(post => ({
       ...post,
-      markdown:
-        post.markdown.length < 600
-          ? post.markdown
-          : `${post.markdown.slice(0, 600)}`
+      markdown: removeHtmlAndShorten(post.markdown)
     }));
     console.log(getPosts);
     res.json(getPosts);
@@ -32,7 +30,7 @@ async function readAllPosts(req: Request, res: Response) {
 }
 
 const postsController = {
-  readAllPosts
+  loadAllPosts
 };
 
 export default postsController;

@@ -5,7 +5,9 @@ export const PostSchema: Schema = new Schema(
   {
     title: String,
     markdown: String,
-    tags: String,
+    tags: [String],
+    series: String,
+    category: String,
     likes: Number
   },
   { timestamps: true }

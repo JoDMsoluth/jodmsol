@@ -23,6 +23,7 @@
     "@types/express-session": "^1.15.16",
     "@types/helmet": "0.0.45",
     "@types/joi": "^14.3.4",
+    "@types/sanitize-html": "^1.20.2",
     "@types/winston": "^2.4.4",
     "app-root-path": "^3.0.0",
     "axios": "^0.19.1",
@@ -39,8 +40,10 @@
     "joi": "^14.3.1",
     "mongoose": "^5.8.6",
     "nodemon": "^2.0.2",
+    "sanitize-html": "^1.20.1",
     "supertest": "^4.0.2",
     "ts-node": "^8.6.0",
+    "tslint": "^5.20.1",
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "winston": "^3.2.1"
@@ -56,8 +59,6 @@
     "@types/supertest": "^2.0.8",
     "babel-plugin-module-resolver": "^4.0.0",
     "jest": "^24.9.0",
-    "tslint": "^5.20.1",
-    "tslint-config-airbnb": "^5.11.2",
     "typescript": "^3.7.4"
   }
 }

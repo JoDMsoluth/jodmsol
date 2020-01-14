@@ -3,6 +3,6 @@ import postsController from "./postsController";
 const posts = Router();
 
 //read
-posts.get("/", postsController.readAllPosts);
+posts.get("/load", postsController.loadAllPosts);
 
 export default posts;
