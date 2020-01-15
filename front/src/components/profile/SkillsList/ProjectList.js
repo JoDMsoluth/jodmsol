@@ -13,7 +13,7 @@ export default function ProjectList() {
       <ProjectListWrap>
         <ProjectListItem>
           <CustomIcon border inline size="large">
-            <i class="fas fa-building"></i>
+            <i className="fas fa-building"></i>
           </CustomIcon>
           <TextContainer>
             <div>Compony Project</div>
@@ -25,7 +25,7 @@ export default function ProjectList() {
         </ProjectListItem>
         <ProjectListItem>
           <CustomIcon border inline size="large">
-            <i class="fas fa-users"></i>
+            <i className="fas fa-users"></i>
           </CustomIcon>
           <TextContainer>
             <div>Team Project</div>
@@ -37,7 +37,7 @@ export default function ProjectList() {
         </ProjectListItem>
         <ProjectListItem>
           <CustomIcon border inline size="large">
-            <i class="fas fa-user"></i>
+            <i className="fas fa-user"></i>
           </CustomIcon>
           <TextContainer>
             <div>Personal Project</div>

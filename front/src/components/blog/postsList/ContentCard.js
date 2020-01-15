@@ -4,10 +4,10 @@ import palette from "lib/styles/palette";
 import { Link } from "react-router-dom";
 
 export default function BlogContentCard({ post }) {
-  const { title, updatedAt, markdown, tags, likes } = post;
+  const { _id, title, updatedAt, markdown, tags, likes } = post;
   return (
     <>
-      <ContentCardWrap>
+      <ContentCardWrap to={`/post/load/${_id}`}>
         <CoverImg coverImg={null}></CoverImg>
         <Content>
           <ContentHead>
@@ -16,15 +16,21 @@ export default function BlogContentCard({ post }) {
               <span>{updatedAt}</span>
               <span style={{ float: "right" }}>
                 {typeof tags === typeof {}
-                  ? Object.keys(tags).map(tag => (
-                      <Link to="/">{`${tags[tag]} `}</Link>
+                  ? Object.keys(tags).map((tag, i) => (
+                      <Link
+                        to={`/blog/?tag=${tags[tag].substring(
+                          1,
+                          tags[tag].length
+                        )}`}
+                        key={`${_id}+${i}`}
+                      >{`${tags[tag]} `}</Link>
                     ))
                   : `${tags}`}
               </span>
             </div>
             <ContentSubHead>
               <div>
-                <i className="far fa-heart"></i>
+                <i className="fas fa-heart"></i>
                 {` ${likes}`}
               </div>
             </ContentSubHead>
@@ -39,7 +45,7 @@ export default function BlogContentCard({ post }) {
   );
 }
 
-const ContentCardWrap = styled.div`
+const ContentCardWrap = styled(Link)`
   width: 100%;
   padding: 0.8rem 1rem;
   height: 16.1rem;
@@ -88,8 +94,11 @@ const ContentSubHead = styled.div`
   top: 1rem;
   right: 2rem;
   & div:first-child {
-    color: ${palette.teal9};
+    color: ${palette.blue6};
     text-align: right;
+    &:hover {
+      color: ${palette.blue8};
+    }
   }
 `;
 const ContentBody = styled.div`

@@ -11,5 +11,9 @@ post.post("/add", postController.addPost);
 post.delete("/delte/:id", checkObjectId, postController.deletePost);
 //update
 post.patch("/update/:id", checkObjectId, postController.updatePost);
+//like
+post.get("/like/:id", checkObjectId, postController.likePost);
+//unlike
+post.get("/unlike/:id", checkObjectId, postController.unlikePost);
 
 export default post;

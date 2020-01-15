@@ -7,6 +7,7 @@ async function loadAllPosts(req: Request, res: Response) {
   const page: number = parseInt(req.query.page || "1", 10);
   if (page < 1) {
     res.status(400).send("bad request");
+    console.log("bad request");
     return;
   }
   try {
@@ -22,7 +23,6 @@ async function loadAllPosts(req: Request, res: Response) {
       ...post,
       markdown: removeHtmlAndShorten(post.markdown)
     }));
-    console.log(getPosts);
     res.json(getPosts);
   } catch (e) {
     console.error(e);

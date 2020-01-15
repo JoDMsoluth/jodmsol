@@ -9,13 +9,12 @@ import errorHandler from "errorhandler";
 
 import mongo from "connect-mongo";
 import mongoose from "mongoose";
-import api from "routes/api";
 
 import dotenv from "dotenv";
 dotenv.config();
 
-import createDummyData from "./createDummyData";
 import router from "routes/indes";
+// import createDummyData from "lib/createDummyData";
 
 // connect to mongodb
 const MongoStore: mongo.MongoStoreFactory = mongo(session);
@@ -32,7 +31,7 @@ mongoose
   })
   .then(() => {
     console.log("  MongoDB is connected successfully.");
-    //createDummyData();
+    // createDummyData();
   })
   .catch(err => {
     console.error(
@@ -46,7 +45,8 @@ mongoose
 app.use(
   cors({
     origin: true,
-    credentials: true
+    credentials: true,
+    exposedHeaders: ["Authorization", "Last-Page"] // i can use res.headers
   })
 );
 app.use(express.json());

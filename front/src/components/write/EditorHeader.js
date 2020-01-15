@@ -2,20 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import CustomButton from "src/lib/CustomButton";
 import palette from "src/lib/styles/palette";
-import { withRouter } from "react-router-dom";
 
-const EditHeader = ({ onGoBack, onSubmit, history }) => {
+export default function EditHeader({ onGoBack, onSubmit }) {
   return (
     <>
       <Header>
-        <CustomButton
-          inline
-          color="darkGray"
-          onClick={onGoBack}
-          onClick={() => {
-            history.goBack();
-          }}
-        >
+        <CustomButton inline color="darkGray" onClick={onGoBack}>
           Back
         </CustomButton>
         <CustomButton
@@ -28,9 +20,7 @@ const EditHeader = ({ onGoBack, onSubmit, history }) => {
       </Header>
     </>
   );
-};
-
-export default withRouter(EditHeader);
+}
 
 const Header = styled.div`
   background: ${palette.gray7};

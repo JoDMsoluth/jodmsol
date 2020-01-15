@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { loadPosts, unloadPost } from "modules/stores/posts";
 import { useDispatch, useSelector } from "react-redux";
-import BlogContent from "src/components/blog/postsList";
+import BlogContent from "components/blog/postsList";
+import qs from "qs";
+import { withRouter } from "react-router-dom";
 
-const PostsListContainer = () => {
+const PostsListContainer = ({ location }) => {
   const dispatch = useDispatch();
   const { posts, postError, loading } = useSelector(({ posts, loading }) => ({
     posts: posts.posts,
@@ -12,11 +14,15 @@ const PostsListContainer = () => {
   }));
 
   useEffect(() => {
-    dispatch(loadPosts());
+    const { tag, page } = qs.parse(location.search, {
+      ignoreQueryPrefix: true
+    });
+    console.log("tag, page", tag, page);
+    dispatch(loadPosts({ tag, page }));
     return () => {
       dispatch(unloadPost());
     };
-  }, [dispatch]);
+  }, [dispatch, location.search]);
 
   return (
     <>
@@ -25,4 +31,4 @@ const PostsListContainer = () => {
   );
 };
 
-export default PostsListContainer;
+export default withRouter(PostsListContainer);

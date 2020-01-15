@@ -7,7 +7,7 @@ export default function BlogContentList({ posts }) {
   return (
     <>
       {posts.map(post => (
-        <BlogContentCard key={posts._id} post={post} />
+        <BlogContentCard key={`${post.title}.${post._id}`} post={post} />
       ))}
     </>
   );

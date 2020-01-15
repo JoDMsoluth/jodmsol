@@ -4,7 +4,6 @@ import { createRequestActionTypes } from "src/lib/createRequestSaga";
 
 export const initialState = {
   post: null,
-  posts: null,
   postError: null,
   postSuccess: null
 };
@@ -68,11 +67,17 @@ export const [
 export const REMOVE_IMAGE = "REMOVE_IMAGE";
 export const UNLOAD_POST = "UNLOAD_POST";
 
-export const loadPosts = createAction(LOAD_POSTS_REQUEST);
+export const loadPosts = createAction(LOAD_POSTS_REQUEST, ({ tag, page }) => ({
+  tag,
+  page
+}));
 export const loadHashTags = createAction(LOAD_HASHTAG_REQUEST);
 export const uploadImg = createAction(UPLOAD_IMAGES_REQUEST);
 export const removeImg = createAction(REMOVE_IMAGE);
-export const addPost = createAction(ADD_POST_REQUEST);
+export const addPost = createAction(
+  ADD_POST_REQUEST,
+  ({ title, markdown, tags }) => ({ title, markdown, tags })
+);
 export const likePost = createAction(LIKE_POST_REQUEST);
 export const unlikePost = createAction(UNLIKE_POST_REQUEST);
 export const addComment = createAction(ADD_COMMENT_REQUEST);
@@ -120,7 +125,9 @@ export default handleActions(
       }),
     [LOAD_POSTS_SUCCESS]: (state, action) =>
       produce(state, draft => {
+        console.log("posts lastpage", action.payload, action.meta.headers);
         draft.posts = action.payload;
+        draft.lastPage = parseInt(action.meta.headers["last-page"], 10);
       }),
     [LOAD_POSTS_FAILURE]: (state, action) =>
       produce(state, draft => {

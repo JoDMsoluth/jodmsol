@@ -23,9 +23,9 @@ function App() {
           <Route exact path="/" component={IntroPage} />
           <Route path="/project" component={ProjectPage} />
           <Route path="/profile" component={ProfilePage} />
-          <Route path="/blog" component={BlogPage} />
+          <Route path="/blog/study" component={BlogPage} />
           <Route path="/print/resume" component={ResumeContent} />
-          <Route path="/post/edit" component={WritePost} />
+          <Route path="/post/add" component={WritePost} />
           <Route path="/post/load/:id" component={PostPage} />
           <Route component={IntroPage} />
         </Switch>

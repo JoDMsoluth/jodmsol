@@ -60,8 +60,8 @@ export default function ProjectContentList() {
   return (
     <>
       <ContentListWrap>
-        {contentData.map(content => (
-          <ProjectContentCard key={content.title} content={content} />
+        {contentData.map((content, i) => (
+          <ProjectContentCard key={`${content.title}${i}`} content={content} />
         ))}
       </ContentListWrap>
     </>

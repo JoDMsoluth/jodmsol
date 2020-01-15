@@ -4,6 +4,7 @@ import PostDocument from "models/post/PostDocument";
 import Joi from "joi";
 import sanitizeHtml from "sanitize-html";
 import { sanitizeOption } from "lib/sanitizeHtml";
+import dbPropIncrease from "lib/dbPropIncrease";
 
 //read
 export async function loadPost(req: Request, res: Response) {
@@ -24,6 +25,7 @@ export async function loadPost(req: Request, res: Response) {
 }
 //write
 export async function addPost(req: Request, res: Response) {
+  console.log(req.body);
   const schema: Joi.ObjectSchema = Joi.object().keys({
     coverImg: Joi.string(),
     title: Joi.string().required(),
@@ -35,6 +37,7 @@ export async function addPost(req: Request, res: Response) {
   const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
   if (joiResult.error) {
     res.status(400).send(joiResult.error);
+    console.log(joiResult.error);
     return;
   }
 
@@ -112,11 +115,27 @@ export async function updatePost(req: Request, res: Response) {
   }
 }
 
+//like
+export async function likePost(req: Request, res: Response) {
+  const { id } = req.params;
+  const result = await dbPropIncrease(id, "likes", 1);
+  res.json(result);
+}
+
+//unlike
+export async function unlikePost(req: Request, res: Response) {
+  const { id } = req.params;
+  const result = await dbPropIncrease(id, "likes", -1);
+  res.json(result);
+}
+
 const postController = {
   loadPost,
   addPost,
   deletePost,
-  updatePost
+  updatePost,
+  likePost,
+  unlikePost
 };
 
 export default postController;

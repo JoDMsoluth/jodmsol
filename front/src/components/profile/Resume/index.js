@@ -11,12 +11,7 @@ export default function Resume() {
     <CareerWrap id="Resume">
       <PrintButtonWrap>
         <a href="../../../statics/images/resume.PNG" download="resume">
-          <PrintButton
-            color="lightGray"
-            size="large"
-            inline
-            download={ResumeContent}
-          >
+          <PrintButton color="lightGray" size="large" inline download>
             PDF
           </PrintButton>
         </a>
