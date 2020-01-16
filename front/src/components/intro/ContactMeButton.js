@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import CustomButton from "lib/CustomButton";
 import { withRouter } from "react-router-dom";
-import palette from "src/lib/styles/palette";
-import transitions from "src/lib/styles/transition";
-import smoothScrollTo, { position } from "src/lib/scrollTo";
+import palette from "lib/styles/palette";
+import transitions from "lib/styles/transition";
+import smoothScrollTo, { position } from "lib/scrollTo";
 
 const ContactMeButton = ({ history }) => {
   return (

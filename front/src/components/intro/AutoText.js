@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Typed from "typed.js";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 
 const AutoText = ({ strings }) => {
   useEffect(() => {

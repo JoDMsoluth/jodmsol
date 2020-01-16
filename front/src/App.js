@@ -21,9 +21,9 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={IntroPage} />
-          <Route path="/project" component={ProjectPage} />
+          <Route path="/project/:category?/:filter?" component={ProjectPage} />
           <Route path="/profile" component={ProfilePage} />
-          <Route path="/blog/study" component={BlogPage} />
+          <Route path="/blog/:category?/:filter?" component={BlogPage} />
           <Route path="/print/resume" component={ResumeContent} />
           <Route path="/post/add" component={WritePost} />
           <Route path="/post/load/:id" component={PostPage} />

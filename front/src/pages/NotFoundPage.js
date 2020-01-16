@@ -1,5 +1,5 @@
 import React from "react";
-import AppLayoutContainer from "src/containers/common/AppLayoutContainer";
+import AppLayoutContainer from "containers/common/AppLayoutContainer";
 
 const NotFoundPage = () => {
   return (

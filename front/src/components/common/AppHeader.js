@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
 import transition from "lib/styles/transition";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 import font from "lib/styles/font";
 
 import logo from "statics/images/logo.png";
 import Avatar from "statics/images/Avatar.jpg";
-import arrange from "src/lib/styles/arrage";
+import arrange from "lib/styles/arrage";
 
 const AppHeader = ({ match }) => {
   console.log(match);
@@ -23,7 +23,7 @@ const AppHeader = ({ match }) => {
       <StyledLink to="/project" path={match.path}>
         <span>PROJECT</span>
       </StyledLink>
-      <StyledLink to="/blog/?page=1" path={match.path}>
+      <StyledLink to="/blog/study?page=1" path={match.path}>
         <span>BLOG</span>
       </StyledLink>
 

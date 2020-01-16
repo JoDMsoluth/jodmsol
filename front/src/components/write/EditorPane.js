@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 import CodeMirror from "codemirror";
 
 import "codemirror/mode/markdown/markdown"; // 마크다운 문법 색상

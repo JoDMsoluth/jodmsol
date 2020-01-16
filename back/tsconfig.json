@@ -74,6 +74,6 @@
       "*": ["*", "src/*"]
     }
   },
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/**/*.ts", "src/models/series"],
   "exclude": ["../front"]
 }

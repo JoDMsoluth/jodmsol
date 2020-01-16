@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import PostCollection from "models/post/PostCollection";
-import PostDocument from "models/post/PostDocument";
+import BlogPostCollection from "models/blogPost/BlogPostCollection";
+import BlogPostDocument from "models/blogPost/BlogPostDocument";
 import Joi from "joi";
 import sanitizeHtml from "sanitize-html";
 import { sanitizeOption } from "lib/sanitizeHtml";
@@ -10,7 +10,7 @@ import dbPropIncrease from "lib/dbPropIncrease";
 export async function loadPost(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    const getPost: PostDocument | null = await PostCollection.findById(
+    const getPost: BlogPostDocument | null = await BlogPostCollection.findById(
       id
     ).exec();
     if (!getPost) {
@@ -43,7 +43,7 @@ export async function addPost(req: Request, res: Response) {
 
   const { title, markdown, tags } = req.body;
   const hashtags: string[] = tags.match(/#[^\s]+/g);
-  const newPost: PostDocument = new PostCollection({
+  const newPost: BlogPostDocument = new BlogPostCollection({
     coverImg: "",
     title,
     markdown: sanitizeHtml(markdown, sanitizeOption),
@@ -66,7 +66,7 @@ export async function addPost(req: Request, res: Response) {
 export async function deletePost(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    await PostCollection.findByIdAndRemove(id).exec();
+    await BlogPostCollection.findByIdAndRemove(id).exec();
     res.status(204); // No Content
   } catch (e) {
     console.error(e);
@@ -97,7 +97,7 @@ export async function updatePost(req: Request, res: Response) {
     updateData.body = sanitizeHtml(updateData.body);
   }
   try {
-    const newPost: PostDocument | null = await PostCollection.findByIdAndUpdate(
+    const newPost: BlogPostDocument | null = await BlogPostCollection.findByIdAndUpdate(
       id,
       updateData,
       {

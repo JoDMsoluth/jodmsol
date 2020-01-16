@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import font from "src/lib/styles/font";
-import palette from "src/lib/styles/palette";
-import transitions from "src/lib/styles/transition";
+import font from "lib/styles/font";
+import palette from "lib/styles/palette";
+import transitions from "lib/styles/transition";
 import ContactForm from "./ContactForm";
 import { ContactCover } from "./ContactCover";
 import { ContactList } from "./ContactList";

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 import BasicInfo from "./BasicInfo";
 import Objective from "./Objective";
 import ContactInfo from "./ContactInfo";
@@ -10,10 +10,10 @@ export default function PersonalDetails() {
   return (
     <PersonalDetailsWrap>
       <PersonalDetailsTitle>Personal Details</PersonalDetailsTitle>
-      <Objective/>
-      <BasicInfo/>
-      <ContactInfo/>
-      <Education/>
+      <Objective />
+      <BasicInfo />
+      <ContactInfo />
+      <Education />
     </PersonalDetailsWrap>
   );
 }
@@ -29,5 +29,5 @@ const PersonalDetailsWrap = styled.div`
 const PersonalDetailsTitle = styled.div`
   font-weight: 900;
   font-size: 1rem;
-  margin-bottom : 2rem
+  margin-bottom: 2rem;
 `;

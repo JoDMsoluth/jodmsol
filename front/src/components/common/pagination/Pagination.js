@@ -2,8 +2,8 @@ import React from "react";
 import styled, { css } from "styled-components";
 import qs from "qs";
 import { Link } from "react-router-dom";
-import palette from "src/lib/styles/palette";
-import font from "src/lib/styles/font";
+import palette from "lib/styles/palette";
+import font from "lib/styles/font";
 
 const buildLink = ({ tag, page }) => {
   const query = qs.stringify({ tag, page });

@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
-import font from "src/lib/styles/font";
-import CustomIcon from "src/lib/CustomIcon";
-import CustomButton from "src/lib/CustomButton";
-import arrange from "src/lib/styles/arrage";
-import transitions from "src/lib/styles/transition";
+import palette from "lib/styles/palette";
+import font from "lib/styles/font";
+import CustomIcon from "lib/CustomIcon";
+import CustomButton from "lib/CustomButton";
+import arrange from "lib/styles/arrage";
+import transitions from "lib/styles/transition";
 
 export default function ProjectList() {
   return (

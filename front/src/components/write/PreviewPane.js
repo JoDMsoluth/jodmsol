@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 import MarkdownRender from "../common/markdown/MarkdownRender";
 
 export default function PreviewPane({ markdown, title }) {

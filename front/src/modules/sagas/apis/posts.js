@@ -1,22 +1,22 @@
 import client from "./axiosSetting";
 import qs from "qs";
 
-export const addPostApi = ({ title, markdown, tags }) =>
-  client.post("api/post/add", { title, markdown, tags });
-
-export const loadPostApi = id => client.get(`api/post/load/${id}`);
-
-export const updatePostApi = ({ id, title, markdown, tags }) =>
-  client.patch(`api/post/update/${id}`, { title, markdown, tags });
-
-export const deletePostApi = id => client.delete(`api/post/delete/${id}`);
-
-export const loadPostsApi = ({ page, tag }) => {
+export const loadPostsApi = ({
+  latest,
+  parpular,
+  category,
+  series,
+  tag,
+  page,
+  filter
+}) => {
   const queryString = qs.stringify({
+    latest,
+    parpular,
+    series,
+    tag,
     page
   });
-  return client.get(`api/posts/load?${queryString}`);
+  console.log("queryString", queryString);
+  return client.get(`api/posts/load/${category}/${filter}?${queryString}`);
 };
-
-export const likePostApi = () => client.get(`api/post/like`);
-export const unlikePostApi = () => client.get(`api/post/unlike`);

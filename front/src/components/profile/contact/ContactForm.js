@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
-import font from "src/lib/styles/font";
-import palette from "src/lib/styles/palette";
-import { InputSpan, InputContainer } from "src/lib/styles/inputStyle";
+import font from "lib/styles/font";
+import palette from "lib/styles/palette";
+import { InputSpan, InputContainer } from "lib/styles/inputStyle";
 import "statics/css/icon.css";
-import CustomButton from "src/lib/CustomButton";
-import arrange from "src/lib/styles/arrage";
+import CustomButton from "lib/CustomButton";
+import arrange from "lib/styles/arrage";
 
 export default function ContactForm() {
   const useInput = (initialValue = null) => {

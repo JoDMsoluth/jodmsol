@@ -1,13 +1,13 @@
 import React from "react";
 import introduceImg from "statics/images/introduceImg.jpg";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
-import CustomButton from "src/lib/CustomButton";
+import palette from "lib/styles/palette";
+import CustomButton from "lib/CustomButton";
 import IntroObjective from "./IntroObjective";
 import IntroCoreValue from "./IntroCoreValue";
 import IntroBasicInfo from "./IntroBasicInfo";
 import ProfileComponentLayout from "../common/ProfileComponentLayout";
-import smoothScrollTo from "src/lib/scrollTo";
+import smoothScrollTo from "lib/scrollTo";
 import { withRouter } from "react-router-dom";
 
 const Introduce = ({ history }) => {

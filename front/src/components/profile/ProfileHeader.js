@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import profileBgHeader from "statics/images/profileBgHeader.jpg";
-import transitions from "src/lib/styles/transition";
-import palette from "src/lib/styles/palette";
-import CustomButton from "src/lib/CustomButton";
-import smoothScrollTo from "src/lib/scrollTo";
+import transitions from "lib/styles/transition";
+import palette from "lib/styles/palette";
+import CustomButton from "lib/CustomButton";
+import smoothScrollTo from "lib/scrollTo";
 
 const ProfileHeader = () => {
   return (

@@ -1,37 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
-import { Link } from "react-router-dom";
+import palette from "lib/styles/palette";
+import { Link, withRouter } from "react-router-dom";
 
-export default function BlogNavBar() {
+const BlogNavBar = ({ match }) => {
+  const { category } = match.params;
   return (
     <>
       <NavBarWrap>
-        <Link to="/blog">
+        <Link to={`/blog/${category}?page=1`}>
           <i>
             <i className="far fa-newspaper"></i>
           </i>
           <b>Posts</b>
         </Link>
-        <Link to="/blog">
+        <Link to={`/blog/${category}/papular?page=1`}>
           <i>
             <i className="fas fa-heart"></i>
           </i>
           <b>Popular</b>
         </Link>
-        <Link to="/blog">
+        <Link to={`/blog/${category}/latest?page=1`}>
           <i>
             <i className="fas fa-clock"></i>
           </i>
           <b>Latest</b>
         </Link>
-        <Link to="/blog">
+        <Link to={`/blog/${category}/series?page=1`}>
           <i>
             <i className="fas fa-object-group"></i>
           </i>
           <b>Series</b>
         </Link>
-        <Link to="/blog" style={{ marginRight: "0" }}>
+        <Link to={`/blog/${category}/tags?page=1`} style={{ marginRight: "0" }}>
           <i>
             <i className="fas fa-tags"></i>
           </i>
@@ -41,7 +42,8 @@ export default function BlogNavBar() {
       </NavBarWrap>
     </>
   );
-}
+};
+export default withRouter(BlogNavBar);
 
 const NavBarWrap = styled.div` 
     justify-self: center;

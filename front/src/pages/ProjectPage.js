@@ -1,7 +1,7 @@
 import React from "react";
-import AppLayoutContainer from "src/containers/common/AppLayoutContainer";
-import ProjectHeader from "src/components/project/header";
-import ProjectContent from "src/components/project/content";
+import AppLayoutContainer from "containers/common/AppLayoutContainer";
+import ProjectHeader from "components/project/header";
+import ProjectContent from "components/project/content";
 
 const ProjectPage = () => {
   return (

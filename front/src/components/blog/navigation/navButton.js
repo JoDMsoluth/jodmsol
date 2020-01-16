@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import CustomIcon from "src/lib/CustomIcon";
-import palette from "src/lib/styles/palette";
+import CustomIcon from "lib/CustomIcon";
+import palette from "lib/styles/palette";
 import { Link } from "react-router-dom";
 
 export default function NavButton() {
@@ -10,17 +10,17 @@ export default function NavButton() {
       <CustomIcon size="ssmall" inline>
         <i className="fas fa-sign-out-alt"></i>
       </CustomIcon>
-      <Link to={`/blog/study`}>
+      <Link to={`/blog/study?page=1`}>
         <CustomIcon size="ssmall" inline>
           <i className="fas fa-book"></i>
         </CustomIcon>
       </Link>
-      <Link to={`/blog/daily`}>
+      <Link to={`/blog/daily?page=1`}>
         <CustomIcon size="ssmall" inline>
           <i className="fas fa-home"></i>
         </CustomIcon>
       </Link>
-      <Link to={`/blog/game`}>
+      <Link to={`/blog/game?page=1`}>
         <CustomIcon size="ssmall" inline>
           <i className="fas fa-gamepad"></i>
         </CustomIcon>

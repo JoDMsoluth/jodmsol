@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import palette, { buttonColor } from "src/lib/styles/palette";
+import palette, { buttonColor } from "lib/styles/palette";
 
 const StyledButton = styled.button`
     display : inline-flex;

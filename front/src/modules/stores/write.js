@@ -4,7 +4,12 @@ import produce from "immer";
 export const initialState = {
   markdown: null,
   title: null,
-  tags: null
+  tags: null,
+  userId: null,
+  password: null,
+  postType: null,
+  category: null,
+  series: null
 };
 
 export const INITIALIZE = "INITIALIZE";

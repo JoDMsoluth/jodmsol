@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 
 export default function EditTemplate({ header, editor, preview }) {
   const [leftPercent, setLeftPercent] = useState(0.5);

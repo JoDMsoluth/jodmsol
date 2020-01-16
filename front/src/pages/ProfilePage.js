@@ -1,10 +1,10 @@
 import React from "react";
-import AppLayoutContainer from "src/containers/common/AppLayoutContainer";
-import ProfileHeader from "src/components/profile/ProfileHeader";
-import SkillsList from "src/components/profile/SkillsList";
-import Resume from "src/components/profile/Resume";
-import Introduce from "src/components/profile/introduce";
-import ProfileContact from "src/components/profile/contact";
+import AppLayoutContainer from "containers/common/AppLayoutContainer";
+import ProfileHeader from "components/profile/ProfileHeader";
+import SkillsList from "components/profile/SkillsList";
+import Resume from "components/profile/Resume";
+import Introduce from "components/profile/introduce";
+import ProfileContact from "components/profile/contact";
 
 const ProfilePage = () => {
   return (

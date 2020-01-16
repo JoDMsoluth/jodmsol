@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { withRouter } from "react-router-dom";
-import { loadPost, unloadPost } from "modules/stores/posts";
+import { loadPost, unloadPost } from "modules/stores/post";
 import { useDispatch, useSelector } from "react-redux";
-import PostView from "src/components/blog/posts/PostView";
+import PostView from "components/blog/posts/PostView";
 
 const PostViewContainer = ({ match }) => {
   const { id } = match.params;

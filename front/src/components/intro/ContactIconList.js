@@ -6,8 +6,8 @@ import kakao from "statics/images/kakao.PNG";
 import twitter from "statics/images/twitter.PNG";
 import gmail from "statics/images/gmail.PNG";
 import github from "statics/images/github.PNG";
-import font from "src/lib/styles/font";
-import palette from "src/lib/styles/palette";
+import font from "lib/styles/font";
+import palette from "lib/styles/palette";
 
 export default function ContactIconList() {
   return (

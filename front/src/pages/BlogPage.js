@@ -1,9 +1,9 @@
 import React from "react";
-import AppLayoutContainer from "src/containers/common/AppLayoutContainer";
-import BlogHeader from "src/components/common/header";
-import BlogNavigation from "src/components/blog/navigation";
-import PostsListContainer from "src/containers/blog/PostsListContainer";
-import PaginationContainer from "src/containers/common/PaginationContainer";
+import AppLayoutContainer from "containers/common/AppLayoutContainer";
+import BlogHeader from "components/common/header";
+import PostsListContainer from "containers/blog/PostsListContainer";
+import PaginationContainer from "containers/common/PaginationContainer";
+import BlogNavigation from "components/blog/navigation/index";
 
 const BlogPage = () => {
   return (

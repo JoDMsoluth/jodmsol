@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import Pagination from "src/components/common/pagination/Pagination";
+import Pagination from "components/common/pagination/Pagination";
 import { useSelector } from "react-redux";
 import qs from "qs";
 

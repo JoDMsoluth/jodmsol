@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import arrange from "src/lib/styles/arrage";
-import palette from "src/lib/styles/palette";
+import arrange from "lib/styles/arrage";
+import palette from "lib/styles/palette";
 
 export function ContactCover() {
   return (

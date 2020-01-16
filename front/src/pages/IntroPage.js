@@ -1,9 +1,9 @@
 import React from "react";
-import AppLayoutContainer from "src/containers/common/AppLayoutContainer";
-import IntroBackground from "src/components/intro/IntroBackground";
-import ContactMeButton from "src/components/intro/ContactMeButton";
-import AutoText from "src/components/intro/AutoText";
-import ContactIconList from "src/components/intro/ContactIconList";
+import AppLayoutContainer from "containers/common/AppLayoutContainer";
+import IntroBackground from "components/intro/IntroBackground";
+import ContactMeButton from "components/intro/ContactMeButton";
+import AutoText from "components/intro/AutoText";
+import ContactIconList from "components/intro/ContactIconList";
 
 const IntroPage = () => {
   return (

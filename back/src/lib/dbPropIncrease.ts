@@ -1,5 +1,5 @@
-import PostCollection from "models/post/PostCollection";
-import PostDocument from "models/post/PostDocument";
+import BlogPostCollection from "models/blogPost/BlogPostCollection";
+import BlogPostDocument from "models/blogPost/BlogPostDocument";
 
 export default async function dbPropIncrease(
   id: string,
@@ -7,7 +7,7 @@ export default async function dbPropIncrease(
   value: number
 ) {
   try {
-    const newPost: PostDocument | null = await PostCollection.findByIdAndUpdate(
+    const newPost: BlogPostDocument | null = await BlogPostCollection.findByIdAndUpdate(
       id,
       {
         $inc: { [props]: value }

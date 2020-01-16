@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import AppFooter from "src/components/common/AppFooter";
-import AppHeader from "src/components/common/AppHeader";
+import AppFooter from "components/common/AppFooter";
+import AppHeader from "components/common/AppHeader";
 
 const AppLayoutContainer = ({ children }) => {
   return (

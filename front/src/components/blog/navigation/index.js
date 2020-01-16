@@ -3,7 +3,7 @@ import styled from "styled-components";
 import NavButton from "./navButton";
 import NavBar from "./navBar";
 import SearchBar from "./searchBar";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 
 export default function BlogNavigation() {
   return (

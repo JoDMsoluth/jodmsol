@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
-import arrange from "src/lib/styles/arrage";
+import arrange from "lib/styles/arrage";
 import { Link } from "react-router-dom";
 
 import kakaoTalk from "statics/images/kakaotalk.png";

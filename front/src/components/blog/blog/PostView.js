@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import MarkdownRender from "./node_modules/src/components/common/markdown/MarkdownRender";
-import palette from "./node_modules/src/lib/styles/palette";
+import MarkdownRender from "components/common/markdown/MarkdownRender";
+import palette from "lib/styles/palette";
 
 export default function PostView({ post, postError, loading }) {
   if (postError) {

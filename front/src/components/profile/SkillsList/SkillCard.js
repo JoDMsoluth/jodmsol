@@ -1,8 +1,8 @@
 import React from "react";
-import palette from "src/lib/styles/palette";
+import palette from "lib/styles/palette";
 import styled from "styled-components";
-import arrange from "src/lib/styles/arrage";
-import CustomIcon from "src/lib/CustomIcon";
+import arrange from "lib/styles/arrage";
+import CustomIcon from "lib/CustomIcon";
 import cardHead from "statics/images/cardHead.PNG";
 
 const SkillCard = ({ cardContent }) => {

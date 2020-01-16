@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import CustomButton from "src/lib/CustomButton";
-import palette from "src/lib/styles/palette";
+import CustomButton from "lib/CustomButton";
+import palette from "lib/styles/palette";
 
 export default function EditHeader({ onGoBack, onSubmit }) {
   return (
