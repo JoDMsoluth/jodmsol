@@ -5,6 +5,8 @@ import Joi from "joi";
 import sanitizeHtml from "sanitize-html";
 import { sanitizeOption } from "lib/sanitizeHtml";
 import dbPropIncrease from "lib/dbPropIncrease";
+import SeriesDocument from "models/series/SeriesDocument";
+import SeriesCollection from "models/series/SeriesCollection";
 
 //read
 export async function loadPost(req: Request, res: Response) {
@@ -25,39 +27,61 @@ export async function loadPost(req: Request, res: Response) {
 }
 //write
 export async function addPost(req: Request, res: Response) {
-  console.log(req.body);
+  const { seriesId, category, id } = req.params;
   const schema: Joi.ObjectSchema = Joi.object().keys({
     coverImg: Joi.string(),
     title: Joi.string().required(),
     markdown: Joi.string().required(),
-    tags: Joi.string(),
-    category: Joi.string(),
-    series: Joi.string()
+    tags: Joi.string()
   });
+
   const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
   if (joiResult.error) {
     res.status(400).send(joiResult.error);
     console.log(joiResult.error);
     return;
   }
+  console.log("newPost");
 
   const { title, markdown, tags } = req.body;
   const hashtags: string[] = tags.match(/#[^\s]+/g);
-  const newPost: BlogPostDocument = new BlogPostCollection({
+  const newPost: BlogPostDocument = await BlogPostCollection.create({
     coverImg: "",
     title,
     markdown: sanitizeHtml(markdown, sanitizeOption),
     tags: hashtags,
-    series: "",
-    category: "study",
+    category,
     likes: 0
   });
   try {
-    await newPost.save(function(err, newPost) {
-      if (err) return console.error(err);
-      console.log(newPost, " is registed");
-      res.json("success");
-    });
+    const getSeries: SeriesDocument | null = await SeriesCollection.findById(
+      id,
+      function(err, getSeries) {
+        if (getSeries) {
+          getSeries.posts.push(newPost);
+          getSeries.save();
+          newPost.save();
+          res.json(newPost);
+        }
+      }
+    );
+
+    // if (getSeries) {
+    //   getSeries.posts.push(newPost);
+    //   getSeries.save(function(err) {
+    //     if (err) return console.error(err);
+    //     console.log("asdf");
+    //   });
+    // }
+
+    // getSeries.save(function(err) {
+    //   if (err) return console.error(err);
+    //   newPost.save(function(err, newPost) {
+    //     if (err) return console.error(err);
+    //     console.log(newPost, " is registed");
+    //     res.json("success");
+    //   });
+    // });
   } catch (e) {
     console.log(e);
   }

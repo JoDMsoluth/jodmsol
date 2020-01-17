@@ -1,19 +1,16 @@
 import mongoose, { Model, Schema } from "mongoose";
 import BlogPostDocument from "./BlogPostDocument";
-import TagsSchema from "models/tags/TagsSchema";
-import SeriesSchema from "models/series/SeriesSchema";
-import CommentsSchema from "models/comments/CommentsSchema";
 
 export const BlogPostSchema: Schema = new Schema(
   {
     coverImg: String,
     title: String,
     markdown: String,
-    tags: [TagsSchema],
-    series: [SeriesSchema],
+    tags: [String],
     category: String,
     likes: Number,
-    comments: [CommentsSchema]
+    series: { type: mongoose.Schema.Types.ObjectId, ref: "Series" },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }]
   },
   { timestamps: true }
 );

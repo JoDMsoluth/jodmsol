@@ -1,9 +1,7 @@
 import { Router } from "express";
-import post from "./post";
-import posts from "./posts";
+import blogApi from "./blog";
 const api = Router();
 
-api.use("/post", post);
-api.use("/posts", posts);
+api.use("/blog", blogApi);
 
 export default api;

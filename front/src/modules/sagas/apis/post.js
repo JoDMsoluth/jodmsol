@@ -9,7 +9,7 @@ export const addPostApi = ({
   series,
   coverImg
 }) =>
-  client.post("api/post/add", {
+  client.post("api/blog/post/add", {
     title,
     markdown,
     tags,
@@ -18,7 +18,7 @@ export const addPostApi = ({
     coverImg
   });
 
-export const loadPostApi = id => client.get(`api/post/load/${id}`);
+export const loadPostApi = id => client.get(`api/blog/post/load/${id}`);
 
 export const updatePostApi = ({
   id,
@@ -29,7 +29,7 @@ export const updatePostApi = ({
   series,
   coverImg
 }) =>
-  client.patch(`api/post/update/${id}`, {
+  client.patch(`api/blog/post/update/${id}`, {
     title,
     markdown,
     tags,
@@ -38,7 +38,7 @@ export const updatePostApi = ({
     coverImg
   });
 
-export const deletePostApi = id => client.delete(`api/post/delete/${id}`);
+export const deletePostApi = id => client.delete(`api/blog/post/delete/${id}`);
 
-export const likePostApi = () => client.get(`api/post/like`);
-export const unlikePostApi = () => client.get(`api/post/unlike`);
+export const likePostApi = () => client.get(`api/blog/post/like`);
+export const unlikePostApi = () => client.get(`api/blog/post/unlike`);

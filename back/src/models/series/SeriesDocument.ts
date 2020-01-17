@@ -1,8 +1,10 @@
 import { Document } from "mongoose";
-import { UnifiedModel } from "types/types.d";
+import { UnifiedModel, category } from "types/types.d";
 
 export default interface SeriesDocument extends Document, UnifiedModel {
+  coverImg: string;
   title: string;
   desc: string;
-  postNumber: number;
+  category: category;
+  posts: any[];
 }

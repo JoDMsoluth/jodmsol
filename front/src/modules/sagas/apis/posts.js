@@ -18,5 +18,5 @@ export const loadPostsApi = ({
     page
   });
   console.log("queryString", queryString);
-  return client.get(`api/posts/load/${category}/${filter}?${queryString}`);
+  return client.get(`api/blog/posts/load/${category}/${filter}?${queryString}`);
 };
