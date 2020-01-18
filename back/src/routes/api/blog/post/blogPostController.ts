@@ -65,23 +65,6 @@ export async function addPost(req: Request, res: Response) {
         }
       }
     );
-
-    // if (getSeries) {
-    //   getSeries.posts.push(newPost);
-    //   getSeries.save(function(err) {
-    //     if (err) return console.error(err);
-    //     console.log("asdf");
-    //   });
-    // }
-
-    // getSeries.save(function(err) {
-    //   if (err) return console.error(err);
-    //   newPost.save(function(err, newPost) {
-    //     if (err) return console.error(err);
-    //     console.log(newPost, " is registed");
-    //     res.json("success");
-    //   });
-    // });
   } catch (e) {
     console.log(e);
   }
