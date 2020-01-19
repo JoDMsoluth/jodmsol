@@ -23,7 +23,6 @@ async function loadAllPosts(req: Request, res: Response) {
     console.log("bad request");
     return;
   }
-
   try {
     const getPosts: BlogPostDocument[] | null =
       filter === "latest"
@@ -124,11 +123,9 @@ async function loadSeries(req: Request, res: Response) {
 }
 
 async function loadPostsInTag(req: Request, res: Response) {
-  const { category } = req.params;
-  const { tag } = req.query;
+  const { category, tag } = req.params;
   const page: number = parseInt(req.query.page || "1", 10);
-
-  if (page < 1 || tag) {
+  if (page < 1 || !tag) {
     res.status(400).send("bad request");
     console.log("bad request");
     return;
@@ -137,18 +134,47 @@ async function loadPostsInTag(req: Request, res: Response) {
   try {
     const getPostsInTag:
       | BlogPostDocument[]
-      | null = await BlogPostCollection.find({ tags: tag })
+      | null = await BlogPostCollection.find({ tags: { $in: `#${tag}` } })
       .where("category")
       .equals(category)
       .sort({ _id: -1 })
-      .limit(10)
-      .skip((page - 1) * 10)
+      .limit(9)
+      .skip((page - 1) * 9)
       .lean()
       .exec();
     const postCount: number = await SeriesCollection.countDocuments().exec();
-    res.set("Last-Page", Math.ceil(postCount / 10).toString());
+    res.set("Last-Page", Math.ceil(postCount / 9).toString());
     console.log(getPostsInTag);
     res.json(getPostsInTag);
+  } catch (e) {
+    console.error(e);
+  }
+}
+async function loadPostsInSeries(req: Request, res: Response) {
+  const { category, id } = req.params;
+  const page: number = parseInt(req.query.page || "1", 10);
+
+  if (page < 1) {
+    res.status(400).send("bad request");
+    console.log("bad request");
+    return;
+  }
+
+  try {
+    const getPostsInSeries:
+      | BlogPostDocument[]
+      | null = await SeriesCollection.find({ _id: id, category })
+      .populate("posts")
+      .select("posts")
+      .sort({ _id: -1 })
+      .limit(9)
+      .skip((page - 1) * 9)
+      .lean()
+      .exec();
+    const postCount: number = await SeriesCollection.countDocuments().exec();
+    res.set("Last-Page", Math.ceil(postCount / 9).toString());
+    console.log(getPostsInSeries);
+    res.json(getPostsInSeries);
   } catch (e) {
     console.error(e);
   }
@@ -158,7 +184,8 @@ const postsController = {
   loadAllPosts,
   loadTags,
   loadSeries,
-  loadPostsInTag
+  loadPostsInTag,
+  loadPostsInSeries
 };
 
 export default postsController;

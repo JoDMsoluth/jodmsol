@@ -14,6 +14,16 @@ export const [
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_FAILURE
 ] = createRequestActionTypes("LOAD_POSTS");
+export const [
+  LOAD_TAG_POSTS_REQUEST,
+  LOAD_TAG_POSTS_SUCCESS,
+  LOAD_TAG_POSTS_FAILURE
+] = createRequestActionTypes("LOAD_TAG_POSTS");
+export const [
+  LOAD_SERIES_POSTS_REQUEST,
+  LOAD_SERIES_POSTS_SUCCESS,
+  LOAD_SERIES_POSTS_FAILURE
+] = createRequestActionTypes("LOAD_SERIES_POSTS");
 
 export const UNLOAD_POSTS = "UNLOAD_POSTS";
 
@@ -41,6 +51,27 @@ export default handleActions(
       produce(state, draft => {
         draft.postsError = action.payload;
       }),
+    [LOAD_TAG_POSTS_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        console.log("posts lastpage", action.payload, action.meta.headers);
+        draft.posts = action.payload;
+        draft.lastPage = parseInt(action.meta.headers["last-page"], 10);
+      }),
+    [LOAD_TAG_POSTS_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.postsError = action.payload;
+      }),
+    [LOAD_SERIES_POSTS_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        console.log("posts lastpage", action.payload, action.meta.headers);
+        draft.posts = action.payload;
+        draft.lastPage = parseInt(action.meta.headers["last-page"], 10);
+      }),
+    [LOAD_SERIES_POSTS_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.postsError = action.payload;
+      }),
+
     [UNLOAD_POSTS]: () => initialState
   },
   initialState
