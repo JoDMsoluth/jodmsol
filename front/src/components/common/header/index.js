@@ -2,19 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import font from "lib/styles/font";
 import palette from "lib/styles/palette";
+import { withRouter } from "react-router-dom";
 
-export default function Header({ desc }) {
+const Header = ({ match }) => {
   return (
     <>
       <HeaderContainer>
         <BlogVersion>V 0.0.1</BlogVersion>
         <Title>JoDmSoluth</Title>
-        <Category>{desc}</Category>
+        <Category>{match.params.category}</Category>
         <Visitios>Today : 123</Visitios>
       </HeaderContainer>
     </>
   );
-}
+};
+
+export default withRouter(Header);
 
 const HeaderContainer = styled.div`
   padding: 0 2rem;

@@ -1,59 +1,45 @@
 import React from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const BlogContentCard = ({ post }) => {
-  const { _id, title, updatedAt, markdown, tags, likes } = post;
+export default function SeriesCard({ series }) {
+  if (!series) {
+    return null;
+  }
+  const { _id, __v, title, desc, category } = series;
   return (
     <>
       <ContentCardWrap>
-        <Link to={`/post/load/${post.category}/${_id}`}>
+        <Link to={`/series/load/${category}/${_id}`}>
           <CoverImg coverImg={null}></CoverImg>
         </Link>
         <Content>
           <ContentHead>
-            <b>{title}</b>
+            <Link to={`/series/load/${category}/${_id}`}>
+              <b>{title}</b>
+            </Link>
             <div>
-              <span>{updatedAt}</span>
-              <span style={{ float: "right" }}>
-                {typeof tags === typeof {}
-                  ? Object.keys(tags).map((tag, i) => (
-                      <Link
-                        to={`/blog/${post.category}/tags?tag=${tags[
-                          tag
-                        ].substring(1, tags[tag].length)}`}
-                        key={`${_id}+${i}`}
-                      >{`${tags[tag]} `}</Link>
-                    ))
-                  : ``}
+              <span>
+                {__v > 1 ? `${__v} units is posted` : `${__v} unit is posted`}
               </span>
             </div>
-            <ContentSubHead>
-              <div>
-                <i className="fas fa-heart"></i>
-                {` ${likes}`}
-              </div>
-            </ContentSubHead>
           </ContentHead>
           <ContentBody>
-            <div>
-              {markdown.length > 500 ? markdown.substring(0, 500) : markdown}
-            </div>
+            <div>{desc.length > 500 ? desc.substring(0, 500) : desc}</div>
+            <div></div>
           </ContentBody>
         </Content>
       </ContentCardWrap>
     </>
   );
-};
-export default withRouter(BlogContentCard);
+}
 
 const ContentCardWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: calc(100% - 2rem);
-  height: 30rem;
-  border: 1px solid ${palette.gray5};
+  width: 100%;
+  padding: 0.8rem 1rem;
+  height: 16.1rem;
+  border-bottom: 1px solid ${palette.gray5};
   &:hover {
     background: ${palette.gray0};
   }
@@ -63,7 +49,7 @@ const CoverImg = styled.div`
   background: url(${props => props.coverImg});
   background-position: 50% 50%;
   background-size: cover;
-  width: 100%;
+  width: 15rem;
   height: 15rem;
   overflow: hidden;
 `;
@@ -71,8 +57,8 @@ const Content = styled.div`
   position : relative;
   display:inline-block;
   white-space: pre-wrap;
-  padding: 0.8rem 1rem;
-  width: 100%;
+  padding : 0 2rem 0 3rem
+  width: calc(100% - 15rem);
   float:right;
   height: 15rem;
   color: ${palette.gray7}
@@ -82,7 +68,7 @@ const Content = styled.div`
 
 const ContentHead = styled.div`
   padding-bottom: 1rem;
-  & > b {
+  & b {
     font-size: 2rem;
     color: ${palette.gray8};
   }
@@ -98,8 +84,8 @@ const ContentHead = styled.div`
 `;
 const ContentSubHead = styled.div`
   position: absolute;
-  top: 1.8rem;
-  right: 1.1rem;
+  top: 1rem;
+  right: 2rem;
   & div:first-child {
     color: ${palette.blue6};
     text-align: right;
@@ -119,4 +105,12 @@ const ContentBody = styled.div`
     color: ${palette.gray7}
   }
 
+  & > div:last-child {
+    position : absolute;
+    bottom : 0;
+    right: 0;
+    width :100%;
+    height : 20%;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 80%);
+}
 `;

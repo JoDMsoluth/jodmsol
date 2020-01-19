@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import MarkdownRender from "components/common/markdown/MarkdownRender";
 import palette from "lib/styles/palette";
+import { Link } from "react-router-dom";
 
-export default function PostView({ post, postError, loading }) {
+export default function PostView({ post, postError, loading, category }) {
+  console.log(post, "post");
   if (postError) {
     console.log("post is not exist");
   }
@@ -17,7 +19,12 @@ export default function PostView({ post, postError, loading }) {
       <PostViewTitle>{title}</PostViewTitle>
       <MarkdownRender markdown={markdown} />
       <PostViewTags>
-        <span>{tags}</span>
+        {tags.map((tag, i) => (
+          <Link
+            to={`/blog/${category}/tags?tag=${tag.slice(1, tag.length)}&page=1`}
+            key={`${tag}${i}`}
+          >{`${tag} `}</Link>
+        ))}
       </PostViewTags>
     </PostViewWrap>
   );
@@ -41,7 +48,7 @@ const PostViewTags = styled.div`
   padding-top: 2rem;
   border-top: 1px solid ${palette.gray3};
   color: ${palette.teal8}
-  & > span:hover {
+  & > a:hover {
       color: ${palette.teal6}
   }
 `;

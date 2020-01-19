@@ -27,7 +27,7 @@ export async function loadPost(req: Request, res: Response) {
 }
 //write
 export async function addPost(req: Request, res: Response) {
-  const { seriesId, category, id } = req.params;
+  const { category, id } = req.params;
   const schema: Joi.ObjectSchema = Joi.object().keys({
     coverImg: Joi.string(),
     title: Joi.string().required(),
@@ -54,17 +54,15 @@ export async function addPost(req: Request, res: Response) {
     likes: 0
   });
   try {
-    const getSeries: SeriesDocument | null = await SeriesCollection.findById(
-      id,
-      function(err, getSeries) {
-        if (getSeries) {
-          getSeries.posts.push(newPost);
-          getSeries.save();
-          newPost.save();
-          res.json(newPost);
-        }
+    await SeriesCollection.findById(id, function(err, getSeries) {
+      if (err) console.error(err);
+      if (getSeries) {
+        getSeries.posts.push(newPost);
+        getSeries.save();
+        newPost.save();
+        res.json(newPost);
       }
-    );
+    });
   } catch (e) {
     console.log(e);
   }
@@ -82,16 +80,11 @@ export async function deletePost(req: Request, res: Response) {
 //update
 export async function updatePost(req: Request, res: Response) {
   const { id } = req.params;
-  // const a = JSON.parse(req.body);
-  // res.send(a);
-  // return;
   const schema: Joi.ObjectSchema = Joi.object().keys({
     coverImg: Joi.string(),
     title: Joi.string(),
     markdown: Joi.string(),
-    tags: Joi.string(),
-    category: Joi.string(),
-    series: Joi.string()
+    tags: Joi.string()
   });
 
   const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
@@ -99,6 +92,7 @@ export async function updatePost(req: Request, res: Response) {
     res.status(400).send(joiResult.error);
     return;
   }
+
   const updateData = Object.assign({}, req.body);
   if (updateData.body) {
     updateData.body = sanitizeHtml(updateData.body);

@@ -1,22 +1,28 @@
 import client from "./axiosSetting";
 import qs from "qs";
 
-export const loadPostsApi = ({
-  latest,
-  parpular,
-  category,
-  series,
-  tag,
-  page,
-  filter
-}) => {
+export const loadPostsApi = ({ category, tag, page, filter }) => {
   const queryString = qs.stringify({
-    latest,
-    parpular,
-    series,
     tag,
     page
   });
-  console.log("queryString", queryString);
-  return client.get(`api/blog/posts/load/${category}/${filter}?${queryString}`);
+  if (filter)
+    return client.get(
+      `api/blog/posts/load/${category}/${filter}?${queryString}`
+    );
+  return client.get(`api/blog/posts/load/${category}?${queryString}`);
+};
+
+export const loadHashtagsApi = ({ category, page }) => {
+  const queryString = qs.stringify({
+    page
+  });
+  return client.get(`api/blog/posts/load/${category}/tags?${queryString}`);
+};
+
+export const loadSeriesApi = ({ category, page }) => {
+  const queryString = qs.stringify({
+    page
+  });
+  return client.get(`api/blog/posts/load/${category}/series?${queryString}`);
 };

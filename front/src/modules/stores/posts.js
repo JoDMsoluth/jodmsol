@@ -6,7 +6,7 @@ export const initialState = {
   posts: null,
   postsError: null,
   postsSuccess: null,
-  lastPage: null
+  lastPage: 1
 };
 
 export const [
@@ -19,11 +19,8 @@ export const UNLOAD_POSTS = "UNLOAD_POSTS";
 
 export const loadPosts = createAction(
   LOAD_POSTS_REQUEST,
-  ({ latest, parpular, category, series, tag, page, filter }) => ({
-    latest,
-    parpular,
+  ({ category, tag, page, filter }) => ({
     category,
-    series,
     tag,
     page,
     filter

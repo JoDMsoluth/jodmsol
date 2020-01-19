@@ -19,8 +19,9 @@ export default function BlogContent({ posts, postError, loading }) {
 }
 
 const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: repeat(3, 32rem);
   width:100%
-  padding: 0 8rem;
+  padding: 1rem 3rem 1rem 5rem;
 `;

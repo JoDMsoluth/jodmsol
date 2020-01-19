@@ -1,24 +1,31 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import qs from "qs";
 import { Link } from "react-router-dom";
 import palette from "lib/styles/palette";
 import font from "lib/styles/font";
 
-const buildLink = ({ tag, page }) => {
+const buildLink = ({ tag, page, category, filter }) => {
   const query = qs.stringify({ tag, page });
-  return `/blog/?${query}`;
+  if (filter) return `/blog/${category}/${filter}?${query}`;
+  return `/blog/${category}?${query}`;
 };
 
-export default function Pagination({ page, lastPage, tag }) {
+export default function Pagination({
+  page = 1,
+  lastPage,
+  tag,
+  category,
+  filter
+}) {
   return (
     <PaginationWrap>
       <CustomLink
         disabled={page === 1}
         to={
           page === 1
-            ? buildLink({ tag, page: 1 })
-            : buildLink({ tag, page: page - 1 })
+            ? buildLink({ category, filter, tag, page: 1 })
+            : buildLink({ category, filter, tag, page: page - 1 })
         }
       >
         back
@@ -28,8 +35,8 @@ export default function Pagination({ page, lastPage, tag }) {
         disabled={page === lastPage}
         to={
           page === lastPage
-            ? buildLink({ tag, page: lastPage })
-            : buildLink({ tag, page: page + 1 })
+            ? buildLink({ category, filter, tag, page: lastPage })
+            : buildLink({ category, filter, tag, page: page + 1 })
         }
       >
         Next

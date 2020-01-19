@@ -1,10 +1,12 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import palette from "lib/styles/palette";
 import { Link, withRouter } from "react-router-dom";
 
-const BlogNavBar = ({ match }) => {
+const BlogNavBar = ({ match, location }) => {
   const { category } = match.params;
+  const filter = location.pathname.split("/");
+
   return (
     <>
       <NavBarWrap>
@@ -14,7 +16,7 @@ const BlogNavBar = ({ match }) => {
           </i>
           <b>Posts</b>
         </Link>
-        <Link to={`/blog/${category}/papular?page=1`}>
+        <Link to={`/blog/${category}/popular?page=1`}>
           <i>
             <i className="fas fa-heart"></i>
           </i>
@@ -38,7 +40,7 @@ const BlogNavBar = ({ match }) => {
           </i>
           <b>Tags</b>
         </Link>
-        <ActiveBar></ActiveBar>
+        <ActiveBar filter={filter[filter.length - 1]}></ActiveBar>
       </NavBarWrap>
     </>
   );
@@ -85,8 +87,8 @@ const NavBarWrap = styled.div`
     & a:hover i{
         left : calc(50% - 3rem);
     }
-    & a:nth-child(1):hover {
-            left : 0;
+    & a:nth-child(1):hover ~ div {
+            left : 0rem;
     } 
     & a:nth-child(2):hover ~ div {
             left : 7.3rem;
@@ -106,12 +108,23 @@ const ActiveBar = styled.div`
   width: 7rem;
   height: 3rem;
   position: absolute;
-  left: 0px;
   top: 0px;
+  left: 0;
   background-color: ${palette.gray2};
   border-radius: 50px;
   box-shadow: 0px 0px 0px 4px ${palette.gray6},
     inset 0px 0px 10px 0px ${palette.gray7};
   z-inex: 1;
   transition: all 0.3s ease-in;
+  left: ${props =>
+    props.filter === "popular"
+      ? "7.3rem"
+      : props.filter === "latest"
+      ? "14.6rem"
+      : props.filter === "series"
+      ? "21.9rem"
+      : props.filter === "tags"
+      ? "29.2rem"
+      : "0rem"};
+  ${props => console.log(props.filter)}
 `;

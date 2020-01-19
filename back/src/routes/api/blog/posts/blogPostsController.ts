@@ -5,7 +5,7 @@ import { removeHtmlAndShorten } from "lib/sanitizeHtml";
 import SeriesCollection from "models/series/SeriesCollection";
 
 async function loadAllPosts(req: Request, res: Response) {
-  console.log("start");
+  console.log("getAllPost");
   const page: number = parseInt(req.query.page || "1", 10);
   const { tag, series } = req.query;
   const { category } = req.params;
@@ -31,8 +31,8 @@ async function loadAllPosts(req: Request, res: Response) {
             .where("category")
             .equals(category)
             .sort({ updateAt: -1 })
-            .limit(10)
-            .skip((page - 1) * 10)
+            .limit(9)
+            .skip((page - 1) * 9)
             .lean()
             .exec()
         : filter === "popular"
@@ -40,21 +40,20 @@ async function loadAllPosts(req: Request, res: Response) {
             .where("category")
             .equals(category)
             .sort({ likes: -1 })
-            .limit(10)
-            .skip((page - 1) * 10)
+            .limit(9)
+            .skip((page - 1) * 9)
             .lean()
             .exec()
         : await BlogPostCollection.find()
             .where("category")
             .equals(category)
             .sort({ _id: -1 })
-            .limit(10)
-            .skip((page - 1) * 10)
+            .limit(9)
+            .skip((page - 1) * 9)
             .lean()
             .exec();
-
     const postCount: number = await BlogPostCollection.countDocuments().exec();
-    res.set("Last-Page", Math.ceil(postCount / 10).toString());
+    res.set("Last-Page", Math.ceil(postCount / 9).toString());
     getPosts.map(post => ({
       ...post,
       markdown: removeHtmlAndShorten(post.markdown)
@@ -66,7 +65,7 @@ async function loadAllPosts(req: Request, res: Response) {
 }
 
 async function loadTags(req: Request, res: Response) {
-  const { tag } = req.query;
+  const tag: string = req.query.tag;
 
   const { category } = req.params;
   console.log("tag category", tag, category);
@@ -80,7 +79,7 @@ async function loadTags(req: Request, res: Response) {
       .distinct("tags")
       .lean()
       .exec();
-
+    res.set("Last-Page", "1");
     console.log(hashtags);
     res.json(hashtags);
   } catch (e) {
@@ -117,12 +116,39 @@ async function loadSeries(req: Request, res: Response) {
       .exec();
     const postCount: number = await SeriesCollection.countDocuments().exec();
     res.set("Last-Page", Math.ceil(postCount / 10).toString());
-    // getSeries.map(post => ({
-    //   ...post,
-    //   postsCount :
-    // }));
     console.log(getSeries);
     res.json(getSeries);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+async function loadPostsInTag(req: Request, res: Response) {
+  const { category } = req.params;
+  const { tag } = req.query;
+  const page: number = parseInt(req.query.page || "1", 10);
+
+  if (page < 1 || tag) {
+    res.status(400).send("bad request");
+    console.log("bad request");
+    return;
+  }
+
+  try {
+    const getPostsInTag:
+      | BlogPostDocument[]
+      | null = await BlogPostCollection.find({ tags: tag })
+      .where("category")
+      .equals(category)
+      .sort({ _id: -1 })
+      .limit(10)
+      .skip((page - 1) * 10)
+      .lean()
+      .exec();
+    const postCount: number = await SeriesCollection.countDocuments().exec();
+    res.set("Last-Page", Math.ceil(postCount / 10).toString());
+    console.log(getPostsInTag);
+    res.json(getPostsInTag);
   } catch (e) {
     console.error(e);
   }
@@ -131,7 +157,8 @@ async function loadSeries(req: Request, res: Response) {
 const postsController = {
   loadAllPosts,
   loadTags,
-  loadSeries
+  loadSeries,
+  loadPostsInTag
 };
 
 export default postsController;

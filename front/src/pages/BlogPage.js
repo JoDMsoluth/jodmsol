@@ -1,17 +1,26 @@
 import React from "react";
 import AppLayoutContainer from "containers/common/AppLayoutContainer";
 import BlogHeader from "components/common/header";
+import BlogNavigation from "components/blog/navigation/index";
 import PostsListContainer from "containers/blog/PostsListContainer";
 import PaginationContainer from "containers/common/PaginationContainer";
-import BlogNavigation from "components/blog/navigation/index";
+import LoadSeriesContainer from "containers/blog/LoadSeriesContainer";
+import LoadTagsContainer from "containers/blog/LoadTagsContainer";
 
-const BlogPage = () => {
+const BlogPage = ({ match }) => {
+  const { filter } = match.params;
   return (
     <>
       <AppLayoutContainer>
-        <BlogHeader desc="study" />
+        <BlogHeader />
         <BlogNavigation />
-        <PostsListContainer />
+        {filter === "series" ? (
+          <LoadSeriesContainer />
+        ) : filter === "tags" ? (
+          <LoadTagsContainer />
+        ) : (
+          <PostsListContainer />
+        )}
         <PaginationContainer />
       </AppLayoutContainer>
     </>

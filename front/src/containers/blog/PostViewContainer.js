@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import PostView from "components/blog/posts/PostView";
 
 const PostViewContainer = ({ match }) => {
-  const { id } = match.params;
+  const { id, category } = match.params;
   const dispatch = useDispatch();
-  const { post, postError, loading } = useSelector(({ posts, loading }) => ({
-    post: posts.post,
-    postError: posts.postError,
+  const { post, postError, loading } = useSelector(({ post, loading }) => ({
+    post: post.post,
+    postError: post.postError,
     loading: loading["LOAD_POST"]
   }));
 
@@ -22,7 +22,12 @@ const PostViewContainer = ({ match }) => {
 
   return (
     <>
-      <PostView post={post} loading={loading} postError={postError} />
+      <PostView
+        post={post}
+        loading={loading}
+        postError={postError}
+        category={category}
+      />
     </>
   );
 };

@@ -71,14 +71,12 @@ async function deleteComment(req: Request, res: Response) {
   }
 }
 async function updateComment(req: Request, res: Response) {
-  const { category, id } = req.params;
-  // const a = JSON.parse(req.body);
-  // res.send(a);
-  // return;
+  const { id } = req.params;
+
   const schema: Joi.ObjectSchema = Joi.object().keys({
-    coverImg: Joi.string(),
-    title: Joi.string(),
-    desc: Joi.string()
+    userId: Joi.string().required(),
+    password: Joi.string().required(),
+    content: Joi.string().required()
   });
 
   const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
@@ -106,15 +104,30 @@ async function updateComment(req: Request, res: Response) {
   }
 }
 
-async function loadComments(req: Request, res: Response) {}
+async function loadReplyComments(req: Request, res: Response) {
+  const { id } = req.params;
 
-async function loadReplyComments(req: Request, res: Response) {}
+  try {
+    const newComment: CommentDocument | null = await CommentCollection.findById(
+      id
+    )
+      .populate("childId")
+      .exec(); // new:true => 업데이트 된 데이터 반환
+    if (!newComment) {
+      res.status(404).send("not found");
+      return;
+    }
+    console.log(newComment);
+    res.json(newComment);
+  } catch (e) {
+    console.error(e);
+  }
+}
 
 const CommentController = {
   addComment,
   deleteComment,
   updateComment,
-  loadComments,
   loadReplyComments
 };
 

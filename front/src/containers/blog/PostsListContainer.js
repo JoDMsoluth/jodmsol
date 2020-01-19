@@ -10,11 +10,11 @@ const PostsListContainer = ({ location, match }) => {
   const { posts, postError, loading } = useSelector(({ posts, loading }) => ({
     posts: posts.posts,
     postError: posts.postError,
-    loading: loading["LOAD_POST"]
+    loading: loading["LOAD_POSTS"]
   }));
 
   useEffect(() => {
-    const { tag, page, series, latest, popular } = qs.parse(location.search, {
+    const { tag, page } = qs.parse(location.search, {
       ignoreQueryPrefix: true
     });
     const { category, filter } = match.params;
@@ -22,9 +22,6 @@ const PostsListContainer = ({ location, match }) => {
       "tag, page, latest, popular, category, filter",
       tag,
       page,
-      series,
-      latest,
-      popular,
       category,
       filter
     );
@@ -33,9 +30,6 @@ const PostsListContainer = ({ location, match }) => {
         tag,
         page,
         category,
-        series,
-        latest,
-        popular,
         filter
       })
     );
