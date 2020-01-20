@@ -29,13 +29,29 @@ export const UNLOAD_POSTS = "UNLOAD_POSTS";
 
 export const loadPosts = createAction(
   LOAD_POSTS_REQUEST,
-  ({ category, tag, page, filter }) => ({
+  ({ category, tag, page }) => ({
     category,
     tag,
-    page,
-    filter
+    page
   })
 );
+export const loadPostsInSeries = createAction(
+  LOAD_SERIES_POSTS_REQUEST,
+  ({ category, id, page }) => ({
+    category,
+    id,
+    page
+  })
+);
+export const loadPostsInTag = createAction(
+  LOAD_TAG_POSTS_REQUEST,
+  ({ category, tag, page }) => ({
+    category,
+    tag,
+    page
+  })
+);
+
 export const unloadPosts = createAction(UNLOAD_POSTS);
 // 여기추가
 
@@ -64,7 +80,7 @@ export default handleActions(
     [LOAD_SERIES_POSTS_SUCCESS]: (state, action) =>
       produce(state, draft => {
         console.log("posts lastpage", action.payload, action.meta.headers);
-        draft.posts = action.payload;
+        draft.posts = action.payload[0].posts;
         draft.lastPage = parseInt(action.meta.headers["last-page"], 10);
       }),
     [LOAD_SERIES_POSTS_FAILURE]: (state, action) =>

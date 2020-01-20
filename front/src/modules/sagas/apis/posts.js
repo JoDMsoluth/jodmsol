@@ -26,3 +26,21 @@ export const loadSeriesApi = ({ category, page }) => {
   });
   return client.get(`api/blog/posts/load/${category}/series?${queryString}`);
 };
+
+export const loadPostsInSeriesApi = ({ category, page, id }) => {
+  const queryString = qs.stringify({
+    page
+  });
+  return client.get(
+    `api/blog/posts/load/${category}/series/${id}?${queryString}`
+  );
+};
+
+export const loadPostsInTagApi = ({ category, page, tag }) => {
+  const queryString = qs.stringify({
+    page
+  });
+  return client.get(
+    `api/blog/posts/load/${category}/tags/${tag}?${queryString}`
+  );
+};

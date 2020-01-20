@@ -2,21 +2,25 @@ import React from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
 import { Link } from "react-router-dom";
+import qs from "qs";
 
 export default function SeriesCard({ series }) {
   if (!series) {
     return null;
   }
-  const { _id, __v, title, desc, category } = series;
+  const { _id: id, __v, title, desc, category } = series;
+  const queryString = qs.stringify({
+    id
+  });
   return (
     <>
       <ContentCardWrap>
-        <Link to={`/series/load/${category}/${_id}`}>
+        <Link to={`/blog/${category}?${queryString}&page=1`}>
           <CoverImg coverImg={null}></CoverImg>
         </Link>
         <Content>
           <ContentHead>
-            <Link to={`/series/load/${category}/${_id}`}>
+            <Link to={`/blog/${category}?${queryString}&page=1`}>
               <b>{title}</b>
             </Link>
             <div>
@@ -80,18 +84,6 @@ const ContentHead = styled.div`
   }
   & a:hover {
     color: ${palette.gray6};
-  }
-`;
-const ContentSubHead = styled.div`
-  position: absolute;
-  top: 1rem;
-  right: 2rem;
-  & div:first-child {
-    color: ${palette.blue6};
-    text-align: right;
-    &:hover {
-      color: ${palette.blue8};
-    }
   }
 `;
 const ContentBody = styled.div`

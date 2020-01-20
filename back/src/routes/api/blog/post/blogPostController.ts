@@ -5,7 +5,6 @@ import Joi from "joi";
 import sanitizeHtml from "sanitize-html";
 import { sanitizeOption } from "lib/sanitizeHtml";
 import dbPropIncrease from "lib/dbPropIncrease";
-import SeriesDocument from "models/series/SeriesDocument";
 import SeriesCollection from "models/series/SeriesCollection";
 
 //read

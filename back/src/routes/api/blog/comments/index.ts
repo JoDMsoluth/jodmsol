@@ -4,11 +4,7 @@ import { checkObjectId } from "lib/middlewares/checkObjectId";
 const commentApi = Router();
 
 //read
-commentApi.get(
-  "/load/:id",
-  checkObjectId,
-  commentsController.loadReplyComments
-);
+commentApi.get("/load/:id", checkObjectId, commentsController.loadComments);
 //write
 commentApi.post("/add/:id", checkObjectId, commentsController.addComment);
 //delete

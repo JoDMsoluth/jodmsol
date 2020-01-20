@@ -7,10 +7,8 @@ const CommentsSchema: Schema = new Schema(
     userId: String,
     password: String,
     content: String,
-    childId: {
-      types: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comments" }],
-      default: []
-    } // comment_id
+    childId: [{ type: mongoose.Schema.Types.ObjectId, ref: "ReComments" }]
+    // comment_id
   },
   { timestamps: true }
 );

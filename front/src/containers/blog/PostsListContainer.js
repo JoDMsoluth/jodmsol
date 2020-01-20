@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { loadPosts, unloadPosts } from "modules/stores/posts";
+import {
+  loadPosts,
+  loadPostsInTag,
+  loadPostsInSeries,
+  unloadPosts
+} from "modules/stores/posts";
 import { useDispatch, useSelector } from "react-redux";
 import BlogContent from "components/blog/postsList";
 import qs from "qs";
@@ -17,26 +22,46 @@ const PostsListContainer = ({ location, match }) => {
     })
   );
 
-  const { tag, page } = qs.parse(location.search, {
+  const { tag, id, page } = qs.parse(location.search, {
     ignoreQueryPrefix: true
   });
   const { category, filter } = match.params;
   useEffect(() => {
     console.log(
-      "tag, page, latest, popular, category, filter",
+      "tag, id, page, category, filter",
       tag,
+      id,
       page,
       category,
       filter
     );
-    dispatch(
-      loadPosts({
-        tag,
-        page,
-        category,
-        filter
-      })
-    );
+    if (id) {
+      dispatch(
+        loadPostsInSeries({
+          id,
+          page,
+          category
+        })
+      );
+    } else if (tag) {
+      dispatch(
+        loadPostsInTag({
+          tag,
+          page,
+          category
+        })
+      );
+    } else {
+      dispatch(
+        loadPosts({
+          tag,
+          page,
+          category,
+          filter
+        })
+      );
+    }
+
     return () => {
       dispatch(unloadPosts());
     };
