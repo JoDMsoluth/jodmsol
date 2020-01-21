@@ -27,7 +27,6 @@ function App() {
           <Route path="/print/resume" component={ResumeContent} />
           <Route path="/post/add" component={WritePost} />
           <Route path="/post/load/:category/:id" component={PostPage} />
-          <Route path="/post/load/:category/comment" component={NotFoundPage} />
           <Route component={IntroPage} />
         </Switch>
       </BrowserRouter>

@@ -1,17 +1,16 @@
 import client from "./axiosSetting";
 
-export const addCommentApi = ({ postId, userId, password, comment }) =>
-  client.post(`api/comment/add/${postId}`, {
+export const addCommentApi = ({ id, userId, password, comment }) =>
+  client.post(`api/blog/comments/add/${id}`, {
     userId,
     password,
     comment
   });
 
-export const loadCommentsApi = postId =>
-  client.get(`api/comment/load/${postId}`);
+export const loadCommentsApi = id => client.get(`api/blog/comments/load/${id}`);
 
-export const updateCommentApi = ({ commentId, password, comment }) =>
-  client.patch(`api/comment/update/${commentId}`, { password, comment });
+export const updateCommentApi = ({ id, password, comment }) =>
+  client.patch(`api/blog/comments/update/${id}`, { password, comment });
 
-export const deleteCommentApi = ({ commentId, password }) =>
-  client.delete(`api/comment/delete/${commentId}`, { password });
+export const deleteCommentApi = ({ id, password }) =>
+  client.delete(`api/blog/comments/delete/${id}`, { password });

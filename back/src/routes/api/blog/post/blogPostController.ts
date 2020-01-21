@@ -13,7 +13,7 @@ export async function loadPost(req: Request, res: Response) {
   try {
     const getPost: BlogPostDocument | null = await BlogPostCollection.findById(
       id
-    ).exec();
+    ).populate("comments").exec();
     if (!getPost) {
       res.status(404);
       return;

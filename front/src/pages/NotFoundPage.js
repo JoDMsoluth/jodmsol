@@ -1,12 +1,12 @@
 import React from "react";
 import AppLayoutContainer from "containers/common/AppLayoutContainer";
-import CommentsItem from "components/blog/comments/CommentsItem";
+import CommentsList from "components/blog/comments/CommentsList";
 
 const NotFoundPage = () => {
   return (
     <>
       <AppLayoutContainer>
-        <CommentsItem />
+        <div>not found page</div>
       </AppLayoutContainer>
     </>
   );

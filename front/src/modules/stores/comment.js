@@ -28,7 +28,28 @@ export const [
   UPDATE_COMMENT_SUCCESS,
   UPDATE_COMMENT_FAILURE
 ] = createRequestActionTypes("UPDATE_COMMENT");
+//----
 
+export const [
+  ADD_RECOMMENT_REQUEST,
+  ADD_RECOMMENT_SUCCESS,
+  ADD_RECOMMENT_FAILURE
+] = createRequestActionTypes("ADD_RECOMMENT");
+export const [
+  LOAD_RECOMMENTS_REQUEST,
+  LOAD_RECOMMENTS_SUCCESS,
+  LOAD_RECOMMENTS_FAILURE
+] = createRequestActionTypes("LOAD_RECOMMENTS");
+export const [
+  DELETE_RECOMMENT_REQUEST,
+  DELETE_RECOMMENT_SUCCESS,
+  DELETE_RECOMMENT_FAILURE
+] = createRequestActionTypes("DELETE_RECOMMENT");
+export const [
+  UPDATE_RECOMMENT_REQUEST,
+  UPDATE_RECOMMENT_SUCCESS,
+  UPDATE_RECOMMENT_FAILURE
+] = createRequestActionTypes("UPDATE_RECOMMENT");
 export const addComment = createAction(ADD_COMMENT_REQUEST);
 export const loadComments = createAction(LOAD_COMMENTS_REQUEST);
 export const deleteComment = createAction(DELETE_COMMENT_REQUEST);
