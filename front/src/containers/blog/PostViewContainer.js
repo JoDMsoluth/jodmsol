@@ -20,6 +20,13 @@ const PostViewContainer = ({ match }) => {
     };
   }, [dispatch, id]);
 
+  console.log(post, "post");
+  if (postError) {
+    console.log("post is not exist");
+  }
+  if (loading || !post) {
+    return null;
+  }
   return (
     <>
       <PostView

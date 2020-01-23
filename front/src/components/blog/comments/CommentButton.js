@@ -4,7 +4,7 @@ import palette from "lib/styles/palette";
 import font from "lib/styles/font";
 
 export default function CommentButton({
-  data,
+  comment,
   setToggleForm,
   setToggleReply,
   toggleForm,
@@ -15,10 +15,11 @@ export default function CommentButton({
       <CommentButtonWrap>
         <div>
           <span onClick={() => setToggleForm(!toggleForm)}>Reply</span>
-          <span>{`${data.child.length}`}</span>
+          <span>{`${comment.childId.length}`}</span>
           <span onClick={() => setToggleReply(!toggleReply)}>
-            {data.child.length > 1 ? ` comments` : " comment"}
+            {comment.childId.length > 1 ? ` comment` : " comment"}
           </span>
+          <span>{comment.likes}</span>
         </div>
       </CommentButtonWrap>
     </>

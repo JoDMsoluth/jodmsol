@@ -6,4 +6,5 @@ export default interface CommentsDocument extends Document, UnifiedModel {
   password: string;
   content: string;
   childId: any[];
+  likes: number;
 }

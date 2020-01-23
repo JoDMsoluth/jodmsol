@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
-import font from "lib/styles/font";
 import CommentsForm from "./CommentForm";
 import ReCommentsList from "./ReCommnetList";
 import CommentButton from "./CommentButton";
 import CommentContent from "./CommentContent";
 import CommentForm from "./CommentForm";
 
-export default function CommentsItem({ data }) {
+export default function CommentsItem({
+  comment,
+  updateComment,
+  deleteComment
+}) {
   const [toggleForm, setToggleForm] = useState(false);
   const [toggleReply, setToggleReply] = useState(false);
   const [edit, setEdit] = useState(false);
@@ -16,12 +19,22 @@ export default function CommentsItem({ data }) {
     <>
       <CommentsItemWrap>
         {edit ? (
-          <CommentForm edit={edit} setEdit={setEdit} data={data} />
+          <CommentForm
+            edit={edit}
+            setEdit={setEdit}
+            comment={comment}
+            updateComment={updateComment}
+          />
         ) : (
           <>
-            <CommentContent data={data} edit={edit} setEdit={setEdit} />
+            <CommentContent
+              comment={comment}
+              edit={edit}
+              setEdit={setEdit}
+              deleteComment={deleteComment}
+            />
             <CommentButton
-              data={data}
+              comment={comment}
               toggleForm={toggleForm}
               toggleReply={toggleReply}
               setToggleForm={setToggleForm}
@@ -31,7 +44,7 @@ export default function CommentsItem({ data }) {
         )}
       </CommentsItemWrap>
       {toggleForm && <CommentsForm />}
-      {toggleReply && <ReCommentsList data={data.child} />}
+      {toggleReply && <ReCommentsList comment={comment.child} />}
     </>
   );
 }

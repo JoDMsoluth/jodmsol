@@ -9,9 +9,10 @@ async function loadComments(req: Request, res: Response) {
   try {
     await BlogPostCollection.findById(id)
       .populate("comments")
+      .select("comments")
       .exec(function(err, comments) {
         if (err) console.error(err);
-        res.json(comments);
+        res.json(comments && comments.comments);
       });
   } catch (err) {
     console.error(err);
@@ -45,7 +46,7 @@ async function addComment(req: Request, res: Response) {
             password,
             content
           });
-          target.comments.push(newComment._id);
+          target.comments.unshift(newComment._id);
           target.save();
           newComment.save();
           console.log(newComment, " is registed");

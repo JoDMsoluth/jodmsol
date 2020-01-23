@@ -3,7 +3,6 @@ import produce from "immer";
 import { createRequestActionTypes } from "lib/createRequestSaga";
 
 export const initialState = {
-  comment: null,
   comments: null,
   commentError: null
 };
@@ -50,16 +49,23 @@ export const [
   UPDATE_RECOMMENT_SUCCESS,
   UPDATE_RECOMMENT_FAILURE
 ] = createRequestActionTypes("UPDATE_RECOMMENT");
-export const addComment = createAction(ADD_COMMENT_REQUEST);
+
+export const UNLOAD_COMMENTS = "UNLOAD_COMMENTS";
+
+export const addComment = createAction(
+  ADD_COMMENT_REQUEST,
+  ({ id, userId, password, content }) => ({ id, userId, password, content })
+);
 export const loadComments = createAction(LOAD_COMMENTS_REQUEST);
 export const deleteComment = createAction(DELETE_COMMENT_REQUEST);
 export const updateComment = createAction(UPDATE_COMMENT_REQUEST);
+export const unloadComments = createAction(UNLOAD_COMMENTS);
 // 여기추가
 export default handleActions(
   {
     [ADD_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comment = action.payload;
+        draft.comments.unshift(action.payload);
       }),
     [ADD_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -67,7 +73,7 @@ export default handleActions(
       }),
     [LOAD_COMMENTS_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comment = action.payload;
+        draft.comments = action.payload;
       }),
     [LOAD_COMMENTS_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -75,7 +81,7 @@ export default handleActions(
       }),
     [DELETE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comment = action.payload;
+        draft.comments = action.payload;
       }),
     [DELETE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -83,12 +89,13 @@ export default handleActions(
       }),
     [UPDATE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comment = action.payload;
+        draft.comments = action.payload;
       }),
     [UPDATE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.commentError = action.payload;
-      })
+      }),
+    [UNLOAD_COMMENTS]: () => initialState
   },
   initialState
 );

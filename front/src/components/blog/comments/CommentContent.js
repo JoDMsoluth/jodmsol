@@ -1,26 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
+import DeleteQuestion from "./DeleteQuestion";
 
-export default function CommentContent({ data, edit, setEdit }) {
+export default function CommentContent({
+  comment,
+  edit,
+  setEdit,
+  deleteComment
+}) {
+  const [toggleQuestion, setToggleQustion] = useState(false);
   return (
     <>
       <CommentsItemWrap>
         <CommentHead>
-          <span>{data.userId}</span>
-          <span>{data.date}</span>
+          <span>{comment.userId}</span>
+          <span>{comment.updatedAt}</span>
         </CommentHead>
-        <div>{data.content}</div>
+        <div>{comment.content}</div>
         <CommentToolbar>
           <div onClick={() => setEdit(!edit)}>
             <i className="fas fa-edit" />
             <span>Edit</span>
           </div>
-          <div>
+          <div onClick={() => setToggleQustion(!toggleQuestion)}>
             <i className="fas fa-times-circle" />
             <span>Delete</span>
           </div>
         </CommentToolbar>
+
+        {toggleQuestion && (
+          <DeleteQuestion
+            toggleQuestion={toggleQuestion}
+            setToggleQustion={setToggleQustion}
+          />
+        )}
       </CommentsItemWrap>
     </>
   );
@@ -61,6 +75,9 @@ const CommentToolbar = styled.div`
     padding: 0.2rem 0.3rem;
     margin-right: 1rem;
     border-radius : 5px;
+  }
+  & > div:last-child {
+    position : relative;
   }
   & > div:hover {
     background : ${palette.gray6}

@@ -1,65 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
 import CommentsItem from "./CommentsItem";
-const dummydata = [
-  {
-    userId: "실버제로",
-    date: "1일전",
-    content: "나는 오늘 밥을 먹었따 그리고 잤다",
-    number: 1,
-    child: [
-      {
-        userId: "실버제로",
-        date: "1일전",
-        content: "나는 오늘 밥을 먹었따 그리고 잤다",
-        number: 1
-      },
-      {
-        userId: "실버제로",
-        date: "1일전",
-        content: "나는 오늘 밥을 먹었따 그리고 잤다",
-        number: 1
-      }
-    ]
-  },
-  {
-    userId: "실버제로",
-    date: "1일전",
-    content: "나는 오늘 밥을 먹었따 그리고 잤다",
-    number: 1,
-    child: []
-  },
-  {
-    userId: "실버제로",
-    date: "1일전",
-    content: "나는 오늘 밥을 먹었따 그리고 잤다",
-    number: 1,
-    child: []
-  },
-  {
-    userId: "실버제로",
-    date: "1일전",
-    content: "나는 오늘 밥을 먹었따 그리고 잤다",
-    number: 1,
-    child: []
-  },
-  {
-    userId: "실버제로",
-    date: "1일전",
-    content: "나는 오늘 밥을 먹었따 그리고 잤다",
-    number: 1,
-    child: []
-  }
-];
-export default function CommentsList() {
+import CommentForm from "./CommentForm";
+
+export default function CommentsList({
+  loadComments,
+  addComment,
+  updateComment,
+  deleteComment,
+  comments = []
+}) {
   return (
     <>
-      <CommentsListWrap>
-        {dummydata.map((data, i) => (
-          <CommentsItem key={`${data.userId}.${i}`} data={data} />
-        ))}
-      </CommentsListWrap>
+      <CommentForm addComment={addComment} loadComments={loadComments} />
+      {comments.length > 0 && (
+        <CommentsListWrap>
+          {comments.map((comment, i) => (
+            <CommentsItem
+              key={`${comment.userId}.${i}`}
+              comment={comment}
+              updateComment={updateComment}
+              deleteComment={deleteComment}
+            />
+          ))}
+        </CommentsListWrap>
+      )}
     </>
   );
 }

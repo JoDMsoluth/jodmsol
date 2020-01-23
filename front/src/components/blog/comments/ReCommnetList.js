@@ -3,12 +3,16 @@ import styled from "styled-components";
 import palette from "lib/styles/palette";
 import CommentContent from "./CommentContent";
 
-export default function ReCommentsList({ data }) {
+export default function ReCommentsList({ comments }) {
   return (
     <>
-      {data.map((data, i) => (
+      {comments.map((comment, i) => (
         <CommentWrap>
-          <CommentContent key={`${data.userId}${i}`} data={data} reply />
+          <CommentContent
+            key={`${comment.userId}${i}`}
+            comment={comment}
+            reply
+          />
         </CommentWrap>
       ))}
     </>

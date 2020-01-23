@@ -1,10 +1,10 @@
 import client from "./axiosSetting";
 
-export const addCommentApi = ({ id, userId, password, comment }) =>
+export const addCommentApi = ({ id, userId, password, content }) =>
   client.post(`api/blog/comments/add/${id}`, {
     userId,
     password,
-    comment
+    content
   });
 
 export const loadCommentsApi = id => client.get(`api/blog/comments/load/${id}`);
