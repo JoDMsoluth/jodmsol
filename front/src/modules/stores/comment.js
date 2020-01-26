@@ -27,7 +27,20 @@ export const [
   UPDATE_COMMENT_SUCCESS,
   UPDATE_COMMENT_FAILURE
 ] = createRequestActionTypes("UPDATE_COMMENT");
+
+export const [
+  LIKE_COMMENT_REQUEST,
+  LIKE_COMMENT_SUCCESS,
+  LIKE_COMMENT_FAILURE
+] = createRequestActionTypes("LIKE_COMMENT");
+
+export const [
+  UNLIKE_COMMENT_REQUEST,
+  UNLIKE_COMMENT_SUCCESS,
+  UNLIKE_COMMENT_FAILURE
+] = createRequestActionTypes("UNLIKE_COMMENT");
 //----
+
 
 export const [
   ADD_RECOMMENT_REQUEST,
