@@ -31,8 +31,10 @@ export default function CommentContent({
 
         {toggleQuestion && (
           <DeleteQuestion
+            id={comment._id}
             toggleQuestion={toggleQuestion}
             setToggleQustion={setToggleQustion}
+            deleteComment={deleteComment}
           />
         )}
       </CommentsItemWrap>

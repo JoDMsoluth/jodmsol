@@ -27,13 +27,19 @@ export const [
   UPDATE_COMMENT_SUCCESS,
   UPDATE_COMMENT_FAILURE
 ] = createRequestActionTypes("UPDATE_COMMENT");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1/27 comment db logic
 export const [
   LIKE_COMMENT_REQUEST,
   LIKE_COMMENT_SUCCESS,
   LIKE_COMMENT_FAILURE
 ] = createRequestActionTypes("LIKE_COMMENT");
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1/27 comment db logic
 export const [
   UNLIKE_COMMENT_REQUEST,
   UNLIKE_COMMENT_SUCCESS,
@@ -71,7 +77,10 @@ export const addComment = createAction(
 );
 export const loadComments = createAction(LOAD_COMMENTS_REQUEST);
 export const deleteComment = createAction(DELETE_COMMENT_REQUEST);
-export const updateComment = createAction(UPDATE_COMMENT_REQUEST);
+export const updateComment = createAction(
+  UPDATE_COMMENT_REQUEST,
+  ({ id, userId, password, content }) => ({ id, userId, password, content })
+);
 export const unloadComments = createAction(UNLOAD_COMMENTS);
 // 여기추가
 export default handleActions(
@@ -94,7 +103,8 @@ export default handleActions(
       }),
     [DELETE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comments = action.payload;
+        const index = draft.comments.findIndex(v => v._id === action.payload);
+        draft.comments.splice(index, 1);
       }),
     [DELETE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -102,9 +112,28 @@ export default handleActions(
       }),
     [UPDATE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comments = action.payload;
+        const index = draft.comments.findIndex(
+          v => v._id === action.payload._id
+        );
+        draft.comments[index] = action.payload;
       }),
     [UPDATE_COMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.commentError = action.payload;
+      }),
+    [LIKE_COMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.comments = action.payload;
+      }),
+    [LIKE_COMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.commentError = action.payload;
+      }),
+    [UNLIKE_COMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.comments = action.payload;
+      }),
+    [UNLIKE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.commentError = action.payload;
       }),

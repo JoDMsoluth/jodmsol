@@ -52,8 +52,8 @@ export const buttonColor = {
   },
   transparent: {
     background: "none",
-    color: palette.teal6,
-    hoverBackground: palette.teal1
+    color: palette.gray5,
+    hoverBackground: palette.gray1
   }
 };
 

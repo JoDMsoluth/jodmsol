@@ -1,20 +1,21 @@
-import { Request, Response, json } from "express";
+import { Request, Response } from "express";
 import Joi from "joi";
-import CommentCollection from "models/comments/CommentsCollection";
-import ReCommentsCollection from "models/reComments/ReCommentsCollection";
-import ReCommentsDocument from "models/reComments/ReCommentsDocument";
+import ReCommentsDocument from "models/recomments/ReCommentsDocument";
+import ReCommentsCollection from "models/recomments/ReCommentsCollection";
+import CommentsCollection from "models/comments/CommentsCollection";
 
 async function loadComments(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    await CommentCollection.findById(id)
+    await CommentsCollection.findById(id)
       .populate("childId")
+      .select("childId")
       .exec(function(err, comments) {
         if (err) console.error(err);
         res.json(comments);
       });
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
   }
 }
 
@@ -33,11 +34,11 @@ async function addComment(req: Request, res: Response) {
 
   const { id } = req.params;
   const { userId, password, content } = req.body;
-
   try {
-    await CommentCollection.findById(id)
+    await CommentsCollection.findById(id)
       .populate("childId")
       .exec(function(err, target) {
+        console.log(target);
         if (err) console.error(err);
         if (target) {
           const newComment: ReCommentsDocument = new ReCommentsCollection({
@@ -45,9 +46,10 @@ async function addComment(req: Request, res: Response) {
             password,
             content
           });
-          target.childId.push(newComment._id);
+          target.childId.unshift(newComment._id);
           target.save();
           newComment.save();
+          console.log(newComment, " is registed");
           res.json(newComment);
         }
       });
@@ -59,8 +61,7 @@ async function addComment(req: Request, res: Response) {
 async function deleteComment(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    console.log(id);
-    await ReCommentsCollection.findByIdAndRemove(id, function(err, result) {
+    await ReCommentsCollection.findByIdAndRemove(id, function(err) {
       if (err) console.error(err);
       res.status(204).send("success"); // No Content
     });
@@ -68,11 +69,45 @@ async function deleteComment(req: Request, res: Response) {
     console.error(e);
   }
 }
+async function updateComment(req: Request, res: Response) {
+  const { id } = req.params;
 
-const reCommentController = {
+  const schema: Joi.ObjectSchema = Joi.object().keys({
+    userId: Joi.string().required(),
+    password: Joi.string().required(),
+    content: Joi.string().required()
+  });
+
+  const joiResult: Joi.ValidationResult<any> = Joi.validate(req.body, schema);
+  if (joiResult.error) {
+    res.status(400).send(joiResult.error);
+    return;
+  }
+
+  try {
+    const newComment: ReCommentsDocument | null = await ReCommentsCollection.findByIdAndUpdate(
+      id,
+      req.body,
+      {
+        new: true
+      }
+    ).exec(); // new:true => 업데이트 된 데이터 반환
+    if (!newComment) {
+      res.status(404).send("not found");
+      return;
+    }
+    console.log(newComment);
+    res.json(newComment);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+const CommentController = {
   addComment,
   deleteComment,
+  updateComment,
   loadComments
 };
 
-export default reCommentController;
+export default CommentController;

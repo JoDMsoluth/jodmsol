@@ -1,7 +1,6 @@
 import { Schema, Model } from "mongoose";
 import mongoose from "configs/mongodb";
 import CommentsDocument from "./CommentsDocument";
-import { number } from "joi";
 
 const CommentsSchema: Schema = new Schema(
   {

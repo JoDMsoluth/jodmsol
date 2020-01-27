@@ -6,8 +6,15 @@ import palette from "lib/styles/palette";
 import CustomButton from "lib/CustomButton";
 import { withRouter } from "react-router-dom";
 
-const CommentForm = ({ comment, edit, setEdit, addComment, match }) => {
-  const { id } = match.params;
+const CommentForm = ({
+  comment,
+  edit,
+  setEdit,
+  addComment,
+  match,
+  updateComment
+}) => {
+  const id = edit ? comment._id : match.params.id;
 
   const [userId, setUserId] = useState(comment ? comment.userId : "");
   const [password, setPassword] = useState("");
@@ -59,29 +66,44 @@ const CommentForm = ({ comment, edit, setEdit, addComment, match }) => {
           <i className="fas fa-align-left input-icon vertical-center"></i>
         </InputContainer>
         <ButtonWrap>
-          {edit && (
+          {edit ? (
+            <>
+              <CommentButton
+                size="medium"
+                color="lightGray"
+                inline
+                onClick={() => setEdit(!edit)}
+              >
+                Back
+              </CommentButton>
+              <CommentButton
+                size="medium"
+                color="lightGray"
+                onClick={() => {
+                  updateComment({ id, userId, password, content });
+                  setPassword("");
+                  setUserId("");
+                  setContent("");
+                  setEdit(!edit);
+                }}
+              >
+                Update
+              </CommentButton>
+            </>
+          ) : (
             <CommentButton
               size="medium"
               color="lightGray"
-              inline
-              onClick={() => setEdit(!edit)}
+              onClick={() => {
+                addComment({ id, userId, password, content });
+                setPassword("");
+                setUserId("");
+                setContent("");
+              }}
             >
-              Back
+              Write
             </CommentButton>
           )}
-
-          <CommentButton
-            size="medium"
-            color="lightGray"
-            onClick={() => {
-              addComment({ id, userId, password, content });
-              setPassword("");
-              setUserId("");
-              setContent("");
-            }}
-          >
-            Write
-          </CommentButton>
         </ButtonWrap>
       </ReplyForm>
     </>

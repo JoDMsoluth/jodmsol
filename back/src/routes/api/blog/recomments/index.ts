@@ -14,5 +14,11 @@ reCommentApi.delete(
   checkObjectId,
   reCommentController.deleteComment
 );
+//update
+reCommentApi.patch(
+  "/update/:id",
+  checkObjectId,
+  reCommentController.updateComment
+);
 
 export default reCommentApi;
