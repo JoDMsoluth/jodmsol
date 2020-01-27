@@ -6,7 +6,8 @@ import {
   unloadComments,
   addComment,
   updateComment,
-  deleteComment
+  deleteComment,
+  addRecomment
 } from "modules/stores/comment";
 import CommentsList from "components/blog/comments/CommentsList";
 
@@ -20,17 +21,17 @@ const CommentsListContainer = ({ match }) => {
     })
   );
 
-  const loadCommentsHandle = id => {
-    dispatch(loadComments(id));
+  const addCommentHandle = ({ id, userId, password, content }) => {
+    dispatch(addComment({ id, userId, password, content }));
   };
-  const addCommentHandle = id => {
-    dispatch(addComment(id));
+  const addRecommentHandle = ({ id, userId, password, content }) => {
+    dispatch(addRecomment({ id, userId, password, content }));
   };
-  const deleteCommentHandle = id => {
-    dispatch(deleteComment(id));
+  const deleteCommentHandle = ({ password, id }) => {
+    dispatch(deleteComment({ password, id }));
   };
-  const updateCommentHandle = id => {
-    dispatch(updateComment(id));
+  const updateCommentHandle = ({ id, userId, password, content }) => {
+    dispatch(updateComment({ id, userId, password, content }));
   };
 
   const { id } = match.params;
@@ -51,13 +52,11 @@ const CommentsListContainer = ({ match }) => {
   return (
     <>
       <CommentsList
-        loadComments={loadCommentsHandle}
         addComment={addCommentHandle}
         updateComment={updateCommentHandle}
         deleteComment={deleteCommentHandle}
+        addRecomment={addRecommentHandle}
         comments={comments}
-        commentError={commentError}
-        loading={loading}
       />
     </>
   );

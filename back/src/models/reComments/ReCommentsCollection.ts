@@ -6,7 +6,8 @@ const ReCommentsSchema: Schema = new Schema(
   {
     userId: String,
     password: String,
-    content: String
+    content: String,
+    targetId: String
     // comment_id
   },
   { timestamps: true }

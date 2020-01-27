@@ -10,16 +10,27 @@ export default function CommentButton({
   toggleForm,
   toggleReply
 }) {
+  if (!comment) {
+    return null;
+  }
+
+  console.log("comment", comment);
   return (
     <>
       <CommentButtonWrap>
         <div>
           <span onClick={() => setToggleForm(!toggleForm)}>Reply</span>
-          <span>{`${comment.childId.length}`}</span>
-          <span onClick={() => setToggleReply(!toggleReply)}>
-            {comment.childId.length > 1 ? ` comment` : " comment"}
+          <span>{`${comment && comment.childId.length}`}</span>
+          <span
+            onClick={() =>
+              comment &&
+              comment.childId.length > 0 &&
+              setToggleReply(!toggleReply)
+            }
+          >
+            {comment && comment.childId.length > 1 ? ` comment` : " comment"}
           </span>
-          <span>{comment.likes}</span>
+          <span>{comment && comment.likes}</span>
         </div>
       </CommentButtonWrap>
     </>

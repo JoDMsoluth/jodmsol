@@ -5,4 +5,5 @@ export default interface ReCommentsDocument extends Document, UnifiedModel {
   userId: string;
   password: string;
   content: string;
+  targetId: string;
 }

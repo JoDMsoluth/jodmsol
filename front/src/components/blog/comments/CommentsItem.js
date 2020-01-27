@@ -1,38 +1,33 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
-import CommentsForm from "./CommentForm";
-import ReCommentsList from "./ReCommnetList";
 import CommentButton from "./CommentButton";
 import CommentContent from "./CommentContent";
+import RecommentsListContainer from "containers/blog/RecommentsListContainer";
 import CommentForm from "./CommentForm";
 
 export default function CommentsItem({
   comment,
   updateComment,
-  deleteComment
+  deleteComment,
+  addRecomment
 }) {
   const [toggleForm, setToggleForm] = useState(false);
   const [toggleReply, setToggleReply] = useState(false);
   const [edit, setEdit] = useState(false);
   return (
     <>
-      <CommentsItemWrap>
-        {edit ? (
-          <CommentForm
-            edit={edit}
-            setEdit={setEdit}
-            comment={comment}
-            updateComment={updateComment}
-          />
-        ) : (
-          <>
+      {comment && (
+        <>
+          <CommentsItemWrap>
             <CommentContent
               comment={comment}
               edit={edit}
               setEdit={setEdit}
+              updateComment={updateComment}
               deleteComment={deleteComment}
             />
+
             <CommentButton
               comment={comment}
               toggleForm={toggleForm}
@@ -40,11 +35,25 @@ export default function CommentsItem({
               setToggleForm={setToggleForm}
               setToggleReply={setToggleReply}
             />
-          </>
-        )}
-      </CommentsItemWrap>
-      {toggleForm && <CommentsForm />}
-      {toggleReply && <ReCommentsList comment={comment.child} />}
+          </CommentsItemWrap>
+
+          {toggleForm && (
+            <CommentForm
+              addRecomment={addRecomment}
+              parentId={comment._id}
+              reply
+            />
+          )}
+          {toggleReply && (
+            <RecommentsListContainer
+              id={comment._id}
+              toggleForm={toggleForm}
+              toggleReply={toggleReply}
+              comment={comment}
+            />
+          )}
+        </>
+      )}
     </>
   );
 }

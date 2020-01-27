@@ -7,14 +7,18 @@ import CustomButton from "lib/CustomButton";
 import { withRouter } from "react-router-dom";
 
 const CommentForm = ({
+  parentId,
   comment,
   edit,
   setEdit,
-  addComment,
   match,
-  updateComment
+  reply,
+  addComment,
+  addRecomment,
+  updateComment,
+  updateRecomment
 }) => {
-  const id = edit ? comment._id : match.params.id;
+  const id = edit ? comment._id : reply ? parentId : match.params.id;
 
   const [userId, setUserId] = useState(comment ? comment.userId : "");
   const [password, setPassword] = useState("");
@@ -80,7 +84,9 @@ const CommentForm = ({
                 size="medium"
                 color="lightGray"
                 onClick={() => {
-                  updateComment({ id, userId, password, content });
+                  reply
+                    ? updateRecomment({ id, userId, password, content })
+                    : updateComment({ id, userId, password, content });
                   setPassword("");
                   setUserId("");
                   setContent("");
@@ -95,7 +101,9 @@ const CommentForm = ({
               size="medium"
               color="lightGray"
               onClick={() => {
-                addComment({ id, userId, password, content });
+                reply
+                  ? addRecomment({ id, userId, password, content })
+                  : addComment({ id, userId, password, content });
                 setPassword("");
                 setUserId("");
                 setContent("");

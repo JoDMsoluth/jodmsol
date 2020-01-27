@@ -63,7 +63,7 @@ async function deleteComment(req: Request, res: Response) {
   try {
     await CommentCollection.findByIdAndRemove(id, function(err, result) {
       if (err) console.error(err);
-      res.status(204).send("success"); // No Content
+      res.json(id); // No Content
     });
   } catch (e) {
     console.error(e);

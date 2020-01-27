@@ -9,7 +9,9 @@ export default function DeleteQuestion({
   id,
   toggleQuestion,
   setToggleQustion,
-  deleteComment
+  deleteComment,
+  deleteRecomment,
+  reply
 }) {
   const [password, setPassowrd] = useState("");
   const onChangePassword = e => {
@@ -32,7 +34,11 @@ export default function DeleteQuestion({
           color="transparent"
           size="medium"
           inline
-          onClick={() => deleteComment({ id, password })}
+          onClick={() =>
+            reply
+              ? deleteRecomment({ id, password })
+              : deleteComment({ id, password })
+          }
         >
           delete
         </CustomButton>

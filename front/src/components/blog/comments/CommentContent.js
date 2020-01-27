@@ -2,16 +2,31 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
 import DeleteQuestion from "./DeleteQuestion";
+import CommentForm from "./CommentForm";
 
 export default function CommentContent({
   comment,
   edit,
   setEdit,
-  deleteComment
+  deleteComment,
+  updateComment,
+  deleteRecomment,
+  updateRecomment,
+  reply
 }) {
   const [toggleQuestion, setToggleQustion] = useState(false);
   return (
     <>
+      {edit && (
+        <CommentForm
+          edit={edit}
+          setEdit={setEdit}
+          comment={comment}
+          updateComment={updateComment}
+          updateRecomment={updateRecomment}
+          reply
+        />
+      )}
       <CommentsItemWrap>
         <CommentHead>
           <span>{comment.userId}</span>
@@ -35,6 +50,8 @@ export default function CommentContent({
             toggleQuestion={toggleQuestion}
             setToggleQustion={setToggleQustion}
             deleteComment={deleteComment}
+            deleteRecomment={deleteRecomment}
+            reply={reply}
           />
         )}
       </CommentsItemWrap>

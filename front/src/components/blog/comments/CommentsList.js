@@ -1,19 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
 import CommentsItem from "./CommentsItem";
 import CommentForm from "./CommentForm";
 
 export default function CommentsList({
-  loadComments,
   addComment,
+  addRecomment,
   updateComment,
   deleteComment,
   comments = []
 }) {
   return (
     <>
-      <CommentForm addComment={addComment} loadComments={loadComments} />
+      <CommentForm addComment={addComment} />
       {comments.length > 0 && (
         <CommentsListWrap>
           {comments.map((comment, i) => (
@@ -22,6 +22,7 @@ export default function CommentsList({
               comment={comment}
               updateComment={updateComment}
               deleteComment={deleteComment}
+              addRecomment={addRecomment}
             />
           ))}
         </CommentsListWrap>

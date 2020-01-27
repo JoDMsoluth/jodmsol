@@ -44,7 +44,8 @@ async function addComment(req: Request, res: Response) {
           const newComment: ReCommentsDocument = new ReCommentsCollection({
             userId,
             password,
-            content
+            content,
+            targetId: id
           });
           target.childId.unshift(newComment._id);
           target.save();

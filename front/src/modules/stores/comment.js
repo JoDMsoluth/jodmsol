@@ -4,6 +4,8 @@ import { createRequestActionTypes } from "lib/createRequestSaga";
 
 export const initialState = {
   comments: null,
+  commentError: null,
+  recomments: null,
   commentError: null
 };
 
@@ -27,26 +29,17 @@ export const [
   UPDATE_COMMENT_SUCCESS,
   UPDATE_COMMENT_FAILURE
 ] = createRequestActionTypes("UPDATE_COMMENT");
-<<<<<<< HEAD
-
-=======
->>>>>>> 1/27 comment db logic
 export const [
   LIKE_COMMENT_REQUEST,
   LIKE_COMMENT_SUCCESS,
   LIKE_COMMENT_FAILURE
 ] = createRequestActionTypes("LIKE_COMMENT");
-<<<<<<< HEAD
-
-=======
->>>>>>> 1/27 comment db logic
 export const [
   UNLIKE_COMMENT_REQUEST,
   UNLIKE_COMMENT_SUCCESS,
   UNLIKE_COMMENT_FAILURE
 ] = createRequestActionTypes("UNLIKE_COMMENT");
-//----
-
+//--------
 
 export const [
   ADD_RECOMMENT_REQUEST,
@@ -68,7 +61,19 @@ export const [
   UPDATE_RECOMMENT_SUCCESS,
   UPDATE_RECOMMENT_FAILURE
 ] = createRequestActionTypes("UPDATE_RECOMMENT");
+export const [
+  LIKE_RECOMMENT_REQUEST,
+  LIKE_RECOMMENT_SUCCESS,
+  LIKE_RECOMMENT_FAILURE
+] = createRequestActionTypes("LIKE_RECOMMENT");
+export const [
+  UNLIKE_RECOMMENT_REQUEST,
+  UNLIKE_RECOMMENT_SUCCESS,
+  UNLIKE_RECOMMENT_FAILURE
+] = createRequestActionTypes("UNLIKE_RECOMMENT");
 
+//----
+export const UNLOAD_RECOMMENTS = "UNLOAD_RECOMMENTS";
 export const UNLOAD_COMMENTS = "UNLOAD_COMMENTS";
 
 export const addComment = createAction(
@@ -81,6 +86,23 @@ export const updateComment = createAction(
   UPDATE_COMMENT_REQUEST,
   ({ id, userId, password, content }) => ({ id, userId, password, content })
 );
+//---
+
+export const loadRecomments = createAction(LOAD_RECOMMENTS_REQUEST);
+export const addRecomment = createAction(
+  ADD_RECOMMENT_REQUEST,
+  ({ id, userId, password, content }) => ({ id, userId, password, content })
+);
+export const deleteRecomment = createAction(
+  DELETE_RECOMMENT_REQUEST,
+  ({ id, password }) => ({ id, password })
+);
+export const updateRecomment = createAction(
+  UPDATE_RECOMMENT_REQUEST,
+  ({ id, userId, password, content }) => ({ id, userId, password, content })
+);
+
+export const unloadRecomments = createAction(UNLOAD_RECOMMENTS);
 export const unloadComments = createAction(UNLOAD_COMMENTS);
 // 여기추가
 export default handleActions(
@@ -103,8 +125,8 @@ export default handleActions(
       }),
     [DELETE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        const index = draft.comments.findIndex(v => v._id === action.payload);
-        draft.comments.splice(index, 1);
+        draft.comments = draft.comments.filter(v => v._id !== action.payload);
+        console.log("draft.comments", draft.comments);
       }),
     [DELETE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -137,7 +159,77 @@ export default handleActions(
       produce(state, draft => {
         draft.commentError = action.payload;
       }),
-    [UNLOAD_COMMENTS]: () => initialState
+    [ADD_RECOMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        const index = draft.comments.findIndex(
+          v => v._id === action.payload.targetId
+        );
+
+        if (draft.recomments) draft.recomments.unshift(action.payload);
+        if (index > -1)
+          draft.comments[index].childId.unshift(action.payload._id);
+      }),
+    [ADD_RECOMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = action.payload;
+      }),
+    [LOAD_RECOMMENTS_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.recomments = action.payload;
+      }),
+    [LOAD_RECOMMENTS_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = action.payload;
+      }),
+    [DELETE_RECOMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.recomments = draft.recomments.filter(
+          v => v._id !== action.payload
+        );
+        console.log("draft.recomments", draft.recomments);
+      }),
+    [DELETE_RECOMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = action.payload;
+      }),
+    [UPDATE_RECOMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        const index = draft.recomments.findIndex(
+          v => v._id === action.payload._id
+        );
+        draft.recomments[index] = action.payload;
+      }),
+    [UPDATE_RECOMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = action.payload;
+      }),
+    [LIKE_RECOMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.recomments = action.payload;
+      }),
+    [LIKE_RECOMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = action.payload;
+      }),
+    [UNLIKE_RECOMMENT_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.recomments = action.payload;
+      }),
+    [UNLIKE_RECOMMENT_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = action.payload;
+      }),
+    [UNLOAD_RECOMMENTS]: (state, action) =>
+      produce(state, draft => {
+        draft.recommentError = null;
+        draft.recomments = null;
+      }),
+
+    [UNLOAD_COMMENTS]: (state, action) =>
+      produce(state, draft => {
+        draft.commentError = null;
+        draft.comments = null;
+      })
   },
   initialState
 );
