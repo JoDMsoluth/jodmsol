@@ -22,9 +22,6 @@ export const addRecommentApi = ({ id, userId, password, content }) =>
     content
   });
 
-export const loadRecommentsApi = id =>
-  client.get(`api/blog/recomments/load/${id}`);
-
 export const updateRecommentApi = ({ id, userId, password, content }) =>
   client.patch(`api/blog/recomments/update/${id}`, {
     userId,

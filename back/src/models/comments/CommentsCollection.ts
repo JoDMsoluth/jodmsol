@@ -7,6 +7,7 @@ const CommentsSchema: Schema = new Schema(
     userId: String,
     password: String,
     content: String,
+    targetId : String,
     childId: [{ type: mongoose.Schema.Types.ObjectId, ref: "ReComments" }],
     likes: Number
     // comment_id

@@ -5,7 +5,6 @@ import {
   deleteCommentApi,
   updateCommentApi,
   loadCommentsApi,
-  loadRecommentsApi,
   addRecommentApi,
   deleteRecommentApi,
   updateRecommentApi
@@ -18,7 +17,6 @@ import {
   ADD_RECOMMENT_REQUEST,
   DELETE_RECOMMENT_REQUEST,
   UPDATE_RECOMMENT_REQUEST,
-  LOAD_RECOMMENTS_REQUEST
 } from "../stores/comment";
 //--------------------------------------------------------
 const addComment = createRequestSaga("ADD_COMMENT", addCommentApi);
@@ -34,7 +32,6 @@ const updateRecomment = createRequestSaga(
   "UPDATE_RECOMMENT",
   updateRecommentApi
 );
-const loadRecomments = createRequestSaga("LOAD_RECOMMENTS", loadRecommentsApi);
 //---------------------------------------------
 
 function* watchAddComment() {
@@ -59,9 +56,6 @@ function* watchDeleteRecomment() {
 function* watchUpdateRecomment() {
   yield takeEvery(UPDATE_RECOMMENT_REQUEST, updateRecomment);
 }
-function* watchLoadRecomments() {
-  yield takeEvery(LOAD_RECOMMENTS_REQUEST, loadRecomments);
-}
 //---------------------------------------
 
 export default function* userSaga() {
@@ -73,6 +67,5 @@ export default function* userSaga() {
     fork(watchAddRecomment),
     fork(watchDeleteRecomment),
     fork(watchUpdateRecomment),
-    fork(watchLoadRecomments)
   ]);
 }

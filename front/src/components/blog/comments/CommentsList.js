@@ -9,6 +9,8 @@ export default function CommentsList({
   addRecomment,
   updateComment,
   deleteComment,
+  updateRecomment,
+  deleteRecomment,
   comments = []
 }) {
   return (
@@ -23,6 +25,8 @@ export default function CommentsList({
               updateComment={updateComment}
               deleteComment={deleteComment}
               addRecomment={addRecomment}
+              updateRecomment={updateRecomment}
+              deleteRecomment={deleteRecomment}
             />
           ))}
         </CommentsListWrap>

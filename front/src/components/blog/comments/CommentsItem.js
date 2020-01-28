@@ -3,31 +3,40 @@ import styled from "styled-components";
 import palette from "lib/styles/palette";
 import CommentButton from "./CommentButton";
 import CommentContent from "./CommentContent";
-import RecommentsListContainer from "containers/blog/RecommentsListContainer";
 import CommentForm from "./CommentForm";
+import ReCommentsList from "./ReCommnetList";
 
 export default function CommentsItem({
   comment,
   updateComment,
   deleteComment,
-  addRecomment
+  addRecomment,
+  updateRecomment,
+  deleteRecomment
 }) {
   const [toggleForm, setToggleForm] = useState(false);
   const [toggleReply, setToggleReply] = useState(false);
   const [edit, setEdit] = useState(false);
   return (
     <>
-      {comment && (
-        <>
           <CommentsItemWrap>
+            
+      {edit ? (
+        <CommentForm
+          edit={edit}
+          setEdit={setEdit}
+          comment={comment}
+          updateComment={updateComment}
+          updateRecomment={updateRecomment}
+        />
+      ) : 
+      <>
             <CommentContent
               comment={comment}
               edit={edit}
               setEdit={setEdit}
-              updateComment={updateComment}
               deleteComment={deleteComment}
             />
-
             <CommentButton
               comment={comment}
               toggleForm={toggleForm}
@@ -35,6 +44,8 @@ export default function CommentsItem({
               setToggleForm={setToggleForm}
               setToggleReply={setToggleReply}
             />
+        </>    
+      }
           </CommentsItemWrap>
 
           {toggleForm && (
@@ -45,15 +56,12 @@ export default function CommentsItem({
             />
           )}
           {toggleReply && (
-            <RecommentsListContainer
-              id={comment._id}
-              toggleForm={toggleForm}
-              toggleReply={toggleReply}
-              comment={comment}
-            />
+            <ReCommentsList
+            updateRecomment={updateRecomment}
+            deleteRecomment={deleteRecomment}
+            comment={comment}
+          />
           )}
-        </>
-      )}
     </>
   );
 }

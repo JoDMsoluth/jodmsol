@@ -7,7 +7,9 @@ import {
   addComment,
   updateComment,
   deleteComment,
-  addRecomment
+  addRecomment,
+  deleteRecomment,
+  updateRecomment
 } from "modules/stores/comment";
 import CommentsList from "components/blog/comments/CommentsList";
 
@@ -33,6 +35,14 @@ const CommentsListContainer = ({ match }) => {
   const updateCommentHandle = ({ id, userId, password, content }) => {
     dispatch(updateComment({ id, userId, password, content }));
   };
+  const deleteRecommentHandle = ({ password, id }) => {
+    dispatch(deleteRecomment({ password, id }));
+  };
+  const updateRecommentHandle = ({ id, userId, password, content }) => {
+    dispatch(updateRecomment({ id, userId, password, content }));
+  };
+
+
 
   const { id } = match.params;
   useEffect(() => {
@@ -56,6 +66,8 @@ const CommentsListContainer = ({ match }) => {
         updateComment={updateCommentHandle}
         deleteComment={deleteCommentHandle}
         addRecomment={addRecommentHandle}
+        updateRecomment={updateRecommentHandle}
+        deleteRecomment={deleteRecommentHandle}
         comments={comments}
       />
     </>

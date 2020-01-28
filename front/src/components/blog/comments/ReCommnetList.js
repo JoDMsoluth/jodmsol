@@ -1,27 +1,24 @@
 import React from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
-import CommentContent from "./CommentContent";
+import RecommentItem from "./RecommentItem";
 
 export default function ReCommentsList({
   updateRecomment,
   deleteRecomment,
-  recomments
+  comment
 }) {
-  console.log("recomments.childId", recomments);
   return (
     <>
-      {recomments &&
-        recomments.childId.map((comment, i) => (
-          <CommentWrap>
-            <CommentContent
+      {comment &&
+        comment.childId.map((comment, i) => (
+            <RecommentItem
               key={`${comment.userId}${i}`}
-              comment={comment}
               deleteRecomment={deleteRecomment}
+              comment={comment}
               updateRecomment={updateRecomment}
-              reply
             />
-          </CommentWrap>
+          
         ))}
     </>
   );

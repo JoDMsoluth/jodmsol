@@ -4,8 +4,6 @@ import { createRequestActionTypes } from "lib/createRequestSaga";
 
 export const initialState = {
   comments: null,
-  commentError: null,
-  recomments: null,
   commentError: null
 };
 
@@ -126,7 +124,6 @@ export default handleActions(
     [DELETE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.comments = draft.comments.filter(v => v._id !== action.payload);
-        console.log("draft.comments", draft.comments);
       }),
     [DELETE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -137,7 +134,9 @@ export default handleActions(
         const index = draft.comments.findIndex(
           v => v._id === action.payload._id
         );
-        draft.comments[index] = action.payload;
+        draft.comments[index].userId = action.payload.userId;
+        draft.comments[index].content = action.payload.content;
+        draft.comments[index].updatedAt = action.payload.updatedAt;
       }),
     [UPDATE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -145,7 +144,10 @@ export default handleActions(
       }),
     [LIKE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comments = action.payload;
+        const index = draft.comments.findIndex(
+          v => v._id === action.payload._id
+        );
+        draft.comments[index] = action.payload;
       }),
     [LIKE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -153,7 +155,10 @@ export default handleActions(
       }),
     [UNLIKE_COMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.comments = action.payload;
+        const index = draft.comments.findIndex(
+          v => v._id === action.payload._id
+        );
+        draft.comments[index] = action.payload;
       }),
     [UNLIKE_COMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -164,29 +169,23 @@ export default handleActions(
         const index = draft.comments.findIndex(
           v => v._id === action.payload.targetId
         );
-
-        if (draft.recomments) draft.recomments.unshift(action.payload);
         if (index > -1)
-          draft.comments[index].childId.unshift(action.payload._id);
+          draft.comments[index].childId.unshift(action.payload);
       }),
     [ADD_RECOMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.recommentError = action.payload;
       }),
-    [LOAD_RECOMMENTS_SUCCESS]: (state, action) =>
-      produce(state, draft => {
-        draft.recomments = action.payload;
-      }),
-    [LOAD_RECOMMENTS_FAILURE]: (state, action) =>
-      produce(state, draft => {
-        draft.recommentError = action.payload;
-      }),
     [DELETE_RECOMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.recomments = draft.recomments.filter(
-          v => v._id !== action.payload
+        const index = draft.comments.findIndex(
+          v => v._id === action.payload.targetId
         );
-        console.log("draft.recomments", draft.recomments);
+        if (index > -1){
+        draft.comments[index].childId = draft.comments[index].childId.filter(
+          v => v._id !== action.payload._id
+        );}
+        console.log("draft.recomments");
       }),
     [DELETE_RECOMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -194,10 +193,15 @@ export default handleActions(
       }),
     [UPDATE_RECOMMENT_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        const index = draft.recomments.findIndex(
+        const index = draft.comments.findIndex(
+          v => v._id === action.payload.targetId
+        );
+        const childIndex = draft.comments[index].childId.findIndex(
           v => v._id === action.payload._id
         );
-        draft.recomments[index] = action.payload;
+        if (index > -1 || childIndex > -1){
+        draft.comments[index].childId[childIndex] = action.payload;
+      }
       }),
     [UPDATE_RECOMMENT_FAILURE]: (state, action) =>
       produce(state, draft => {
@@ -219,17 +223,7 @@ export default handleActions(
       produce(state, draft => {
         draft.recommentError = action.payload;
       }),
-    [UNLOAD_RECOMMENTS]: (state, action) =>
-      produce(state, draft => {
-        draft.recommentError = null;
-        draft.recomments = null;
-      }),
-
-    [UNLOAD_COMMENTS]: (state, action) =>
-      produce(state, draft => {
-        draft.commentError = null;
-        draft.comments = null;
-      })
+    [UNLOAD_COMMENTS]:()=>initialState
   },
   initialState
 );

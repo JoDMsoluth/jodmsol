@@ -9,24 +9,12 @@ export default function CommentContent({
   edit,
   setEdit,
   deleteComment,
-  updateComment,
   deleteRecomment,
-  updateRecomment,
   reply
 }) {
   const [toggleQuestion, setToggleQustion] = useState(false);
   return (
     <>
-      {edit && (
-        <CommentForm
-          edit={edit}
-          setEdit={setEdit}
-          comment={comment}
-          updateComment={updateComment}
-          updateRecomment={updateRecomment}
-          reply
-        />
-      )}
       <CommentsItemWrap>
         <CommentHead>
           <span>{comment.userId}</span>

@@ -4,20 +4,6 @@ import ReCommentsDocument from "models/recomments/ReCommentsDocument";
 import ReCommentsCollection from "models/recomments/ReCommentsCollection";
 import CommentsCollection from "models/comments/CommentsCollection";
 
-async function loadComments(req: Request, res: Response) {
-  const { id } = req.params;
-  try {
-    await CommentsCollection.findById(id)
-      .populate("childId")
-      .select("childId")
-      .exec(function(err, comments) {
-        if (err) console.error(err);
-        res.json(comments);
-      });
-  } catch (err) {
-    console.error(err);
-  }
-}
 
 async function addComment(req: Request, res: Response) {
   const schema: Joi.ObjectSchema = Joi.object().keys({
@@ -62,9 +48,10 @@ async function addComment(req: Request, res: Response) {
 async function deleteComment(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    await ReCommentsCollection.findByIdAndRemove(id, function(err) {
+    await ReCommentsCollection.findByIdAndRemove(id, function(err, result) {
       if (err) console.error(err);
-      res.status(204).send("success"); // No Content
+      console.log(result)
+      res.json(result)
     });
   } catch (e) {
     console.error(e);
@@ -108,7 +95,6 @@ const CommentController = {
   addComment,
   deleteComment,
   updateComment,
-  loadComments
 };
 
 export default CommentController;

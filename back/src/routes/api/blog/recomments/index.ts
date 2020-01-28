@@ -4,8 +4,6 @@ import reCommentController from "./reCommentsController";
 
 const reCommentApi = Router();
 
-//read
-reCommentApi.get("/load/:id", checkObjectId, reCommentController.loadComments);
 //write
 reCommentApi.post("/add/:id", checkObjectId, reCommentController.addComment);
 //delete

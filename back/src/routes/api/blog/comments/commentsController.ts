@@ -7,12 +7,11 @@ import BlogPostCollection from "models/blogPost/BlogPostCollection";
 async function loadComments(req: Request, res: Response) {
   const { id } = req.params;
   try {
-    await BlogPostCollection.findById(id)
-      .populate("comments")
-      .select("comments")
+    await CommentCollection.find({targetId : id})
+      .populate("childId")
       .exec(function(err, comments) {
         if (err) console.error(err);
-        res.json(comments && comments.comments);
+        res.json(comments);
       });
   } catch (err) {
     console.error(err);
@@ -44,7 +43,8 @@ async function addComment(req: Request, res: Response) {
           const newComment: CommentDocument = new CommentCollection({
             userId,
             password,
-            content
+            content,
+            targetId : id
           });
           target.comments.unshift(newComment._id);
           target.save();
