@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
 import { Link } from "react-router-dom";
@@ -18,11 +19,11 @@ export default function SeriesCard({ series }) {
     <>
       <ContentCardWrap>
         <Link to={`/blog/${category}?${queryString}&page=1`}>
-          <CoverImg coverImg={thumbnail}></CoverImg>
+          <CoverImg coverImg={thumbnail} />
         </Link>
         <Content>
           <ContentHead>
-            <div>{updatedAt}</div>
+            <div>{moment(updatedAt).format("YYYY.MM.DD.")}</div>
             <Link to={`/blog/${category}?${queryString}&page=1`}>
               <b>{title}</b>
             </Link>
@@ -34,7 +35,6 @@ export default function SeriesCard({ series }) {
           </ContentHead>
           <ContentBody>
             <div>{desc.length > 500 ? desc.substring(0, 500) : desc}</div>
-            <div></div>
           </ContentBody>
           <CustomButton color="darkGray" size="medium">
             Show Posts
@@ -56,28 +56,34 @@ const ContentCardWrap = styled.div`
   }
 `;
 const CoverImg = styled.div`
+  &::before {
+    content: "";
+    display: inline-block;
+    transform: translate(-3%, 3%);
+    height: 17rem;
+    width: 17rem;
+    background: url(${props => props.coverImg});
+    background-position: 50% 50%;
+    background-size: cover;
+    box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.5);
+  }
   display: inline-block;
   position: absolute;
   top: 50%;
-  transform: translate(-20%, -50%);
-  box-shadow: 5px 5px 15px 0px rgba(0, 0, 0, 0.5);
-  background: url(${props => props.coverImg});
-  background-position: 50% 50%;
-  background-size: cover;
+  transform: translate(-20%, -53%);
+  background: ${palette.gray0};
   width: 17rem;
   height: 17rem;
-  overflow: hidden;
 `;
 const Content = styled.div`
   position : relative;
   display:inline-block;
   white-space: pre-wrap;
-  padding : 0 2rem 0 3rem
+  padding : 1rem 2rem 3rem
   width: calc(100% - 15rem);
   float:right;
   height: 18rem;
   color: ${palette.gray7}
-  overflow:hidden  
 `;
 
 const ContentHead = styled.div`
@@ -86,8 +92,9 @@ const ContentHead = styled.div`
     font-size: 2rem;
     color: ${palette.gray8};
   }
-  & div:nth-child(3) {
-    font-size: 0.7rem;
+  & div:nth-child(3),
+  div:nth-child(1) {
+    font-size: 0.8rem;
     line-height: 0.7rem;
     font-weight: 600;
     color: ${palette.gray5};
@@ -97,8 +104,7 @@ const ContentHead = styled.div`
   }
 `;
 const ContentBody = styled.div`
-  position : relative;
-  height: 10rem;
+  height: 8.5rem;
   & div:nth-child(1) {
     height: 100%;
     overflow:hidden
@@ -107,12 +113,4 @@ const ContentBody = styled.div`
     color: ${palette.gray7}
   }
 
-  & > div:last-child {
-    position : absolute;
-    bottom : 0;
-    right: 0;
-    width :100%;
-    height : 20%;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 80%);
-}
 `;
