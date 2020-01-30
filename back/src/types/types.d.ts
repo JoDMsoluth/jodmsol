@@ -1,4 +1,4 @@
-export type category = undefined | "study" | "daily | game";
+export type category = undefined | "study" | "daily" | "game";
 
 export interface UnifiedModel {
   _id: any;

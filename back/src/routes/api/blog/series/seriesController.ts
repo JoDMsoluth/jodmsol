@@ -26,6 +26,7 @@ async function addSeries(req: Request, res: Response) {
     category
   });
 
+  console.log(newSeries);
   try {
     await newSeries.save(function(err, newSeries) {
       if (err) return console.error(err);

@@ -5,9 +5,9 @@ import SeriesDocument from "./SeriesDocument";
 export const SeriesSchema: Schema = new Schema(
   {
     coverImg: String,
-    title: { type: String, unique: true },
+    title: String,
     desc: String,
-    category: String,
+    category: { type: String, default: "study" },
     posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "BlogPost" }]
   },
   { timestamps: true }
