@@ -1,23 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import EditorHeader from "components/write/EditorHeader";
 import { withRouter } from "react-router-dom";
 import { addPost } from "modules/stores/post";
-import { INITIALIZE } from "modules/stores/write";
+import { addSeries } from "modules/stores/series";
 
-const EditorPaneContainer = ({ history }) => {
-  const { title, tags, markdown } = useSelector(({ write }) => write);
+const EditorPaneContainer = ({ history, match }) => {
+  const { title, tags, markdown, desc } = useSelector(({ write }) => write);
+  const { category } = match.params;
   const dispatch = useDispatch();
-  console.log("selector", title, tags, markdown);
+
   const onGoBack = () => history.goBack();
   const onSubmit = () => {
-    dispatch(addPost({ title, markdown, tags }));
-    history.push(`/blog/?page=1`);
+    match.params.id
+      ? dispatch(addPost({ title, markdown, tags, category }))
+      : dispatch(addSeries({ title, markdown, desc, category }));
   };
-
-  useEffect(() => {
-    return () => dispatch({ type: INITIALIZE });
-  });
 
   return <EditorHeader onGoBack={onGoBack} onSubmit={onSubmit} />;
 };

@@ -1,0 +1,31 @@
+import client from "./axiosSetting";
+import qs from "qs";
+
+export const addSeriesApi = ({ title, desc, markdown, category, coverImg }) =>
+  client.post(`api/blog/series/add/${category}`, {
+    title,
+    desc,
+    markdown,
+    coverImg
+  });
+
+export const loadSeriesApi = ({ category, page }) => {
+  const queryString = qs.stringify({
+    page
+  });
+  return client.get(`api/blog/series/loadAll/${category}?${queryString}`);
+};
+
+export const loadSeriesPostsApi = id =>
+  client.get(`api/blog/series/load/${id}`);
+
+export const updateSeriesApi = ({ id, title, desc, markdown, coverImg }) =>
+  client.patch(`api/blog/series/update/${id}`, {
+    title,
+    desc,
+    markdown,
+    coverImg
+  });
+
+export const deleteSeriesApi = id =>
+  client.delete(`api/blog/series/delete/${id}`);

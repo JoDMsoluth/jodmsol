@@ -86,42 +86,6 @@ async function loadTags(req: Request, res: Response) {
   }
 }
 
-async function loadSeries(req: Request, res: Response) {
-  const page: number = parseInt(req.query.page || "1", 10);
-  const { series } = req.query;
-
-  const { category } = req.params;
-  console.log(
-    "page tag series popular latest category filter",
-    page,
-    series,
-    category
-  );
-
-  if (page < 1) {
-    res.status(400).send("bad request");
-    console.log("bad request");
-    return;
-  }
-  try {
-    const getSeries: BlogPostDocument[] | null = await SeriesCollection.find()
-      .populate("posts")
-      .where("category")
-      .equals(category)
-      .sort({ _id: -1 })
-      .limit(10)
-      .skip((page - 1) * 10)
-      .lean()
-      .exec();
-    const postCount: number = await SeriesCollection.countDocuments().exec();
-    res.set("Last-Page", Math.ceil(postCount / 10).toString());
-    console.log(getSeries);
-    res.json(getSeries);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 async function loadPostsInTag(req: Request, res: Response) {
   const { category, tag } = req.params;
   const page: number = parseInt(req.query.page || "1", 10);
@@ -150,42 +114,10 @@ async function loadPostsInTag(req: Request, res: Response) {
     console.error(e);
   }
 }
-async function loadPostsInSeries(req: Request, res: Response) {
-  const { category, id } = req.params;
-  const page: number = parseInt(req.query.page || "1", 10);
-
-  if (page < 1) {
-    res.status(400).send("bad request");
-    console.log("bad request");
-    return;
-  }
-
-  try {
-    const getPostsInSeries:
-      | BlogPostDocument[]
-      | null = await SeriesCollection.find({ _id: id, category })
-      .populate("posts")
-      .select("posts")
-      .sort({ _id: -1 })
-      .limit(9)
-      .skip((page - 1) * 9)
-      .lean()
-      .exec();
-    const postCount: number = await SeriesCollection.countDocuments().exec();
-    res.set("Last-Page", Math.ceil(postCount / 9).toString());
-    console.log(getPostsInSeries);
-    res.json(getPostsInSeries);
-  } catch (e) {
-    console.error(e);
-  }
-}
-
 const postsController = {
   loadAllPosts,
   loadTags,
-  loadSeries,
-  loadPostsInTag,
-  loadPostsInSeries
+  loadPostsInTag
 };
 
 export default postsController;

@@ -20,13 +20,6 @@ export const loadHashtagsApi = ({ category, page }) => {
   return client.get(`api/blog/posts/load/${category}/tags?${queryString}`);
 };
 
-export const loadSeriesApi = ({ category, page }) => {
-  const queryString = qs.stringify({
-    page
-  });
-  return client.get(`api/blog/posts/load/${category}/series?${queryString}`);
-};
-
 export const loadPostsInSeriesApi = ({ category, page, id }) => {
   const queryString = qs.stringify({
     page

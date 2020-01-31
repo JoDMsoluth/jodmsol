@@ -8,7 +8,7 @@ const BlogContentCard = ({ post }) => {
   return (
     <>
       <ContentCardWrap>
-        <Link to={`/post/load/${post.category}/${_id}`}>
+        <Link to={`/post/${_id}`}>
           <CoverImg coverImg={null}></CoverImg>
         </Link>
         <Content>

@@ -6,14 +6,14 @@ import PreviewPaneContainer from "containers/write/PreviewPaneContainer";
 import EditHeaderContainer from "containers/write/EditHeaderContainer";
 
 export default function WritePost() {
+  const header = <EditHeaderContainer />;
+  const editor = <EditorPaneContainer />;
+  const preview = <PreviewPaneContainer />;
+
   return (
     <>
       <AppLayoutContainer>
-        <EditTemplate
-          header={<EditHeaderContainer />}
-          editor={<EditorPaneContainer />}
-          preview={<PreviewPaneContainer />}
-        />
+        <EditTemplate header={header} editor={editor} preview={preview} />
       </AppLayoutContainer>
     </>
   );

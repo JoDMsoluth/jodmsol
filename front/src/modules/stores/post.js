@@ -8,11 +8,6 @@ export const initialState = {
   postSuccess: null
 };
 export const [
-  LOAD_POSTS_REQUEST,
-  LOAD_POSTS_SUCCESS,
-  LOAD_POSTS_FAILURE
-] = createRequestActionTypes("LOAD_POSTS");
-export const [
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
   UPLOAD_IMAGES_FAILURE
@@ -41,10 +36,6 @@ export const [
 export const REMOVE_IMAGE = "REMOVE_IMAGE";
 export const UNLOAD_POST = "UNLOAD_POST";
 
-export const loadPosts = createAction(LOAD_POSTS_REQUEST, ({ tag, page }) => ({
-  tag,
-  page
-}));
 export const uploadImg = createAction(UPLOAD_IMAGES_REQUEST);
 export const removeImg = createAction(REMOVE_IMAGE);
 export const addPost = createAction(

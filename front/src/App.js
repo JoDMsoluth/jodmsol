@@ -7,7 +7,7 @@ import {
   BlogPage,
   WritePost,
   NotFoundPage,
-  PostPage
+  ViewPage
 } from "./pages";
 import ResumeContent from "./components/profile/Resume/ResumeContent";
 
@@ -25,8 +25,10 @@ function App() {
           <Route path="/profile" component={ProfilePage} />
           <Route path="/blog/:category?/:filter?" component={BlogPage} />
           <Route path="/print/resume" component={ResumeContent} />
-          <Route path="/post/add" component={WritePost} />
-          <Route path="/post/load/:category/:id" component={PostPage} />
+
+          <Route path="/add/:filter/:category/:id" component={WritePost} />
+          <Route path="/:filter/:id" component={ViewPage} />
+
           <Route component={IntroPage} />
         </Switch>
       </BrowserRouter>

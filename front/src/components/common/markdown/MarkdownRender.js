@@ -15,7 +15,7 @@ import "prismjs/components/prism-css.min.js";
 
 export default function MarkdownRender({ markdown }) {
   const [html, setHtml] = useState(
-    markdown ? marked(markdown, { breaks: true, sanitize: true }) : ""
+    markdown ? marked(markdown, { breaks: true }) : ""
   );
   const markup = {
     __html: html
@@ -27,8 +27,7 @@ export default function MarkdownRender({ markdown }) {
     }
     setHtml(
       marked(markdown, {
-        breaks: true,
-        sanitize: true
+        breaks: true
       })
     );
   };

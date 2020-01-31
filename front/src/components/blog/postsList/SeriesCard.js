@@ -18,13 +18,13 @@ export default function SeriesCard({ series }) {
   return (
     <>
       <ContentCardWrap>
-        <Link to={`/blog/${category}?${queryString}&page=1`}>
+        <Link to={`/series/${id}`}>
           <CoverImg coverImg={thumbnail} />
         </Link>
         <Content>
           <ContentHead>
             <div>{moment(updatedAt).format("YYYY.MM.DD.")}</div>
-            <Link to={`/blog/${category}?${queryString}&page=1`}>
+            <Link to={`/series/${id}`}>
               <b>{title}</b>
             </Link>
             <div>
@@ -36,9 +36,11 @@ export default function SeriesCard({ series }) {
           <ContentBody>
             <div>{desc.length > 500 ? desc.substring(0, 500) : desc}</div>
           </ContentBody>
-          <CustomButton color="darkGray" size="medium">
-            Show Posts
-          </CustomButton>
+          <Link to={`/series/${id}`}>
+            <CustomButton color="darkGray" size="medium">
+              Show Posts
+            </CustomButton>
+          </Link>
         </Content>
       </ContentCardWrap>
     </>

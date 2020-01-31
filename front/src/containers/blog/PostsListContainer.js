@@ -1,10 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  loadPosts,
-  loadPostsInTag,
-  loadPostsInSeries,
-  unloadPosts
-} from "modules/stores/posts";
+import { loadPosts, loadPostsInTag, unloadPosts } from "modules/stores/posts";
 import { useDispatch, useSelector } from "react-redux";
 import BlogContent from "components/blog/postsList";
 import qs from "qs";
@@ -35,15 +30,7 @@ const PostsListContainer = ({ location, match }) => {
       category,
       filter
     );
-    if (id) {
-      dispatch(
-        loadPostsInSeries({
-          id,
-          page,
-          category
-        })
-      );
-    } else if (tag) {
+    if (tag) {
       dispatch(
         loadPostsInTag({
           tag,

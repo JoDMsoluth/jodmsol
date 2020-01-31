@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import BlogContent from "components/blog/postsList";
 import qs from "qs";
 import { withRouter } from "react-router-dom";
 import { loadSeries, unloadSeries } from "modules/stores/series";

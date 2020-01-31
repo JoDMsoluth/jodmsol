@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useCallback, useState } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
 import CodeMirror from "codemirror";
@@ -13,8 +13,16 @@ import "codemirror/mode/shell/shell";
 // CodeMirror를 위한 CSS 스타일
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/monokai.css";
+import { useRouteMatch } from "react-router-dom";
 
-export default function EditorPane({ title, markdown, tags, onChangeInput }) {
+export default function EditorPane({
+  desc,
+  title,
+  markdown,
+  tags,
+  onChangeInput
+}) {
+  const match = useRouteMatch();
   const editor = useRef();
   const codeMirror = useRef();
 
@@ -53,18 +61,29 @@ export default function EditorPane({ title, markdown, tags, onChangeInput }) {
           name="title"
           value={title}
           onChange={onChangehandle}
-          placeholder="제목"
+          placeholder="title"
         />
-        <CodeEditor ref={editor}></CodeEditor>
-        <TagsWrap>
-          <div>태그</div>
-          <input
-            name="tags"
-            value={tags}
-            placeholder="태그를 입력하세요"
+        {!match.params.id && (
+          <DescInput
+            type="text"
+            name="desc"
+            value={desc}
             onChange={onChangehandle}
+            placeholder="description"
           />
-        </TagsWrap>
+        )}
+        <CodeEditor ref={editor}></CodeEditor>
+        {match.params.id && (
+          <TagsWrap>
+            <div>태그</div>
+            <input
+              name="tags"
+              value={tags}
+              placeholder="태그를 입력하세요"
+              onChange={onChangehandle}
+            />
+          </TagsWrap>
+        )}
       </PaneWrap>
     </>
   );
@@ -96,6 +115,13 @@ const TitleInput = styled.input`
   padding: 1rem;
   font-size: 1.5rem;
   font-weight: 500;
+`;
+const DescInput = styled.input`
+  width: 100%;
+  height: 5rem;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 300;
 `;
 const CodeEditor = styled.textarea``;
 const TagsWrap = styled.div`

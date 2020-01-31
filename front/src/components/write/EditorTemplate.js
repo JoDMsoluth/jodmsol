@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import palette from "lib/styles/palette";
+import { INITIALIZE } from "modules/stores/write";
+import { useDispatch } from "react-redux";
 
 export default function EditTemplate({ header, editor, preview }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return () => dispatch({ type: INITIALIZE });
+  });
   const [leftPercent, setLeftPercent] = useState(0.5);
   const handleMouseMove = e => {
     setLeftPercent(e.clientX / window.innerWidth);
