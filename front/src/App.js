@@ -26,7 +26,7 @@ function App() {
           <Route path="/blog/:category?/:filter?" component={BlogPage} />
           <Route path="/print/resume" component={ResumeContent} />
 
-          <Route path="/add/:filter/:category/:id" component={WritePost} />
+          <Route path="/add/:filter/:category/:id?" component={WritePost} />
           <Route path="/:filter/:id" component={ViewPage} />
 
           <Route component={IntroPage} />

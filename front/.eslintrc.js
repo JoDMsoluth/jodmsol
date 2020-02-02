@@ -14,6 +14,10 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module"
   },
+  extends : [
+    "airbnb",
+    "prettier"
+  ],
   plugins: ["react"],
   rules: {
     quotes: "off",
