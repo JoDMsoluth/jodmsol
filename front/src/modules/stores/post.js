@@ -1,46 +1,53 @@
-import { createAction, handleActions } from "redux-actions";
-import produce from "immer";
-import { createRequestActionTypes } from "lib/createRequestSaga";
+import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
+import { createRequestActionTypes } from 'lib/createRequestSaga';
 
 export const initialState = {
   post: null,
   postError: null,
-  postSuccess: null
+  postSuccess: null,
 };
 export const [
   UPLOAD_IMAGES_REQUEST,
   UPLOAD_IMAGES_SUCCESS,
-  UPLOAD_IMAGES_FAILURE
-] = createRequestActionTypes("UPLOAD_IMAGES");
+  UPLOAD_IMAGES_FAILURE,
+] = createRequestActionTypes('UPLOAD_IMAGES');
 export const [
   ADD_POST_REQUEST,
   ADD_POST_SUCCESS,
-  ADD_POST_FAILURE
-] = createRequestActionTypes("ADD_POST");
+  ADD_POST_FAILURE,
+] = createRequestActionTypes('ADD_POST');
 export const [
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
-  DELETE_POST_FAILURE
-] = createRequestActionTypes("DELETE_POST");
+  DELETE_POST_FAILURE,
+] = createRequestActionTypes('DELETE_POST');
 export const [
   LOAD_POST_REQUEST,
   LOAD_POST_SUCCESS,
-  LOAD_POST_FAILURE
-] = createRequestActionTypes("LOAD_POST");
+  LOAD_POST_FAILURE,
+] = createRequestActionTypes('LOAD_POST');
 export const [
   UPDATE_POST_REQUEST,
   UPDATE_POST_SUCCESS,
-  UPDATE_POST_FAILURE
-] = createRequestActionTypes("UPDATE_POST");
+  UPDATE_POST_FAILURE,
+] = createRequestActionTypes('UPDATE_POST');
 
-export const REMOVE_IMAGE = "REMOVE_IMAGE";
-export const UNLOAD_POST = "UNLOAD_POST";
+export const REMOVE_IMAGE = 'REMOVE_IMAGE';
+export const UNLOAD_POST = 'UNLOAD_POST';
 
 export const uploadImg = createAction(UPLOAD_IMAGES_REQUEST);
 export const removeImg = createAction(REMOVE_IMAGE);
 export const addPost = createAction(
   ADD_POST_REQUEST,
-  ({ title, markdown, tags }) => ({ title, markdown, tags })
+  ({ title, markdown, tags, id, category, coverImg }) => ({
+    title,
+    markdown,
+    tags,
+    id,
+    category,
+    coverImg,
+  }),
 );
 export const deletePost = createAction(DELETE_POST_REQUEST, id => id);
 export const loadPost = createAction(LOAD_POST_REQUEST, id => id);
@@ -83,7 +90,7 @@ export default handleActions(
       produce(state, draft => {
         draft.postError = action.payload;
       }),
-    [UNLOAD_POST]: () => initialState
+    [UNLOAD_POST]: () => initialState,
   },
-  initialState
+  initialState,
 );

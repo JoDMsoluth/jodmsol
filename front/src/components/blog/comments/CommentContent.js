@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import DeleteQuestion from "./DeleteQuestion";
-import CommentForm from "./CommentForm";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import DeleteQuestion from './DeleteQuestion';
+import dateFormat from 'lib/dateFormat';
 
 export default function CommentContent({
   comment,
@@ -10,17 +10,18 @@ export default function CommentContent({
   setEdit,
   deleteComment,
   deleteRecomment,
-  reply
+  reply,
 }) {
   const [toggleQuestion, setToggleQustion] = useState(false);
+  const { userId, _id, updatedAt, content } = comment;
   return (
     <>
       <CommentsItemWrap>
         <CommentHead>
-          <span>{comment.userId}</span>
-          <span>{comment.updatedAt}</span>
+          <span>{userId}</span>
+          <span>{updatedAt && dateFormat(updatedAt)}</span>
         </CommentHead>
-        <div>{comment.content}</div>
+        <div>{content}</div>
         <CommentToolbar>
           <div onClick={() => setEdit(!edit)}>
             <i className="fas fa-edit" />
@@ -34,7 +35,7 @@ export default function CommentContent({
 
         {toggleQuestion && (
           <DeleteQuestion
-            id={comment._id}
+            id={_id}
             toggleQuestion={toggleQuestion}
             setToggleQustion={setToggleQustion}
             deleteComment={deleteComment}

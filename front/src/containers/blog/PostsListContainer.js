@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
-import { loadPosts, loadPostsInTag, unloadPosts } from "modules/stores/posts";
-import { useDispatch, useSelector } from "react-redux";
-import BlogContent from "components/blog/postsList";
-import qs from "qs";
-import { withRouter } from "react-router-dom";
-import Pagination from "components/common/pagination/Pagination";
+import React, { useEffect } from 'react';
+import {
+  loadPosts,
+  loadPostsInTag,
+  loadPostsInSeries,
+  unloadPosts,
+} from 'modules/stores/posts';
+import { useDispatch, useSelector } from 'react-redux';
+import BlogContent from 'components/blog/postsList';
+import qs from 'qs';
+import { withRouter } from 'react-router-dom';
+import Pagination from 'components/common/pagination/Pagination';
 
 const PostsListContainer = ({ location, match }) => {
   const dispatch = useDispatch();
@@ -12,31 +17,40 @@ const PostsListContainer = ({ location, match }) => {
     ({ posts, loading }) => ({
       posts: posts.posts,
       postError: posts.postError,
-      loading: loading["LOAD_POSTS"],
-      lastPage: posts.lastPage
-    })
+      loading: loading['LOAD_POSTS'],
+      lastPage: posts.lastPage,
+    }),
   );
 
   const { tag, id, page } = qs.parse(location.search, {
-    ignoreQueryPrefix: true
+    ignoreQueryPrefix: true,
   });
   const { category, filter } = match.params;
   useEffect(() => {
     console.log(
-      "tag, id, page, category, filter",
+      'tag, id, page, category, filter',
       tag,
       id,
       page,
       category,
-      filter
+      filter,
     );
+    if (id) {
+      dispatch(
+        loadPostsInSeries({
+          id,
+          page,
+          category,
+        }),
+      );
+    }
     if (tag) {
       dispatch(
         loadPostsInTag({
           tag,
           page,
-          category
-        })
+          category,
+        }),
       );
     } else {
       dispatch(
@@ -44,8 +58,8 @@ const PostsListContainer = ({ location, match }) => {
           tag,
           page,
           category,
-          filter
-        })
+          filter,
+        }),
       );
     }
 

@@ -1,40 +1,41 @@
-import React from "react";
-import styled from "styled-components";
-import MarkdownRender from "components/common/markdown/MarkdownRender";
-import palette from "lib/styles/palette";
-import thumbnail from "statics/images/kickVillageProject.PNG";
+import React from 'react';
+import styled from 'styled-components';
+import MarkdownRender from 'components/common/markdown/MarkdownRender';
+import palette from 'lib/styles/palette';
+import thumbnail from 'statics/images/kickVillageProject.PNG';
+import SeriesPostsList from '../postsList/SereisPostsList';
 
 export default function SeriesView({ seriesPosts, seriesError, loading }) {
-  console.log(seriesPosts, "seriesPosts");
+  console.log(seriesPosts, 'seriesPosts');
   if (seriesError) {
-    console.log("seriesPosts is not exist");
+    console.log('seriesPosts is not exist');
   }
   if (loading || !seriesPosts) {
     return null;
   }
 
-  const { coverImg, title, markdown, desc } = seriesPosts;
+  const { coverImg, title, markdown, desc, posts, category } = seriesPosts;
+  const seriesPost =
+    posts.length > 5 ? posts.slice(0, 5) : posts.slice(0, posts.length);
   return (
     <SeriesViewWrap>
       <SeriesViewTitle>{title}</SeriesViewTitle>
-      <Thumbnail coverImg={coverImg || thumbnail}></Thumbnail>
+      <Thumbnail src={coverImg || thumbnail} alt="coverImg"></Thumbnail>
       <SeriesViewDesc>{desc}</SeriesViewDesc>
       <MarkdownRender markdown={markdown} />
+      <SeriesPostsList posts={seriesPost} category={category} />
     </SeriesViewWrap>
   );
 }
 
 const SeriesViewWrap = styled.div`
   flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
+  padding: 2rem 20rem;
   font-size: 1.125rem;
 `;
-const Thumbnail = styled.div`
+const Thumbnail = styled.img`
   width: 100%;
-  background: url(${props => props.coverImg});
-  background-position: 50% 50%;
-  background-size: cover;
+  height: auto;
 `;
 const SeriesViewTitle = styled.div`
   font-size: 2.5rem;

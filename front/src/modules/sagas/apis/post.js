@@ -1,21 +1,11 @@
-import client from "./axiosSetting";
-import qs from "qs";
+import client from './axiosSetting';
 
-export const addPostApi = ({
-  title,
-  markdown,
-  tags,
-  category,
-  series,
-  coverImg
-}) =>
-  client.post("api/blog/post/add", {
+export const addPostApi = ({ title, markdown, tags, category, coverImg, id }) =>
+  client.post(`api/blog/post/add/${category}/${id}`, {
     title,
     markdown,
     tags,
-    category,
-    series,
-    coverImg
+    coverImg,
   });
 
 export const loadPostApi = id => client.get(`api/blog/post/load/${id}`);
@@ -27,7 +17,7 @@ export const updatePostApi = ({
   tags,
   category,
   series,
-  coverImg
+  coverImg,
 }) =>
   client.patch(`api/blog/post/update/${id}`, {
     title,
@@ -35,7 +25,7 @@ export const updatePostApi = ({
     tags,
     category,
     series,
-    coverImg
+    coverImg,
   });
 
 export const deletePostApi = id => client.delete(`api/blog/post/delete/${id}`);

@@ -1,57 +1,59 @@
-import { createAction, handleActions } from "redux-actions";
-import produce from "immer";
-import { createRequestActionTypes } from "lib/createRequestSaga";
+import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
+import { createRequestActionTypes } from 'lib/createRequestSaga';
 
 export const initialState = {
   series: null,
   seriesError: null,
   seriesPosts: null,
-  lastPage: 1
+  lastPage: 1,
 };
 
 export const [
+  LOAD_ALL_SERIES_REQUEST,
+  LOAD_ALL_SERIES_SUCCESS,
+  LOAD_ALL_SERIES_FAILURE,
+] = createRequestActionTypes('LOAD_ALL_SERIES');
+export const [
   LOAD_SERIES_REQUEST,
   LOAD_SERIES_SUCCESS,
-  LOAD_SERIES_FAILURE
-] = createRequestActionTypes("LOAD_SERIES");
-export const [
-  LOAD_SERIES_POSTS_REQUEST,
-  LOAD_SERIES_POSTS_SUCCESS,
-  LOAD_SERIES_POSTS_FAILURE
-] = createRequestActionTypes("LOAD_SERIES_POSTS");
+  LOAD_SERIES_FAILURE,
+] = createRequestActionTypes('LOAD_SERIES');
 
 export const [
   DELETE_SERIES_REQUEST,
   DELETE_SERIES_SUCCESS,
-  DELETE_SERIES_FAILURE
-] = createRequestActionTypes("DELETE_SERIES");
+  DELETE_SERIES_FAILURE,
+] = createRequestActionTypes('DELETE_SERIES');
 export const [
   UPDATE_SERIES_REQUEST,
   UPDATE_SERIES_SUCCESS,
-  UPDATE_SERIES_FAILURE
-] = createRequestActionTypes("UPDATE_SERIES");
+  UPDATE_SERIES_FAILURE,
+] = createRequestActionTypes('UPDATE_SERIES');
 export const [
   ADD_SERIES_REQUEST,
   ADD_SERIES_SUCCESS,
-  ADD_SERIES_FAILURE
-] = createRequestActionTypes("ADD_SERIES");
+  ADD_SERIES_FAILURE,
+] = createRequestActionTypes('ADD_SERIES');
 
-export const UNLOAD_SERIES = "UNLOAD_SERIES";
+export const UNLOAD_SERIES = 'UNLOAD_SERIES';
 
 export const loadSeries = createAction(
-  LOAD_SERIES_REQUEST,
+  LOAD_ALL_SERIES_REQUEST,
   ({ page, category }) => ({
     page,
-    category
-  })
+    category,
+  }),
 );
-export const loadSeriesPosts = createAction(
-  LOAD_SERIES_POSTS_REQUEST,
-  id => id
-);
+export const loadSeriesPosts = createAction(LOAD_SERIES_REQUEST, id => id);
 export const addSeries = createAction(
   ADD_SERIES_REQUEST,
-  ({ title, markdown, desc, category }) => ({ title, markdown, desc, category })
+  ({ title, markdown, desc, category }) => ({
+    title,
+    markdown,
+    desc,
+    category,
+  }),
 );
 export const deleteSeries = createAction(DELETE_SERIES_REQUEST, id => id);
 export const updateSeries = createAction(
@@ -61,8 +63,8 @@ export const updateSeries = createAction(
     title,
     markdown,
     desc,
-    category
-  })
+    category,
+  }),
 );
 
 export const unloadSeries = createAction(UNLOAD_SERIES);
@@ -70,20 +72,20 @@ export const unloadSeries = createAction(UNLOAD_SERIES);
 
 export default handleActions(
   {
-    [LOAD_SERIES_SUCCESS]: (state, action) =>
+    [LOAD_ALL_SERIES_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.series = action.payload;
-        draft.lastPage = parseInt(action.meta.headers["last-page"], 10);
+        draft.lastPage = parseInt(action.meta.headers['last-page'], 10);
       }),
-    [LOAD_SERIES_FAILURE]: (state, action) =>
+    [LOAD_ALL_SERIES_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.seriesError = action.payload;
       }),
-    [LOAD_SERIES_POSTS_SUCCESS]: (state, action) =>
+    [LOAD_SERIES_SUCCESS]: (state, action) =>
       produce(state, draft => {
         draft.seriesPosts = action.payload;
       }),
-    [LOAD_SERIES_POSTS_FAILURE]: (state, action) =>
+    [LOAD_SERIES_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.seriesError = action.payload;
       }),
@@ -106,7 +108,7 @@ export default handleActions(
     [UPDATE_SERIES_SUCCESS]: (state, action) =>
       produce(state, draft => {
         const index = draft.comments.findIndex(
-          v => v._id === action.payload._id
+          v => v._id === action.payload._id,
         );
         draft.series[index].title = action.payload.title;
         draft.series[index].desc = action.payload.desc;
@@ -116,7 +118,7 @@ export default handleActions(
       produce(state, draft => {
         draft.seriesError = action.payload;
       }),
-    [UNLOAD_SERIES]: () => initialState
+    [UNLOAD_SERIES]: () => initialState,
   },
-  initialState
+  initialState,
 );

@@ -1,5 +1,5 @@
-import React from "react";
-import { Switch, BrowserRouter, Route } from "react-router-dom";
+import React from 'react';
+import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import {
   IntroPage,
   ProjectPage,
@@ -7,9 +7,9 @@ import {
   BlogPage,
   WritePost,
   NotFoundPage,
-  ViewPage
-} from "./pages";
-import ResumeContent from "./components/profile/Resume/ResumeContent";
+  ViewPage,
+} from './pages';
+import ResumeContent from './components/profile/Resume/ResumeContent';
 
 function App() {
   return (

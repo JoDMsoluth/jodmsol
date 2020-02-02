@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import palette from 'lib/styles/palette';
 import { Link, withRouter } from 'react-router-dom';
 import thumbnail from 'statics/images/kickVillageProject.PNG';
-import dateFormat from 'lib/dateFormat';
+import formatDate from 'lib/dateFormat';
 
-const BlogContentCard = ({ post }) => {
+const SeriesPostsCard = ({ post }) => {
   const { _id, title, updatedAt, markdown, tags, likes, coverImg } = post;
   return (
     <>
@@ -17,7 +17,7 @@ const BlogContentCard = ({ post }) => {
           <ContentHead>
             <b>{title}</b>
             <div>
-              <span>{dateFormat(updatedAt)}</span>
+              <span>{formatDate(updatedAt)}</span>
               <span style={{ float: 'right' }}>
                 {typeof tags === typeof {}
                   ? Object.keys(tags).map((tag, i) => (
@@ -49,14 +49,19 @@ const BlogContentCard = ({ post }) => {
     </>
   );
 };
-export default withRouter(BlogContentCard);
+export default withRouter(SeriesPostsCard);
 
 const ContentCardWrap = styled.div`
+    padding : 0.01px;
   display: flex;
-  flex-direction: column;
-  width: calc(100% - 2rem);
-  height: 30rem;
+  flex-direction: row;
+  width: 100%
+  height: 10rem;
   border: 1px solid ${palette.gray5};
+  border-bottom : none;
+  &:last-child {
+    border-bottom: 1px solid ${palette.gray5};
+  }
   &:hover {
     background: ${palette.gray0};
   }
@@ -66,8 +71,8 @@ const CoverImg = styled.div`
   background: url(${props => props.coverImg});
   background-position: 50% 50%;
   background-size: cover;
-  width: 100%;
-  height: 15rem;
+  width: 10rem;
+  height: 10rem;
   overflow: hidden;
 `;
 const Content = styled.div`
@@ -75,9 +80,9 @@ const Content = styled.div`
   display:inline-block;
   white-space: pre-wrap;
   padding: 0.8rem 1rem;
-  width: 100%;
+  width: calc(100% - 10rem);
   float:right;
-  height: 15rem;
+  height: 13rem;
   color: ${palette.gray7}
   overflow:hidden
   

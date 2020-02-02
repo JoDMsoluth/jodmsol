@@ -63,6 +63,42 @@ async function loadAllPosts(req: Request, res: Response) {
   }
 }
 
+async function loadSeriesPosts(req: Request, res: Response) {
+  const page: number = parseInt(req.query.page || "1", 10);
+  const { series } = req.query;
+
+  const { category } = req.params;
+  console.log(
+    "page tag series popular latest category filter",
+    page,
+    series,
+    category
+  );
+
+  if (page < 1) {
+    res.status(400).send("bad request");
+    console.log("bad request");
+    return;
+  }
+  try {
+    const getSeries: BlogPostDocument[] | null = await SeriesCollection.find()
+      .populate("posts")
+      .where("category")
+      .equals(category)
+      .sort({ _id: -1 })
+      .limit(10)
+      .skip((page - 1) * 10)
+      .lean()
+      .exec();
+    const postCount: number = await SeriesCollection.countDocuments().exec();
+    res.set("Last-Page", Math.ceil(postCount / 10).toString());
+    console.log(getSeries);
+    res.json(getSeries);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 async function loadTags(req: Request, res: Response) {
   const tag: string = req.query.tag;
 
@@ -116,6 +152,7 @@ async function loadPostsInTag(req: Request, res: Response) {
 }
 const postsController = {
   loadAllPosts,
+  loadSeriesPosts,
   loadTags,
   loadPostsInTag
 };

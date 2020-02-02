@@ -1,10 +1,10 @@
-import React from "react";
-import SeriesCard from "./SeriesCard";
-import styled from "styled-components";
+import React from 'react';
+import SeriesCard from './SeriesCard';
+import styled from 'styled-components';
 
 export default function SeriesCardList({ series, seriesError, loading }) {
   if (seriesError) {
-    console.log("post is not exist");
+    console.log('post is not exist');
   }
   if (loading || !series) {
     return null;

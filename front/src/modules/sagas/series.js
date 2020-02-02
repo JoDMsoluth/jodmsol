@@ -1,29 +1,26 @@
-import { all, fork, takeEvery } from "redux-saga/effects";
-import createRequestSaga from "lib/createRequestSaga";
+import { all, fork, takeEvery } from 'redux-saga/effects';
+import createRequestSaga from 'lib/createRequestSaga';
 import {
   addSeriesApi,
   deleteSeriesApi,
   updateSeriesApi,
+  loadAllSeriesApi,
   loadSeriesApi,
-  loadSeriesPostsApi
-} from "./apis/series";
+} from './apis/series';
 import {
   ADD_SERIES_REQUEST,
   DELETE_SERIES_REQUEST,
   UPDATE_SERIES_REQUEST,
+  LOAD_ALL_SERIES_REQUEST,
   LOAD_SERIES_REQUEST,
-  LOAD_SERIES_POSTS_REQUEST
-} from "../stores/series";
+} from '../stores/series';
 
 //--------------------------------------------------------
-const addSeries = createRequestSaga("ADD_SERIES", addSeriesApi);
-const deleteSeries = createRequestSaga("DELETE_SERIES", deleteSeriesApi);
-const updateSeries = createRequestSaga("UPDATE_SERIES", updateSeriesApi);
-const loadSeries = createRequestSaga("LOAD_SERIES", loadSeriesApi);
-const loadSeriesPosts = createRequestSaga(
-  "LOAD_SERIES_POSTS",
-  loadSeriesPostsApi
-);
+const addSeries = createRequestSaga('ADD_SERIES', addSeriesApi);
+const deleteSeries = createRequestSaga('DELETE_SERIES', deleteSeriesApi);
+const updateSeries = createRequestSaga('UPDATE_SERIES', updateSeriesApi);
+const loadAllSeries = createRequestSaga('LOAD_ALL_SERIES', loadAllSeriesApi);
+const loadSeries = createRequestSaga('LOAD_SERIES', loadSeriesApi);
 
 //---------------------------------------------
 
@@ -36,11 +33,11 @@ function* watchDeleteSeries() {
 function* watchUpdateSeries() {
   yield takeEvery(UPDATE_SERIES_REQUEST, updateSeries);
 }
+function* watchLoadAllSeries() {
+  yield takeEvery(LOAD_ALL_SERIES_REQUEST, loadAllSeries);
+}
 function* watchLoadSeries() {
   yield takeEvery(LOAD_SERIES_REQUEST, loadSeries);
-}
-function* watchLoadSeriesPosts() {
-  yield takeEvery(LOAD_SERIES_POSTS_REQUEST, loadSeriesPosts);
 }
 
 //---------------------------------------
@@ -50,7 +47,7 @@ export default function* userSaga() {
     fork(watchAddSeries),
     fork(watchDeleteSeries),
     fork(watchUpdateSeries),
+    fork(watchLoadAllSeries),
     fork(watchLoadSeries),
-    fork(watchLoadSeriesPosts)
   ]);
 }
