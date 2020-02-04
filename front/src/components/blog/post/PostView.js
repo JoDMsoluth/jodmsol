@@ -1,13 +1,21 @@
-import React from "react";
-import styled from "styled-components";
-import MarkdownRender from "components/common/markdown/MarkdownRender";
-import palette from "lib/styles/palette";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import MarkdownRender from 'components/common/markdown/MarkdownRender';
+import palette from 'lib/styles/palette';
+import { Link } from 'react-router-dom';
+import PostToc from './PostToc';
 
-export default function PostView({ post, postError, loading, category }) {
-  console.log(post, "post");
+export default function PostView({
+  post,
+  postError,
+  loading,
+  category,
+  toc,
+  onSetToc,
+}) {
+  console.log(post, 'post');
   if (postError) {
-    console.log("post is not exist");
+    console.log('post is not exist');
   }
   if (loading || !post) {
     return null;
@@ -16,8 +24,9 @@ export default function PostView({ post, postError, loading, category }) {
   const { title, markdown, tags } = post;
   return (
     <PostViewWrap>
+      <PostToc toc={toc} />
       <PostViewTitle>{title}</PostViewTitle>
-      <MarkdownRender markdown={markdown} />
+      <MarkdownRender markdown={markdown} onSetToc={onSetToc} />
       <PostViewTags>
         {tags.map((tag, i) => (
           <Link

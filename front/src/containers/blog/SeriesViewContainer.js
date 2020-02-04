@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { withRouter } from "react-router-dom";
-import { loadSeriesPosts, unloadSeries } from "modules/stores/series";
-import { useDispatch, useSelector } from "react-redux";
-import SeriesView from "components/blog/posts/SeriesView";
+import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import { loadSeriesPosts, unloadSeries } from 'modules/stores/series';
+import { useDispatch, useSelector } from 'react-redux';
+import SeriesView from 'components/blog/post/SeriesView';
 
 const SeriesViewContainer = ({ match }) => {
   const { id } = match.params;
@@ -11,8 +11,8 @@ const SeriesViewContainer = ({ match }) => {
     ({ series, loading }) => ({
       seriesPosts: series.seriesPosts,
       seriesError: series.seriesError,
-      loading: loading["LOAD_SERIES_POSTS"]
-    })
+      loading: loading['LOAD_SERIES_POSTS'],
+    }),
   );
 
   useEffect(() => {
@@ -22,9 +22,9 @@ const SeriesViewContainer = ({ match }) => {
     };
   }, [dispatch, id]);
 
-  console.log(seriesPosts, "seriesPosts");
+  console.log(seriesPosts, 'seriesPosts');
   if (seriesError) {
-    console.log("seriesPosts is not exist");
+    console.log('seriesPosts is not exist');
   }
   if (loading || !seriesPosts) {
     return null;

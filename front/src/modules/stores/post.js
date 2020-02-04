@@ -6,6 +6,7 @@ export const initialState = {
   post: null,
   postError: null,
   postSuccess: null,
+  toc: null,
 };
 export const [
   UPLOAD_IMAGES_REQUEST,
@@ -33,9 +34,11 @@ export const [
   UPDATE_POST_FAILURE,
 ] = createRequestActionTypes('UPDATE_POST');
 
+export const SET_TOC = 'SET_TOC';
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const UNLOAD_POST = 'UNLOAD_POST';
 
+export const setToc = createAction(SET_TOC, toc => toc);
 export const uploadImg = createAction(UPLOAD_IMAGES_REQUEST);
 export const removeImg = createAction(REMOVE_IMAGE);
 export const addPost = createAction(
@@ -89,6 +92,10 @@ export default handleActions(
     [ADD_POST_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.postError = action.payload;
+      }),
+    [SET_TOC]: (state, action) =>
+      produce(state, draft => {
+        draft.toc = action.payload;
       }),
     [UNLOAD_POST]: () => initialState,
   },
