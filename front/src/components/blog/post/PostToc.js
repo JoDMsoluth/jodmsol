@@ -1,26 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import smoothScrollTo from 'lib/scrollTo';
 
 export default function PostToc({ toc }) {
   if (!toc) return null;
   return (
     <>
-      <div>
-        <TocListWrap>
-          {toc.map(({ anchor, level, text }, i) => (
-            <li>
-              <span
-                key={i}
-                style={{
-                  paddingLeft: `${(level === 1 ? 0 : level - 2) * 0.5}rem`,
-                }}
-              >
-                <a href={`#${anchor}`}>{text}</a>
-              </span>
-            </li>
-          ))}
-        </TocListWrap>
-      </div>
+      <TocListWrap>
+        {toc.map(({ anchor, level, text }, i) => (
+          <li>
+            <span
+              key={i}
+              style={{
+                paddingLeft: `${(level === 1 ? 0 : level - 2) * 0.5}rem`,
+              }}
+            >
+              <div onClick={() => smoothScrollTo(`${anchor}`, 150)}>{text}</div>
+            </span>
+          </li>
+        ))}
+      </TocListWrap>
     </>
   );
 }

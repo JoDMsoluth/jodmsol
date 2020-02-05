@@ -40,6 +40,7 @@ export default function PostView({
 }
 
 const PostViewWrap = styled.div`
+  position: relative;
   flex: 1;
   padding: 2rem;
   overflow-y: auto;

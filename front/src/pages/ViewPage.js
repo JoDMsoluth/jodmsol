@@ -15,7 +15,8 @@ export default function ViewPage() {
       ''
     ) : (
       filter === 'post' && (
-        <>  <PostViewContainer />
+        <>
+          <PostViewContainer />
           <CommentsListContainer />
         </>
       )
