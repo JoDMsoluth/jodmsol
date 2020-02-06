@@ -4,9 +4,11 @@ import palette from 'lib/styles/palette';
 import { Link, withRouter } from 'react-router-dom';
 import thumbnail from 'statics/images/kickVillageProject.PNG';
 import dateFormat from 'lib/dateFormat';
+import { convertToPlainText } from 'lib/markdown';
 
 const BlogContentCard = ({ post }) => {
   const { _id, title, updatedAt, markdown, tags, likes, coverImg } = post;
+  const plainText = convertToPlainText(markdown);
   return (
     <>
       <ContentCardWrap>
@@ -41,7 +43,7 @@ const BlogContentCard = ({ post }) => {
           </ContentHead>
           <ContentBody>
             <div>
-              {markdown.length > 500 ? markdown.substring(0, 500) : markdown}
+              {plainText.length > 500 ? plainText.substring(0, 500) : plainText}
             </div>
           </ContentBody>
         </Content>

@@ -12,6 +12,8 @@ export default function PostView({
   category,
   toc,
   onSetToc,
+  onActiveHeading,
+  activeHeading,
 }) {
   console.log(post, 'post');
   if (postError) {
@@ -21,12 +23,27 @@ export default function PostView({
     return null;
   }
 
+  if (document.body && document.body.scrollTop) {
+    document.body.scrollTop = 0;
+  }
+  if (document.documentElement) {
+    document.documentElement.scrollTop = 0;
+  }
+
   const { title, markdown, tags } = post;
   return (
     <PostViewWrap>
-      <PostToc toc={toc} />
+      <PostToc
+        toc={toc}
+        activeHeading={activeHeading}
+        onActiveHeading={onActiveHeading}
+      />
       <PostViewTitle>{title}</PostViewTitle>
-      <MarkdownRender markdown={markdown} onSetToc={onSetToc} />
+      <MarkdownRender
+        markdown={markdown}
+        onSetToc={onSetToc}
+        onActiveHeading={onActiveHeading}
+      />
       <PostViewTags>
         {tags.map((tag, i) => (
           <Link
@@ -43,7 +60,6 @@ const PostViewWrap = styled.div`
   position: relative;
   flex: 1;
   padding: 2rem;
-  overflow-y: auto;
   font-size: 1.125rem;
 `;
 const PostViewTitle = styled.div`

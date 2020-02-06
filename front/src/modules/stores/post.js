@@ -7,6 +7,7 @@ export const initialState = {
   postError: null,
   postSuccess: null,
   toc: null,
+  activeHeading: null,
 };
 export const [
   UPLOAD_IMAGES_REQUEST,
@@ -35,6 +36,8 @@ export const [
 ] = createRequestActionTypes('UPDATE_POST');
 
 export const SET_TOC = 'SET_TOC';
+export const SET_ACTIVE_HEADING = 'SET_ACTIVE_HEADING';
+
 export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const UNLOAD_POST = 'UNLOAD_POST';
 
@@ -56,6 +59,7 @@ export const deletePost = createAction(DELETE_POST_REQUEST, id => id);
 export const loadPost = createAction(LOAD_POST_REQUEST, id => id);
 export const updatePost = createAction(UPDATE_POST_REQUEST);
 export const unloadPost = createAction(UNLOAD_POST);
+export const setActiveHeading = createAction(SET_ACTIVE_HEADING, id => id);
 
 // 여기추가
 
@@ -96,6 +100,10 @@ export default handleActions(
     [SET_TOC]: (state, action) =>
       produce(state, draft => {
         draft.toc = action.payload;
+      }),
+    [SET_ACTIVE_HEADING]: (state, action) =>
+      produce(state, draft => {
+        draft.activeHeading = action.payload;
       }),
     [UNLOAD_POST]: () => initialState,
   },

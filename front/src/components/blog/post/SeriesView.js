@@ -4,8 +4,15 @@ import MarkdownRender from 'components/common/markdown/MarkdownRender';
 import palette from 'lib/styles/palette';
 import thumbnail from 'statics/images/kickVillageProject.PNG';
 import SeriesPostsList from '../postsList/SereisPostsList';
+import PostToc from './PostToc';
 
-export default function SeriesView({ seriesPosts, seriesError, loading }) {
+export default function SeriesView({
+  toc,
+  onSetToc,
+  seriesPosts,
+  seriesError,
+  loading,
+}) {
   console.log(seriesPosts, 'seriesPosts');
   if (seriesError) {
     console.log('seriesPosts is not exist');
@@ -19,16 +26,18 @@ export default function SeriesView({ seriesPosts, seriesError, loading }) {
     posts.length > 5 ? posts.slice(0, 5) : posts.slice(0, posts.length);
   return (
     <SeriesViewWrap>
+      <PostToc toc={toc} />
       <SeriesViewTitle>{title}</SeriesViewTitle>
       <Thumbnail src={coverImg || thumbnail} alt="coverImg"></Thumbnail>
       <SeriesViewDesc>{desc}</SeriesViewDesc>
-      <MarkdownRender markdown={markdown} />
+      <MarkdownRender markdown={markdown} onSetToc={onSetToc} />
       <SeriesPostsList posts={seriesPost} category={category} />
     </SeriesViewWrap>
   );
 }
 
 const SeriesViewWrap = styled.div`
+  position: relative;
   flex: 1;
   padding: 2rem 20rem;
   font-size: 1.125rem;

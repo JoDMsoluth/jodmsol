@@ -1,20 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import font from "lib/styles/font";
+import React from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import font from 'lib/styles/font';
 
 export default function CommentButton({
   comment,
   setToggleForm,
   setToggleReply,
   toggleForm,
-  toggleReply
+  toggleReply,
 }) {
   if (!comment) {
     return null;
   }
 
-  console.log("comment", comment);
   return (
     <>
       <CommentButtonWrap>
@@ -28,7 +27,7 @@ export default function CommentButton({
               setToggleReply(!toggleReply)
             }
           >
-            {comment && comment.childId.length > 1 ? ` comment` : " comment"}
+            {comment && comment.childId.length > 1 ? ` comment` : ' comment'}
           </span>
           <span>{comment && comment.likes}</span>
         </div>

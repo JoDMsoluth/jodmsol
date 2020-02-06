@@ -16,7 +16,6 @@ const AppLayoutContainer = ({ children }) => {
 export default AppLayoutContainer;
 
 const StyledPageLayout = styled.div`
-  overflow: hidden;
   width: 100%;
   min-height: calc(100vh - 13rem - 10vh);
 `;

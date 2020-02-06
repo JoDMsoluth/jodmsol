@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import MarkdownRender from "../common/markdown/MarkdownRender";
+import React from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import MarkdownPreview from 'components/common/markdown/MarkdownPreview';
 
 export default function PreviewPane({ markdown, title }) {
   return (
@@ -9,7 +9,7 @@ export default function PreviewPane({ markdown, title }) {
       <PreviewWrap>
         <PreviewTitle>{title}</PreviewTitle>
         <PreviewContent>
-          <MarkdownRender markdown={markdown} />
+          <MarkdownPreview markdown={markdown} />
         </PreviewContent>
       </PreviewWrap>
     </>
