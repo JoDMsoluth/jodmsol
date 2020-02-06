@@ -26,7 +26,11 @@ export default function SeriesView({
     posts.length > 5 ? posts.slice(0, 5) : posts.slice(0, posts.length);
   return (
     <SeriesViewWrap>
-      <PostToc toc={toc} />
+      <PostToc
+        toc={toc}
+        activeHeading={activeHeading}
+        onActiveHeading={onActiveHeading}
+      />
       <SeriesViewTitle>{title}</SeriesViewTitle>
       <Thumbnail src={coverImg || thumbnail} alt="coverImg"></Thumbnail>
       <SeriesViewDesc>{desc}</SeriesViewDesc>

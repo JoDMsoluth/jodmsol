@@ -7,6 +7,8 @@ export const initialState = {
   seriesError: null,
   seriesPosts: null,
   lastPage: 1,
+  toc: null,
+  activeHeading: null,
 };
 
 export const [
@@ -37,6 +39,8 @@ export const [
 ] = createRequestActionTypes('ADD_SERIES');
 
 export const UNLOAD_SERIES = 'UNLOAD_SERIES';
+export const SET_SERIES_TOC = 'SET_SERIES_TOC';
+export const SET_SERIES_ACTIVE_HEADING = 'SET_SERIES_ACTIVE_HEADING';
 
 export const loadSeries = createAction(
   LOAD_ALL_SERIES_REQUEST,
@@ -66,7 +70,12 @@ export const updateSeries = createAction(
     category,
   }),
 );
+export const setSeriesActiveHeading = createAction(
+  SET_SERIES_ACTIVE_HEADING,
+  id => id,
+);
 
+export const setSeriesToc = createAction(SET_SERIES_TOC, toc => toc);
 export const unloadSeries = createAction(UNLOAD_SERIES);
 // 여기추가
 
@@ -117,6 +126,14 @@ export default handleActions(
     [UPDATE_SERIES_FAILURE]: (state, action) =>
       produce(state, draft => {
         draft.seriesError = action.payload;
+      }),
+    [SET_SERIES_TOC]: (state, action) =>
+      produce(state, draft => {
+        draft.toc = action.payload;
+      }),
+    [SET_SERIES_ACTIVE_HEADING]: (state, action) =>
+      produce(state, draft => {
+        draft.activeHeading = action.payload;
       }),
     [UNLOAD_SERIES]: () => initialState,
   },

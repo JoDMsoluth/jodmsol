@@ -12,8 +12,8 @@ postApi.delete("/delete/:id", checkObjectId, blogPostController.deletePost);
 //update
 postApi.patch("/update/:id", checkObjectId, blogPostController.updatePost);
 //like
-postApi.get("/like/:id", checkObjectId, blogPostController.likePost);
+postApi.patch("/like/:id", checkObjectId, blogPostController.likePost);
 //unlike
-postApi.get("/unlike/:id", checkObjectId, blogPostController.unlikePost);
+postApi.patch("/unlike/:id", checkObjectId, blogPostController.unlikePost);
 
 export default postApi;

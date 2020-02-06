@@ -35,6 +35,20 @@ export const [
   UPDATE_POST_FAILURE,
 ] = createRequestActionTypes('UPDATE_POST');
 
+export const [
+  LIKE_POST_REQUEST,
+  LIKE_POST_SUCCESS,
+  LIKE_POST_FAILURE,
+] = createRequestActionTypes('LIKE_POST');
+export const [
+  UNLIKE_POST_REQUEST,
+  UNLIKE_POST_SUCCESS,
+  UNLIKE_POST_FAILURE,
+] = createRequestActionTypes('UNLIKE_POST');
+
+export const likePost = createAction(LIKE_POST_REQUEST);
+export const unlikePost = createAction(UNLIKE_POST_REQUEST);
+
 export const SET_TOC = 'SET_TOC';
 export const SET_ACTIVE_HEADING = 'SET_ACTIVE_HEADING';
 
@@ -104,6 +118,22 @@ export default handleActions(
     [SET_ACTIVE_HEADING]: (state, action) =>
       produce(state, draft => {
         draft.activeHeading = action.payload;
+      }),
+    [LIKE_POST_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.post.likes = action.payload;
+      }),
+    [LIKE_POST_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.postError = action.payload;
+      }),
+    [UNLIKE_POST_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.post.likes = action.payload;
+      }),
+    [UNLIKE_POST_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.postError = action.payload;
       }),
     [UNLOAD_POST]: () => initialState,
   },

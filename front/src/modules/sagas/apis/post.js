@@ -30,5 +30,7 @@ export const updatePostApi = ({
 
 export const deletePostApi = id => client.delete(`api/blog/post/delete/${id}`);
 
-export const likePostApi = () => client.get(`api/blog/post/like`);
-export const unlikePostApi = () => client.get(`api/blog/post/unlike`);
+export const likePostApi = id =>
+  client.patch(`api/blog/post/like/${id}`, null, { withCredentials: true });
+export const unlikePostApi = id =>
+  client.patch(`api/blog/post/unlike/${id}`, null, { withCredentials: true });

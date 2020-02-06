@@ -5,6 +5,8 @@ import {
   unloadPost,
   setToc,
   setActiveHeading,
+  likePost,
+  unlikePost,
 } from 'modules/stores/post';
 import { useDispatch, useSelector } from 'react-redux';
 import throttle from 'lodash/throttle';
@@ -13,6 +15,8 @@ import palette from 'lib/styles/palette';
 import { Link } from 'react-router-dom';
 import MarkdownRender from 'components/common/markdown/MarkdownRender';
 import PostToc from 'components/blog/post/PostToc';
+import thumbnail from 'statics/images/kickVillageProject.PNG';
+import PostHeader from 'components/blog/post/PostHeader';
 
 const PostViewContainer = () => {
   const match = useRouteMatch();
@@ -34,6 +38,12 @@ const PostViewContainer = () => {
   const onActiveHeading = throttle(id => {
     dispatch(setActiveHeading(id));
   }, 250);
+  const onLike = useCallback(id => {
+    dispatch(likePost(id));
+  });
+  const onUnlike = useCallback(id => {
+    dispatch(unlikePost(id));
+  });
 
   useEffect(() => {
     if (document.body && document.body.scrollTop) {
@@ -56,8 +66,7 @@ const PostViewContainer = () => {
     return null;
   }
 
-  const { title, markdown, tags } = post;
-  console.log('main render');
+  const { title, markdown, tags, coverImg, createdAt, likes } = post;
   return (
     <>
       <PostViewWrap>
@@ -66,7 +75,16 @@ const PostViewContainer = () => {
           activeHeading={activeHeading}
           onActiveHeading={onActiveHeading}
         />
-        <PostViewTitle>{title}</PostViewTitle>
+        <PostHeader
+          onLike={onLike}
+          onUnlike={onUnlike}
+          title={title}
+          likes={likes}
+          createdAt={createdAt}
+          thumbnail={coverImg || thumbnail}
+        >
+          {title}
+        </PostHeader>
         <MarkdownRender
           markdown={markdown}
           onSetToc={onSetToc}
@@ -91,14 +109,8 @@ const PostViewContainer = () => {
 const PostViewWrap = styled.div`
   position: relative;
   flex: 1;
-  padding: 2rem;
+  padding: 2rem 15rem;
   font-size: 1.125rem;
-`;
-const PostViewTitle = styled.div`
-  font-size: 2.5rem;
-  font-weight: 300;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid ${palette.gray3};
 `;
 const PostViewTags = styled.div`
   font-size: 1rem;
