@@ -13,13 +13,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
-import router from "routes/indes";
+import router from "routes";
 // import createDummyData from "lib/createDummyData";
 
 // connect to mongodb
 const MongoStore: mongo.MongoStoreFactory = mongo(session);
-export const mongoUrl: string =
-  process.env.MONGO_DB || "mongodb://127.0.0.1/";
+export const mongoUrl: string = process.env.MONGO_DB || "mongodb://127.0.0.1/";
 (<any>mongoose).Promise = global.Promise; // use Node Promise. because promise not exist in mongodb
 mongoose.set("useNewUrlParser", true);
 mongoose.set("useFindAndModify", false);

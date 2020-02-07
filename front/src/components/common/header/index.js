@@ -1,25 +1,25 @@
-import React from "react";
-import styled from "styled-components";
-import font from "lib/styles/font";
-import palette from "lib/styles/palette";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import font from 'lib/styles/font';
+import palette from 'lib/styles/palette';
+import { withRouter } from 'react-router-dom';
 
-const Header = ({ match }) => {
+const Header = ({ match, views }) => {
   return (
     <>
-      <HeaderContainer>
+      <HeaderWrap>
         <BlogVersion>V 0.0.1</BlogVersion>
         <Title>JoDmSoluth</Title>
         <Category>{match.params.category}</Category>
-        <Visitios>Today : 123</Visitios>
-      </HeaderContainer>
+        <Visitios>{`Today : ${views}`}</Visitios>
+      </HeaderWrap>
     </>
   );
 };
 
 export default withRouter(Header);
 
-const HeaderContainer = styled.div`
+const HeaderWrap = styled.div`
   padding: 0 2rem;
   position: relative;
   height: 7rem;

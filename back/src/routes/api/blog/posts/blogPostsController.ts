@@ -29,7 +29,7 @@ async function loadAllPosts(req: Request, res: Response) {
         ? await BlogPostCollection.find()
             .where("category")
             .equals(category)
-            .sort({ updateAt: -1 })
+            .sort({ createdAt: -1 })
             .limit(9)
             .skip((page - 1) * 9)
             .lean()

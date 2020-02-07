@@ -16,7 +16,7 @@ export default function PostHeader({
 }) {
   const match = useRouteMatch();
   const { id } = match.params;
-  const isLike = Cookies.get('lkck');
+  const isLike = Cookies.get(id);
   return (
     <>
       <HeaderWrap>

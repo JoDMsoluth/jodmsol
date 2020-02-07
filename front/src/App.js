@@ -10,10 +10,17 @@ import {
   ViewPage,
 } from './pages';
 import ResumeContent from './components/profile/Resume/ResumeContent';
+import { Helmet } from 'react-helmet';
 
 function App() {
   return (
     <>
+      <Helmet>
+        <title>Jodsol</title>
+        <meta name="description" content="Hyehyeong's personal blog" />
+        <meta property="fb:app_id" content="" />
+        <meta property="og:image" content="" />
+      </Helmet>
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"

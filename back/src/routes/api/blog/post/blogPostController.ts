@@ -117,29 +117,29 @@ export async function updatePost(req: Request, res: Response) {
 
 //like
 export async function likePost(req: Request, res: Response) {
-  console.log("cookie", req.cookies);
   const day: number = 60 * 60 * 24 * 1000;
-  if (req.hasOwnProperty("lkck")) {
+  const { id } = req.params;
+  if (req.hasOwnProperty(id)) {
     res.json("cookie exist");
     return;
   }
-  res.cookie("lkck", true, {
+  res.cookie(id, true, {
     maxAge: day,
     expires: new Date(Date.now() + day)
   });
-  const { id } = req.params;
   const result = await dbPropIncrease(id, "likes", 1);
   res.json(result);
 }
 
 //unlike
 export async function unlikePost(req: Request, res: Response) {
-  if (!req.cookies.lkck) {
+  const { id } = req.params;
+
+  if (!req.cookies[id]) {
     res.json("cookie not exist");
     return;
   }
-  res.clearCookie("lkck");
-  const { id } = req.params;
+  res.clearCookie(id);
   const result = await dbPropIncrease(id, "likes", -1);
   res.json(result);
 }

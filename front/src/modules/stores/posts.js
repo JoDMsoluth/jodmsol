@@ -38,10 +38,11 @@ export const loadPostsInSeries = createAction(
 
 export const loadPosts = createAction(
   LOAD_POSTS_REQUEST,
-  ({ category, tag, page }) => ({
+  ({ category, tag, page, filter }) => ({
     category,
     tag,
     page,
+    filter,
   }),
 );
 
