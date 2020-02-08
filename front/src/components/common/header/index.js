@@ -4,14 +4,14 @@ import font from 'lib/styles/font';
 import palette from 'lib/styles/palette';
 import { withRouter } from 'react-router-dom';
 
-const Header = ({ match, views }) => {
+const Header = ({ match, todayViews, totalViews }) => {
   return (
     <>
       <HeaderWrap>
         <BlogVersion>V 0.0.1</BlogVersion>
         <Title>JoDmSoluth</Title>
         <Category>{match.params.category}</Category>
-        <Visitios>{`Today : ${views}`}</Visitios>
+        <Visitios>{`Total : ${totalViews}\n Today : ${todayViews}`}</Visitios>
       </HeaderWrap>
     </>
   );

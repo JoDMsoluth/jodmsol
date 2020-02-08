@@ -14,6 +14,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import router from "routes";
+import initializeViews from "lib/initializeViews";
 // import createDummyData from "lib/createDummyData";
 
 // connect to mongodb
@@ -74,5 +75,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 app.use("/", router);
+initializeViews();
 
 export default app;

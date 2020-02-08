@@ -3,7 +3,8 @@ import produce from 'immer';
 import { createRequestActionTypes } from 'lib/createRequestSaga';
 
 export const initialState = {
-  views: null,
+  todayViews: 0,
+  totalViews: 0,
   viewsError: null,
 };
 
@@ -23,7 +24,8 @@ export default handleActions(
   {
     [LOAD_VIEWS_SUCCESS]: (state, action) =>
       produce(state, draft => {
-        draft.views = action.payload;
+        draft.totalViews = action.payload.getTotalViews[0].totalViews;
+        draft.todayViews = action.payload.getTodayViews.todayViews;
       }),
     [LOAD_VIEWS_FAILURE]: (state, action) =>
       produce(state, draft => {

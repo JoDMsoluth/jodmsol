@@ -5,8 +5,9 @@ import BlogHeader from 'components/common/header';
 
 const BlogHeaderContainer = () => {
   const dispatch = useDispatch();
-  const { views } = useSelector(({ views }) => ({
-    views: views.views,
+  const { totalViews, todayViews } = useSelector(({ views }) => ({
+    totalViews: views.totalViews,
+    todayViews: views.todayViews,
   }));
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const BlogHeaderContainer = () => {
 
   return (
     <>
-      <BlogHeader views={views} />
+      <BlogHeader totalViews={totalViews} todayViews={todayViews} />
     </>
   );
 };
