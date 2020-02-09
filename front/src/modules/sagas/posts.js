@@ -4,12 +4,14 @@ import {
   LOAD_POSTS_REQUEST,
   LOAD_TAG_POSTS_REQUEST,
   LOAD_SERIES_POSTS_REQUEST,
+  SEARCH_POSTS_REQUEST,
 } from '../stores/posts';
 import {
   loadPostsApi,
   loadHashtagsApi,
   loadPostsInTagApi,
   loadPostsInSeriesApi,
+  searchPostsApi,
 } from './apis/posts';
 import { LOAD_HASHTAGS_REQUEST } from 'modules/stores/hashtags';
 
@@ -21,6 +23,7 @@ const loadPostsInSeries = createRequestSaga(
   'LOAD_SERIES_POSTS',
   loadPostsInSeriesApi,
 );
+const searchPosts = createRequestSaga('SEARCH_POSTS', searchPostsApi);
 
 //---------------------------------------------
 function* watchLoadPosts() {
@@ -35,6 +38,9 @@ function* watchLoadPostsInTags() {
 function* watchLoadPostsInSeries() {
   yield takeEvery(LOAD_SERIES_POSTS_REQUEST, loadPostsInSeries);
 }
+function* watchSearchPosts() {
+  yield takeEvery(SEARCH_POSTS_REQUEST, searchPosts);
+}
 //---------------------------------------
 
 export default function* userSaga() {
@@ -43,5 +49,6 @@ export default function* userSaga() {
     fork(watchLoadTags),
     fork(watchLoadPostsInTags),
     fork(watchLoadPostsInSeries),
+    fork(watchSearchPosts),
   ]);
 }

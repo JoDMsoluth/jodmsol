@@ -37,3 +37,13 @@ export const loadPostsInTagApi = ({ category, page, tag }) => {
     `api/blog/posts/load/${category}/tags/${tag}?${queryString}`,
   );
 };
+
+export const searchPostsApi = ({ category, filter, q, page }) => {
+  const queryString = qs.stringify({
+    q,
+    page,
+  });
+  return client.get(
+    `api/blog/posts/search/${category}/${filter}?${queryString}`,
+  );
+};

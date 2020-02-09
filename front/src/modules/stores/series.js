@@ -37,6 +37,11 @@ export const [
   ADD_SERIES_SUCCESS,
   ADD_SERIES_FAILURE,
 ] = createRequestActionTypes('ADD_SERIES');
+export const [
+  SEARCH_SERIES_REQUEST,
+  SEARCH_SERIES_SUCCESS,
+  SEARCH_SERIES_FAILURE,
+] = createRequestActionTypes('SEARCH_SERIES');
 
 export const UNLOAD_SERIES = 'UNLOAD_SERIES';
 export const SET_SERIES_TOC = 'SET_SERIES_TOC';
@@ -70,6 +75,16 @@ export const updateSeries = createAction(
     category,
   }),
 );
+
+export const searchSeries = createAction(
+  SEARCH_SERIES_REQUEST,
+  ({ category, q, page }) => ({
+    category,
+    q,
+    page,
+  }),
+);
+
 export const setSeriesActiveHeading = createAction(
   SET_SERIES_ACTIVE_HEADING,
   id => id,

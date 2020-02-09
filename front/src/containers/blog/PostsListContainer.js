@@ -4,6 +4,7 @@ import {
   loadPostsInTag,
   loadPostsInSeries,
   unloadPosts,
+  searchPosts,
 } from 'modules/stores/posts';
 import { useDispatch, useSelector } from 'react-redux';
 import BlogContent from 'components/blog/postsList';
@@ -22,7 +23,7 @@ const PostsListContainer = ({ location, match }) => {
     }),
   );
 
-  const { tag, id, page } = qs.parse(location.search, {
+  const { tag, id, page, q } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
   const { category, filter } = match.params;
@@ -35,7 +36,9 @@ const PostsListContainer = ({ location, match }) => {
       category,
       filter,
     );
-    if (id) {
+    if (q) {
+      dispatch(searchPosts({ category, filter, q, page }));
+    } else if (id) {
       dispatch(
         loadPostsInSeries({
           id,
@@ -43,8 +46,7 @@ const PostsListContainer = ({ location, match }) => {
           category,
         }),
       );
-    }
-    if (tag) {
+    } else if (tag) {
       dispatch(
         loadPostsInTag({
           tag,

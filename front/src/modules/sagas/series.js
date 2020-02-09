@@ -6,6 +6,7 @@ import {
   updateSeriesApi,
   loadAllSeriesApi,
   loadSeriesApi,
+  searchSeriesApi,
 } from './apis/series';
 import {
   ADD_SERIES_REQUEST,
@@ -13,6 +14,7 @@ import {
   UPDATE_SERIES_REQUEST,
   LOAD_ALL_SERIES_REQUEST,
   LOAD_SERIES_REQUEST,
+  SEARCH_SERIES_REQUEST,
 } from '../stores/series';
 
 //--------------------------------------------------------
@@ -21,7 +23,7 @@ const deleteSeries = createRequestSaga('DELETE_SERIES', deleteSeriesApi);
 const updateSeries = createRequestSaga('UPDATE_SERIES', updateSeriesApi);
 const loadAllSeries = createRequestSaga('LOAD_ALL_SERIES', loadAllSeriesApi);
 const loadSeries = createRequestSaga('LOAD_SERIES', loadSeriesApi);
-
+const searchSeries = createRequestSaga('SEARCH_SERIES', searchSeriesApi);
 //---------------------------------------------
 
 function* watchAddSeries() {
@@ -39,6 +41,9 @@ function* watchLoadAllSeries() {
 function* watchLoadSeries() {
   yield takeEvery(LOAD_SERIES_REQUEST, loadSeries);
 }
+function* watchSearchSeries() {
+  yield takeEvery(SEARCH_SERIES_REQUEST, searchSeries);
+}
 
 //---------------------------------------
 
@@ -49,5 +54,6 @@ export default function* userSaga() {
     fork(watchUpdateSeries),
     fork(watchLoadAllSeries),
     fork(watchLoadSeries),
+    fork(watchSearchSeries),
   ]);
 }

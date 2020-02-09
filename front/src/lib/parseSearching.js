@@ -1,26 +1,15 @@
-export function parseSearching(searchText, filter) {
+export function parseSearching({ searchText, filter }) {
+  let qs = null;
   if (filter === 'series') {
-    const parsedText = searchText.match(/#[^\s]+/g);
+    const parsedText = searchText.trim();
+    qs = `q=${parsedText}&page=1`;
   } else if (filter === 'tags') {
-    const parsedText = searchText.match(/#[^\s]+/g);
-    const queryString = `?tag=${parsedText}&page=1`;
+    const regExp = /^#?[^/s]{1,}/i;
+    const parsedText = regExp.exec(searchText);
+    qs = `tag=${parsedText}&page=1`;
   } else {
+    const parsedText = searchText.trim();
+    qs = `q=${parsedText}&page=1`;
   }
-  const parsedText = searchText.trim().filter(text => text.match(/#/));
-
-  const headingsInfo = headings.map(heading => ({
-    id: heading.id,
-    text: heading.textContent,
-    level: parseInt(heading.tagName.replace('H', ''), 10),
-  }));
-
-  const minLevel = Math.min(
-    ...Array.from(headingsInfo.map(info => info.level)),
-  );
-
-  headingsInfo.forEach(info => {
-    info.level -= minLevel;
-  });
-
-  return headingsInfo;
+  return qs;
 }

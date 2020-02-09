@@ -10,6 +10,12 @@ export const initialState = {
 };
 
 export const [
+  SEARCH_POSTS_REQUEST,
+  SEARCH_POSTS_SUCCESS,
+  SEARCH_POSTS_FAILURE,
+] = createRequestActionTypes('SEARCH_POSTS');
+
+export const [
   LOAD_POSTS_REQUEST,
   LOAD_POSTS_SUCCESS,
   LOAD_POSTS_FAILURE,
@@ -26,6 +32,16 @@ export const [
 ] = createRequestActionTypes('LOAD_SERIES_POSTS');
 
 export const UNLOAD_POSTS = 'UNLOAD_POSTS';
+
+export const searchPosts = createAction(
+  SEARCH_POSTS_REQUEST,
+  ({ category, filter, q, page }) => ({
+    category,
+    filter,
+    q,
+    page,
+  }),
+);
 
 export const loadPostsInSeries = createAction(
   LOAD_SERIES_POSTS_REQUEST,
@@ -90,7 +106,15 @@ export default handleActions(
       produce(state, draft => {
         draft.postsError = action.payload;
       }),
-
+    [SEARCH_POSTS_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        console.log('action', action);
+        draft.posts = action.payload;
+      }),
+    [SEARCH_POSTS_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.postsError = action.payload;
+      }),
     [UNLOAD_POSTS]: () => initialState,
   },
   initialState,

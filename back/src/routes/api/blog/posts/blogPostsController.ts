@@ -150,11 +150,66 @@ async function loadPostsInTag(req: Request, res: Response) {
     console.error(e);
   }
 }
+
+async function searchPosts(req: Request, res: Response) {
+  console.log("getSearchPost");
+  const { q, page } = req.query;
+  const { category, filter } = req.params;
+
+  const searchRegExp = new RegExp(q, "g");
+
+  console.log(q, page, "p and page");
+  if (page < 1 || !q) {
+    res.status(400).send("bad request");
+    console.log("bad request");
+    return;
+  }
+  try {
+    const getPosts: BlogPostDocument[] | null =
+      filter === "latest"
+        ? await BlogPostCollection.find({ title: { $regex: searchRegExp } })
+            .where("category")
+            .equals(category)
+            .sort({ createdAt: -1 })
+            .limit(9)
+            .skip((page - 1) * 9)
+            .lean()
+            .exec()
+        : filter === "popular"
+        ? await BlogPostCollection.find({ title: { $regex: searchRegExp } })
+            .where("category")
+            .equals(category)
+            .sort({ likes: -1 })
+            .limit(9)
+            .skip((page - 1) * 9)
+            .lean()
+            .exec()
+        : await BlogPostCollection.find({ title: { $regex: searchRegExp } })
+            .where("category")
+            .equals(category)
+            .sort({ _id: -1 })
+            .limit(9)
+            .skip((page - 1) * 9)
+            .lean()
+            .exec();
+    const postCount: number = await BlogPostCollection.countDocuments().exec();
+    res.set("Last-Page", Math.ceil(postCount / 9).toString());
+    getPosts.map(post => ({
+      ...post,
+      markdown: removeHtmlAndShorten(post.markdown)
+    }));
+    res.json(getPosts);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 const postsController = {
   loadAllPosts,
   loadSeriesPosts,
   loadTags,
-  loadPostsInTag
+  loadPostsInTag,
+  searchPosts
 };
 
 export default postsController;
