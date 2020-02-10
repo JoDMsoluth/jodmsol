@@ -144,13 +144,20 @@ export async function unlikePost(req: Request, res: Response) {
   res.json(result);
 }
 
+export async function uploadImages(req: Request, res: Response) {
+  console.dir(req.body.imageFormData);
+  console.dir(req.file);
+  res.json(req.file);
+}
+
 const postController = {
   loadPost,
   addPost,
   deletePost,
   updatePost,
   likePost,
-  unlikePost
+  unlikePost,
+  uploadImages
 };
 
 export default postController;

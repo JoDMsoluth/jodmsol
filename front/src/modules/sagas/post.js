@@ -7,6 +7,7 @@ import {
   loadPostApi,
   likePostApi,
   unlikePostApi,
+  uploadImgApi,
 } from './apis/post';
 import {
   ADD_POST_REQUEST,
@@ -15,6 +16,7 @@ import {
   LOAD_POST_REQUEST,
   LIKE_POST_REQUEST,
   UNLIKE_POST_REQUEST,
+  UPLOAD_IMAGES_REQUEST,
 } from '../stores/post';
 
 //--------------------------------------------------------
@@ -24,6 +26,7 @@ const updatePost = createRequestSaga('UPDATE_POST', updatePostApi);
 const loadPost = createRequestSaga('LOAD_POST', loadPostApi);
 const likePost = createRequestSaga('LIKE_POST', likePostApi);
 const unlikePost = createRequestSaga('UNLIKE_POST', unlikePostApi);
+const uploadImg = createRequestSaga('UPLOAD_IMAGES', uploadImgApi);
 
 //---------------------------------------------
 
@@ -47,6 +50,9 @@ function* watchLikePost() {
 function* watchUnlikePost() {
   yield takeEvery(UNLIKE_POST_REQUEST, unlikePost);
 }
+function* watchUploadImg() {
+  yield takeEvery(UPLOAD_IMAGES_REQUEST, uploadImg);
+}
 
 //---------------------------------------
 
@@ -58,5 +64,6 @@ export default function* userSaga() {
     fork(watchLoadPost),
     fork(watchLikePost),
     fork(watchUnlikePost),
+    fork(watchUploadImg),
   ]);
 }

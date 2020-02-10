@@ -34,3 +34,11 @@ export const likePostApi = id =>
   client.patch(`api/blog/post/like/${id}`, null, { withCredentials: true });
 export const unlikePostApi = id =>
   client.patch(`api/blog/post/unlike/${id}`, null, { withCredentials: true });
+
+export const uploadImgApi = ({ imageFormData }) => {
+  return client.post(`api/blog/post/images`, imageFormData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};

@@ -1,18 +1,19 @@
-import { createAction, handleActions } from "redux-actions";
-import produce from "immer";
+import { createAction, handleActions } from 'redux-actions';
+import produce from 'immer';
 
 export const initialState = {
-  markdown: "",
-  title: "",
-  tags: "",
-  desc: ""
+  markdown: '',
+  title: '',
+  tags: '',
+  desc: '',
+  coverImg: null,
 };
 
-export const INITIALIZE = "INITIALIZE";
-export const CHANGE_INPUT = "CHANGE_INPUT";
-export const CHANGE_MARKDOWN = "CHANGE_MARKDOWN";
-export const CHANGE_TITLE = "CHANGE_TITLE";
-export const CHANGE_DESC = "CHANGE_DESC";
+export const INITIALIZE = 'INITIALIZE';
+export const CHANGE_INPUT = 'CHANGE_INPUT';
+export const CHANGE_MARKDOWN = 'CHANGE_MARKDOWN';
+export const CHANGE_TITLE = 'CHANGE_TITLE';
+export const CHANGE_DESC = 'CHANGE_DESC';
 
 export const initialize = createAction(INITIALIZE);
 export const changeInput = createAction(CHANGE_INPUT);
@@ -41,7 +42,7 @@ export default handleActions(
     [CHANGE_DESC]: (state, action) =>
       produce(state, draft => {
         draft.desc = action.payload;
-      })
+      }),
   },
-  initialState
+  initialState,
 );

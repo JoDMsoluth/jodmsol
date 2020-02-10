@@ -1,33 +1,33 @@
-import React, { useRef, useEffect, useCallback } from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import CodeMirror from "codemirror";
+import React, { useRef, useEffect, useCallback } from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import CodeMirror from 'codemirror';
 
-import "codemirror/mode/markdown/markdown"; // 마크다운 문법 색상
+import 'codemirror/mode/markdown/markdown'; // 마크다운 문법 색상
 // 마크다운 내부에 들어가는 코드 색상
-import "codemirror/mode/javascript/javascript";
-import "codemirror/mode/jsx/jsx";
-import "codemirror/mode/css/css";
-import "codemirror/mode/shell/shell";
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/jsx/jsx';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/shell/shell';
 
 // CodeMirror를 위한 CSS 스타일
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/monokai.css";
-import { useRouteMatch } from "react-router-dom";
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/monokai.css';
+import { useRouteMatch } from 'react-router-dom';
 
 export default function EditorPane({
   desc,
   title,
   markdown,
   tags,
-  onChangeInput
+  onChangeInput,
 }) {
   const match = useRouteMatch();
   const editor = useRef();
   const codeMirror = useRef();
 
   const handleChangeMarkdown = useCallback(cm => {
-    onChangeInput("markdown", cm.getValue());
+    onChangeInput('markdown', cm.getValue());
   }, []);
   const onChangehandle = useCallback(e => {
     onChangeInput(e.target.name, e.target.value);
@@ -35,15 +35,15 @@ export default function EditorPane({
 
   useEffect(() => {
     const cm = CodeMirror.fromTextArea(editor.current, {
-      mode: "markdown",
-      theme: "monokai",
-      placeholder: "write here...",
+      mode: 'markdown',
+      theme: 'monokai',
+      placeholder: 'write here...',
       lineNumbers: true,
-      lineWrapping: true
+      lineWrapping: true,
     });
     codeMirror.current = cm;
     cm.focus();
-    cm.on("change", handleChangeMarkdown);
+    cm.on('change', handleChangeMarkdown);
 
     if (markdown) {
       cm.setValue(markdown);
@@ -55,7 +55,7 @@ export default function EditorPane({
 
   return (
     <>
-      <PaneWrap>
+      <PaneWrap autocomplete="off">
         <TitleInput
           type="text"
           name="title"
@@ -89,7 +89,7 @@ export default function EditorPane({
   );
 }
 
-const PaneWrap = styled.div`
+const PaneWrap = styled.form`
   background: black;
   flex: 1;
   display: flex;
@@ -102,11 +102,11 @@ const PaneWrap = styled.div`
     border: none;
     outline: none;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.9) !important;
     &::placeholder {
       color: rgba(255, 255, 255, 0.75);
     }
-    background: ${palette.gray8};
+    background: ${palette.gray8} !important;
   }
 `;
 const TitleInput = styled.input`

@@ -8,6 +8,7 @@ export const initialState = {
   postSuccess: null,
   toc: null,
   activeHeading: null,
+  coverImg: null,
 };
 export const [
   UPLOAD_IMAGES_REQUEST,
@@ -56,7 +57,10 @@ export const REMOVE_IMAGE = 'REMOVE_IMAGE';
 export const UNLOAD_POST = 'UNLOAD_POST';
 
 export const setToc = createAction(SET_TOC, toc => toc);
-export const uploadImg = createAction(UPLOAD_IMAGES_REQUEST);
+export const uploadImg = createAction(
+  UPLOAD_IMAGES_REQUEST,
+  ({ imageFormData }) => ({ imageFormData }),
+);
 export const removeImg = createAction(REMOVE_IMAGE);
 export const addPost = createAction(
   ADD_POST_REQUEST,
@@ -135,6 +139,15 @@ export default handleActions(
       produce(state, draft => {
         draft.postError = action.payload;
       }),
+    [UPLOAD_IMAGES_SUCCESS]: (state, action) =>
+      produce(state, draft => {
+        draft.coverImg = action.payload;
+      }),
+    [UPLOAD_IMAGES_FAILURE]: (state, action) =>
+      produce(state, draft => {
+        draft.postError = action.payload;
+      }),
+
     [UNLOAD_POST]: () => initialState,
   },
   initialState,
