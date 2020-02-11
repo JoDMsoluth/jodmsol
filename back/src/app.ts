@@ -57,7 +57,7 @@ app.use(
   session({
     resave: true,
     saveUninitialized: true,
-    secret: "abcdefghijklnmop",
+    secret: "abcdefghi___jklnmop",
     cookie: {
       httpOnly: true,
       secure: false //https를 쓸 때 true
@@ -73,6 +73,7 @@ app.use(
 if (process.env.NODE_ENV === "development") {
   app.use(errorHandler());
 }
+app.use("/", express.static("uploads")); // 다른서버에서 정적파일 가져갈 수 있도록 함, 앞의 주소는 프론트에서 접근하는 주소
 
 app.use("/", router);
 initializeViews();

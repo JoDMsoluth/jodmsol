@@ -145,9 +145,7 @@ export async function unlikePost(req: Request, res: Response) {
 }
 
 export async function uploadImages(req: Request, res: Response) {
-  console.dir(req.body.imageFormData);
-  console.dir(req.file);
-  res.json(req.file);
+  res.json(req.file.filename);
 }
 
 const postController = {

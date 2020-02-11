@@ -2,7 +2,7 @@ import React, { useRef, useCallback } from 'react';
 import styled, { css } from 'styled-components';
 import palette from 'lib/styles/palette';
 import { useDispatch } from 'react-redux';
-import { uploadImg } from 'modules/stores/post';
+import { uploadImg, removeImg } from 'modules/stores/post';
 
 export default function WriteOpsPanel({
   onSubmit,
@@ -12,17 +12,21 @@ export default function WriteOpsPanel({
 }) {
   const imageInput = useRef();
   const dispatch = useDispatch();
-
+  console.log(coverImg);
   const onChangeImage = useCallback(
     e => {
       console.log(e.target.files);
-      const imageFormData = new FormData();
-      [].forEach.call(e.target.files, f => {
-        imageFormData.append('image', f);
-        // 'image'는 서버에서도 같은 네이밍을 씀 / 키-벨류 / ajax에서 사용
-      });
-      console.log(imageFormData.getAll('image'));
-      dispatch(uploadImg({ imageFormData }));
+      if (coverImg) {
+        const imageFormData = new FormData();
+        [].forEach.call(e.target.files, f => {
+          imageFormData.append('image', f);
+          // 'image'는 서버에서도 같은 네이밍을 씀 / 키-벨류 / ajax에서 사용
+        });
+        console.log(imageFormData.getAll('image'));
+        dispatch(uploadImg({ imageFormData }));
+      } else {
+        dispatch(removeImg());
+      }
     },
     [dispatch],
   );
@@ -47,8 +51,18 @@ export default function WriteOpsPanel({
           ref={imageInput}
           onChange={onChangeImage}
         />
-        <div onClick={onClickImageUpload}>Upload</div>
-        <img src={coverImg} alt="coverImg" width="100px" height="100px" />
+        {coverImg ? (
+          <div onClick={onClickImageUpload}>Remove</div>
+        ) : (
+          <div onClick={onClickImageUpload}>Upload</div>
+        )}
+
+        <img
+          src={`${process.env.REACT_APP_SERVER_URL}/${coverImg}`}
+          alt="coverImg"
+          width="100px"
+          height="100px"
+        />
         <i className="far fa-times-circle" onClick={setToggleOps} />
       </WriteOpsWrap>
     </>
