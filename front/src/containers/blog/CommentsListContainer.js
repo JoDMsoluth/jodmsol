@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { withRouter, useRouteMatch } from 'react-router-dom';
 import {
   loadComments,
   unloadComments,
@@ -9,19 +9,18 @@ import {
   deleteComment,
   addRecomment,
   deleteRecomment,
-  updateRecomment
-} from "modules/stores/comment";
-import CommentsList from "components/blog/comments/CommentsList";
+  updateRecomment,
+} from 'modules/stores/comment';
+import CommentsList from 'components/blog/comments/CommentsList';
 
-const CommentsListContainer = ({ match }) => {
+const CommentsListContainer = () => {
+  const match = useRouteMatch();
   const dispatch = useDispatch();
-  const { comments, commentError, loading } = useSelector(
-    ({ comment, loading }) => ({
-      comments: comment.comments,
-      commentError: comment.commentError,
-      loading: loading["LOAD_COMMENTS"]
-    })
-  );
+  const { comments, loading } = useSelector(({ comment, loading }) => ({
+    comments: comment.comments,
+    commentError: comment.commentError,
+    loading: loading['LOAD_COMMENTS'],
+  }));
 
   const addCommentHandle = ({ id, userId, password, content }) => {
     dispatch(addComment({ id, userId, password, content }));
@@ -41,8 +40,6 @@ const CommentsListContainer = ({ match }) => {
   const updateRecommentHandle = ({ id, userId, password, content }) => {
     dispatch(updateRecomment({ id, userId, password, content }));
   };
-
-
 
   const { id } = match.params;
   useEffect(() => {
@@ -74,4 +71,4 @@ const CommentsListContainer = ({ match }) => {
   );
 };
 
-export default withRouter(CommentsListContainer);
+export default CommentsListContainer;

@@ -12,7 +12,11 @@ import 'prismjs/components/prism-bash.min.js';
 import 'prismjs/components/prism-javascript.min.js';
 import 'prismjs/components/prism-jsx.min.js';
 import 'prismjs/components/prism-css.min.js';
+import PropTypes from 'prop-types';
 
+MarkdownPreview.propTypes = {
+  markdown: PropTypes.string,
+};
 export default function MarkdownPreview({ markdown }) {
   const [html, setHtml] = useState(
     markdown ? marked(markdown, { breaks: true }) : '',

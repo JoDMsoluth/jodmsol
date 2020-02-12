@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import arrange from "lib/styles/arrage";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import arrange from 'lib/styles/arrage';
+import { Link } from 'react-router-dom';
 
-import kakaoTalk from "statics/images/kakaotalk.png";
+import kakaoTalk from 'statics/images/kakaotalk.png';
 
 const AppFooter = () => {
   return (
@@ -15,17 +15,29 @@ const AppFooter = () => {
           <FooterMenu to="/">Privacy Policy</FooterMenu>
           <FooterMenu to="/">Bug Reports</FooterMenu>
           <MessengerIcon>
-            <a href="https://www.facebook.com/jodmsoluth" target="_blank">
+            <a
+              href="https://www.facebook.com/jodmsoluth"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <IconStyle facebook>
                 <i className="fab fa-facebook-f"></i>
               </IconStyle>
             </a>
-            <a href="https://github.com/JoDMsoluth" target="_blank">
+            <a
+              href="https://github.com/JoDMsoluth"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <IconStyle github>
                 <i className="fab fa-github-alt" />
               </IconStyle>
             </a>
-            <a href="https://open.kakao.com/o/sNCD8wHb" target="_blank">
+            <a
+              href="https://open.kakao.com/o/sNCD8wHb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <IconStyle kakaotalk>
                 <img
                   src={kakaoTalk}
@@ -102,7 +114,7 @@ const IconStyle = styled.div`
     transition : all .2s
     transform : translateY(-2px);
     background: ${props =>
-      props.facebook ? "#7289da" : props.github ? palette.gray2 : "	#ffce00"};
+      props.facebook ? '#7289da' : props.github ? palette.gray2 : '	#ffce00'};
   }
 `;
 

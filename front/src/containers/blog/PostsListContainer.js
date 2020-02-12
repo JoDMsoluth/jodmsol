@@ -9,10 +9,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import BlogContent from 'components/blog/postsList';
 import qs from 'qs';
-import { withRouter } from 'react-router-dom';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import Pagination from 'components/common/pagination/Pagination';
 
-const PostsListContainer = ({ location, match }) => {
+const PostsListContainer = () => {
+  const location = useLocation();
+  const match = useRouteMatch();
   const dispatch = useDispatch();
   const { posts, postError, loading, lastPage } = useSelector(
     ({ posts, loading }) => ({
@@ -84,4 +86,4 @@ const PostsListContainer = ({ location, match }) => {
   );
 };
 
-export default withRouter(PostsListContainer);
+export default PostsListContainer;

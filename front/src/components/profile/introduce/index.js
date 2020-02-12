@@ -1,23 +1,24 @@
-import React from "react";
-import introduceImg from "statics/images/introduceImg.jpg";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import CustomButton from "lib/CustomButton";
-import IntroObjective from "./IntroObjective";
-import IntroCoreValue from "./IntroCoreValue";
-import IntroBasicInfo from "./IntroBasicInfo";
-import ProfileComponentLayout from "../common/ProfileComponentLayout";
-import smoothScrollTo from "lib/scrollTo";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import introduceImg from 'statics/images/introduceImg.jpg';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import CustomButton from 'lib/CustomButton';
+import IntroObjective from './IntroObjective';
+import IntroCoreValue from './IntroCoreValue';
+import IntroBasicInfo from './IntroBasicInfo';
+import ProfileComponentLayout from '../common/ProfileComponentLayout';
+import smoothScrollTo from 'lib/scrollTo';
+import { useHistory } from 'react-router-dom';
 
-const Introduce = ({ history }) => {
+const Introduce = () => {
+  const history = useHistory();
   return (
     <>
       <ProfileComponentLayout title="Introduce" id="introduce">
         <IntroObjective />
         <IntroduceWrap>
           <IntroduceContentWrap>
-            <IntroduceImgWrap onClick={() => smoothScrollTo("contactMe", 150)}>
+            <IntroduceImgWrap onClick={() => smoothScrollTo('contactMe', 150)}>
               <IntroduceImg
                 src={introduceImg}
                 alt="introduceImg"
@@ -31,14 +32,14 @@ const Introduce = ({ history }) => {
                 <CustomButton
                   color="darkGray"
                   size="medium"
-                  onClick={() => smoothScrollTo("skillsList", 100)}
+                  onClick={() => smoothScrollTo('skillsList', 100)}
                 >
                   Show Skills List
                 </CustomButton>
                 <CustomButton
                   color="darkGray"
                   size="medium"
-                  onClick={() => history.push("/project")}
+                  onClick={() => history.push('/project')}
                 >
                   Show Project List
                 </CustomButton>
@@ -51,7 +52,7 @@ const Introduce = ({ history }) => {
   );
 };
 
-export default withRouter(Introduce);
+export default Introduce;
 
 const IntroduceWrap = styled.span`
   display: grid;

@@ -14,6 +14,7 @@ import 'codemirror/mode/shell/shell';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/monokai.css';
 import { useRouteMatch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function EditorPane({
   desc,
@@ -88,6 +89,14 @@ export default function EditorPane({
     </>
   );
 }
+
+EditorPane.propTypes = {
+  desc: PropTypes.string,
+  title: PropTypes.string,
+  markdown: PropTypes.string,
+  tags: PropTypes.string,
+  onChangeInput: PropTypes.func,
+};
 
 const PaneWrap = styled.form`
   background: black;

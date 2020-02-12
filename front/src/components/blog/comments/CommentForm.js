@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { InputContainer, InputSpan } from "lib/styles/inputStyle";
-import "statics/css/icon.css";
-import palette from "lib/styles/palette";
-import CustomButton from "lib/CustomButton";
-import { withRouter } from "react-router-dom";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { InputContainer, InputSpan } from 'lib/styles/inputStyle';
+import 'statics/css/icon.css';
+import palette from 'lib/styles/palette';
+import CustomButton from 'lib/CustomButton';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const CommentForm = ({
   parentId,
@@ -16,13 +17,13 @@ const CommentForm = ({
   addComment,
   addRecomment,
   updateComment,
-  updateRecomment
+  updateRecomment,
 }) => {
   const id = edit ? comment._id : reply ? parentId : match.params.id;
 
-  const [userId, setUserId] = useState(comment ? comment.userId : "");
-  const [password, setPassword] = useState("");
-  const [content, setContent] = useState(comment ? comment.content : "");
+  const [userId, setUserId] = useState(comment ? comment.userId : '');
+  const [password, setPassword] = useState('');
+  const [content, setContent] = useState(comment ? comment.content : '');
 
   const onChangeUserId = e => {
     setUserId(e.target.value);
@@ -59,7 +60,7 @@ const CommentForm = ({
             <i className="fas fa-key input-icon vertical-center"></i>
           </CustomInputWrap>
         </FormHead>
-        <InputContainer style={{ marginBottom: "0" }}>
+        <InputContainer style={{ marginBottom: '0' }}>
           <CustomContentInput
             type="text"
             name="content"
@@ -87,9 +88,9 @@ const CommentForm = ({
                   reply
                     ? updateRecomment({ id, userId, password, content })
                     : updateComment({ id, userId, password, content });
-                  setPassword("");
-                  setUserId("");
-                  setContent("");
+                  setPassword('');
+                  setUserId('');
+                  setContent('');
                   setEdit(!edit);
                 }}
               >
@@ -104,9 +105,9 @@ const CommentForm = ({
                 reply
                   ? addRecomment({ id, userId, password, content })
                   : addComment({ id, userId, password, content });
-                setPassword("");
-                setUserId("");
-                setContent("");
+                setPassword('');
+                setUserId('');
+                setContent('');
               }}
             >
               Write
@@ -116,6 +117,19 @@ const CommentForm = ({
       </ReplyForm>
     </>
   );
+};
+
+CommentForm.propTypes = {
+  parentId: PropTypes.string,
+  comment: PropTypes.array,
+  edit: PropTypes.bool,
+  setEdit: PropTypes.func,
+  match: PropTypes.object,
+  reply: PropTypes.bool,
+  addComment: PropTypes.func,
+  addRecomment: PropTypes.func,
+  updateComment: PropTypes.func,
+  updateRecomment: PropTypes.func,
 };
 
 export default withRouter(CommentForm);

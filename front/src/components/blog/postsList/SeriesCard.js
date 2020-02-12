@@ -1,20 +1,23 @@
-import React from "react";
-import moment from "moment";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import { Link } from "react-router-dom";
-import thumbnail from "statics/images/kickVillageProject.PNG";
-import qs from "qs";
-import CustomButton from "lib/CustomButton";
+import React from 'react';
+import moment from 'moment';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import { Link } from 'react-router-dom';
+import thumbnail from 'statics/images/kickVillageProject.PNG';
+import qs from 'qs';
+import CustomButton from 'lib/CustomButton';
+import PropTypes from 'prop-types';
+
+SeriesCard.propTypes = {
+  series: PropTypes.object,
+};
 
 export default function SeriesCard({ series }) {
   if (!series) {
     return null;
   }
-  const { _id: id, __v, title, desc, category, updatedAt } = series;
-  const queryString = qs.stringify({
-    id
-  });
+  const { _id: id, __v, title, desc, updatedAt } = series;
+
   return (
     <>
       <ContentCardWrap>
@@ -23,7 +26,7 @@ export default function SeriesCard({ series }) {
         </Link>
         <Content>
           <ContentHead>
-            <div>{moment(updatedAt).format("YYYY.MM.DD.")}</div>
+            <div>{moment(updatedAt).format('YYYY.MM.DD.')}</div>
             <Link to={`/series/${id}`}>
               <b>{title}</b>
             </Link>
@@ -59,7 +62,7 @@ const ContentCardWrap = styled.div`
 `;
 const CoverImg = styled.div`
   &::before {
-    content: "";
+    content: '';
     display: inline-block;
     transform: translate(-3%, 3%);
     height: 17rem;

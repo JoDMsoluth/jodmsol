@@ -6,8 +6,10 @@ import PostsListContainer from 'containers/blog/PostsListContainer';
 import LoadSeriesContainer from 'containers/blog/LoadSeriesContainer';
 import LoadTagsContainer from 'containers/blog/LoadTagsContainer';
 import BlogHeaderContainer from 'containers/common/BlogHeaderContainer';
+import { useRouteMatch } from 'react-router-dom';
 
-const BlogPage = ({ match }) => {
+const BlogPage = () => {
+  const match = useRouteMatch();
   const { filter } = match.params;
   return (
     <>

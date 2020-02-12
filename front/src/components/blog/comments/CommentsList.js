@@ -1,8 +1,19 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import CommentsItem from "./CommentsItem";
-import CommentForm from "./CommentForm";
+import React from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import CommentsItem from './CommentsItem';
+import CommentForm from './CommentForm';
+import PropTypes from 'prop-types';
+
+CommentsList.propTypes = {
+  addComment: PropTypes.func,
+  addRecomment: PropTypes.func,
+  updateComment: PropTypes.func,
+  deleteComment: PropTypes.func,
+  updateRecomment: PropTypes.func,
+  deleteRecomment: PropTypes.func,
+  comments: PropTypes.array,
+};
 
 export default function CommentsList({
   addComment,
@@ -11,7 +22,7 @@ export default function CommentsList({
   deleteComment,
   updateRecomment,
   deleteRecomment,
-  comments = []
+  comments = [],
 }) {
   return (
     <>

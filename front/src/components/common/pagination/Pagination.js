@@ -1,9 +1,18 @@
-import React from "react";
-import styled from "styled-components";
-import qs from "qs";
-import { Link } from "react-router-dom";
-import palette from "lib/styles/palette";
-import font from "lib/styles/font";
+import React from 'react';
+import styled from 'styled-components';
+import qs from 'qs';
+import { Link } from 'react-router-dom';
+import palette from 'lib/styles/palette';
+import font from 'lib/styles/font';
+import PropTypes from 'prop-types';
+
+Pagination.propTypes = {
+  tag: PropTypes.string,
+  page: PropTypes.number,
+  lastPage: PropTypes.number,
+  category: PropTypes.string,
+  filter: PropTypes.string,
+};
 
 const buildLink = ({ tag, page, category, filter }) => {
   const query = qs.stringify({ tag, page });
@@ -16,7 +25,7 @@ export default function Pagination({
   lastPage,
   tag,
   category,
-  filter
+  filter,
 }) {
   return (
     <PaginationWrap>
@@ -55,7 +64,7 @@ color : ${palette.teal9}
 `;
 
 const CustomLink = styled(Link)`
-  pointer-events: ${props => (props.disabled ? "none" : "")};
+  pointer-events: ${props => (props.disabled ? 'none' : '')};
   background: ${palette.blue3}
   border-radius : 3.5rem;
   text-align : center;

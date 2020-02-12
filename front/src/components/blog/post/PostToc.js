@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import smoothScrollTo, { getScrollTop } from 'lib/scrollTo';
+import smoothScrollTo from 'lib/scrollTo';
 import palette from 'lib/styles/palette';
 import font from 'lib/styles/font';
+import PropTypes from 'prop-types';
 
 export default function PostToc({ toc, activeHeading, onActiveHeading }) {
   if (!toc) return null;
@@ -33,6 +34,12 @@ export default function PostToc({ toc, activeHeading, onActiveHeading }) {
     </>
   );
 }
+
+PostToc.propTypes = {
+  toc: PropTypes.array,
+  activeHeading: PropTypes.string,
+  onActiveHeading: PropTypes.func,
+};
 
 // list - none style
 const TocWrap = styled.div`

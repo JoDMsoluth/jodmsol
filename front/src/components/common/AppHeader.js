@@ -1,15 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import { Link, withRouter } from "react-router-dom";
-import transition from "lib/styles/transition";
-import palette from "lib/styles/palette";
-import font from "lib/styles/font";
+import React from 'react';
+import styled from 'styled-components';
+import { Link, useRouteMatch } from 'react-router-dom';
+import transition from 'lib/styles/transition';
+import palette from 'lib/styles/palette';
+import font from 'lib/styles/font';
+import logo from 'statics/images/logo.png';
+import Avatar from 'statics/images/Avatar.jpg';
+import arrange from 'lib/styles/arrage';
 
-import logo from "statics/images/logo.png";
-import Avatar from "statics/images/Avatar.jpg";
-import arrange from "lib/styles/arrage";
+const AppHeader = () => {
+  const match = useRouteMatch();
 
-const AppHeader = ({ match }) => {
   console.log(match);
   return (
     <HeaderWrap>
@@ -39,7 +40,7 @@ const AppHeader = ({ match }) => {
   );
 };
 
-export default withRouter(AppHeader);
+export default AppHeader;
 
 const HeaderWrap = styled.div`
   padding: 1rem 2rem;
@@ -66,7 +67,7 @@ const StyledLink = styled(Link)`
       props.to === props.path ? palette.gray7 : palette.gray9};
   }
   & > span {
-    border-bottom: ${props => props.to === props.path && "2px solid #495057"};
+    border-bottom: ${props => props.to === props.path && '2px solid #495057'};
   }
   &:hover {
     color: ${palette.gray7};

@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import facebook from "statics/images/facebook.PNG";
-import instagram from "statics/images/instagram.PNG";
-import kakao from "statics/images/kakao.PNG";
-import twitter from "statics/images/twitter.PNG";
-import gmail from "statics/images/gmail.PNG";
-import github from "statics/images/github.PNG";
-import font from "lib/styles/font";
-import palette from "lib/styles/palette";
+import React from 'react';
+import styled from 'styled-components';
+import facebook from 'statics/images/facebook.PNG';
+import instagram from 'statics/images/instagram.PNG';
+import kakao from 'statics/images/kakao.PNG';
+import twitter from 'statics/images/twitter.PNG';
+import gmail from 'statics/images/gmail.PNG';
+import github from 'statics/images/github.PNG';
+import font from 'lib/styles/font';
+import palette from 'lib/styles/palette';
 
 export default function ContactIconList() {
   return (
@@ -15,22 +15,46 @@ export default function ContactIconList() {
       <MyName>Hyehyeong Jo</MyName>
       <MyDesc>Front-End Developer</MyDesc>
       <ContactIconWrap>
-        <a href="https://www.facebook.com/jodmsoluth" target="_blank">
+        <a
+          href="https://www.facebook.com/jodmsoluth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ContactIcon src={facebook} width="30px" height="30px" />
         </a>
-        <a href="https://www.instagram.com/jodmsoluth" target="_blank">
+        <a
+          href="https://www.instagram.com/jodmsoluth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ContactIcon src={instagram} width="30px" height="30px" />
         </a>
-        <a href="https://open.kakao.com/o/sNCD8wHb" target="_blank">
+        <a
+          href="https://open.kakao.com/o/sNCD8wHb"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ContactIcon src={kakao} width="30px" height="30px" />
         </a>
-        <a href="https://www.twitter.com/jodmsoluth" target="_blank">
+        <a
+          href="https://www.twitter.com/jodmsoluth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ContactIcon src={twitter} width="30px" height="30px" />
         </a>
-        <a href="https://www.gmail.com" target="_blank">
+        <a
+          href="https://www.gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ContactIcon src={gmail} width="30px" height="30px" />
         </a>
-        <a href="https://github.com/JoDMsoluth" target="_blank">
+        <a
+          href="https://github.com/JoDMsoluth"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <ContactIcon src={github} width="30px" height="30px" />
         </a>
       </ContactIconWrap>
