@@ -13,17 +13,9 @@ import 'codemirror/mode/shell/shell';
 // CodeMirror를 위한 CSS 스타일
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/monokai.css';
-import { useRouteMatch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function EditorPane({
-  desc,
-  title,
-  markdown,
-  tags,
-  onChangeInput,
-}) {
-  const match = useRouteMatch();
+export default function EditorPane({ title, markdown, onChangeInput }) {
   const editor = useRef();
   const codeMirror = useRef();
 
@@ -64,27 +56,7 @@ export default function EditorPane({
           onChange={onChangehandle}
           placeholder="title"
         />
-        {!match.params.id && (
-          <DescInput
-            type="text"
-            name="desc"
-            value={desc}
-            onChange={onChangehandle}
-            placeholder="description"
-          />
-        )}
         <CodeEditor ref={editor}></CodeEditor>
-        {match.params.id && (
-          <TagsWrap>
-            <div>태그</div>
-            <input
-              name="tags"
-              value={tags}
-              placeholder="태그를 입력하세요"
-              onChange={onChangehandle}
-            />
-          </TagsWrap>
-        )}
       </PaneWrap>
     </>
   );
@@ -125,28 +97,4 @@ const TitleInput = styled.input`
   font-size: 1.5rem;
   font-weight: 500;
 `;
-const DescInput = styled.input`
-  width: 100%;
-  height: 5rem;
-  padding: 1rem;
-  font-size: 1rem;
-  font-weight: 300;
-`;
 const CodeEditor = styled.textarea``;
-const TagsWrap = styled.div`
-  padding: 0 1rem;
-  height: 2rem;
-  display: flex;
-  align-items: center;
-  background: ${palette.gray8};
-  & > div {
-    font-size: 1rem;
-    color: white;
-    font-weight: 600;
-    margin-right: 1rem;
-    padding-bottom: 0.2rem;
-  }
-  & > input {
-    flex: 1;
-  }
-`;

@@ -1,4 +1,10 @@
 {
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "html",
+    "typescriptreact"
+  ],
   "eslint.workingDirectories": ["./front", "./back"]
 }
 // 폴더 구조가

@@ -20,7 +20,7 @@ const PostsListContainer = () => {
     ({ posts, loading }) => ({
       posts: posts.posts,
       postError: posts.postError,
-      loading: loading['LOAD_POSTS'],
+      loading: loading.LOAD_POSTS,
       lastPage: posts.lastPage,
     }),
   );

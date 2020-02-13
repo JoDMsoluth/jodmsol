@@ -1,5 +1,5 @@
-import client from './axiosSetting';
 import qs from 'qs';
+import client from './axiosSetting';
 
 export const loadPostsApi = ({ category, tag, page, filter }) => {
   const queryString = qs.stringify({
@@ -23,10 +23,9 @@ export const loadHashtagsApi = ({ category, page }) => {
 export const loadPostsInSeriesApi = ({ id, category, page }) => {
   const queryString = qs.stringify({
     page,
+    id,
   });
-  return client.get(
-    `api/blog/posts/load/${category}/series/${id}?${queryString}`,
-  );
+  return client.get(`api/blog/posts/load/${category}/series?${queryString}`);
 };
 
 export const loadPostsInTagApi = ({ category, page, tag }) => {

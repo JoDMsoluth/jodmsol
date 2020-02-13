@@ -3,13 +3,14 @@ import BlogPostCollection from "models/blogPost/BlogPostCollection";
 import BlogPostDocument from "models/blogPost/BlogPostDocument";
 import { removeHtmlAndShorten } from "lib/sanitizeHtml";
 import SeriesCollection from "models/series/SeriesCollection";
+import SeriesDocument from "models/series/SeriesDocument";
 
 async function loadAllPosts(req: Request, res: Response) {
   console.log("getAllPost");
   const page: number = parseInt(req.query.page || "1", 10);
   const { tag, series } = req.query;
   const { category } = req.params;
-  let { filter } = req.params;
+  const { filter } = req.params;
   console.log(
     "page tag series popular latest category filter",
     page,
@@ -65,15 +66,10 @@ async function loadAllPosts(req: Request, res: Response) {
 
 async function loadSeriesPosts(req: Request, res: Response) {
   const page: number = parseInt(req.query.page || "1", 10);
-  const { series } = req.query;
+  const { id } = req.query;
 
   const { category } = req.params;
-  console.log(
-    "page tag series popular latest category filter",
-    page,
-    series,
-    category
-  );
+  console.log("page tag series popular latest category filter", page, category);
 
   if (page < 1) {
     res.status(400).send("bad request");
@@ -81,7 +77,7 @@ async function loadSeriesPosts(req: Request, res: Response) {
     return;
   }
   try {
-    const getSeries: BlogPostDocument[] | null = await SeriesCollection.find()
+    const getSeries: SeriesDocument | null = await SeriesCollection.findById(id)
       .populate("posts")
       .where("category")
       .equals(category)

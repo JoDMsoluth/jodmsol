@@ -4,7 +4,13 @@ import CustomButton from 'lib/CustomButton';
 import palette from 'lib/styles/palette';
 import WirteOpsPanel from './WriteOpsPanel';
 
-export default function EditHeader({ onGoBack, onSubmit, coverImg }) {
+export default function EditHeader({
+  onGoBack,
+  onSubmit,
+  coverImg,
+  tags,
+  desc,
+}) {
   const [toggleOps, setToggleOps] = useState(false);
 
   const onClickHandle = useCallback(() => {
@@ -29,6 +35,8 @@ export default function EditHeader({ onGoBack, onSubmit, coverImg }) {
           toggleOps={toggleOps}
           setToggleOps={onClickHandle}
           coverImg={coverImg}
+          tags={tags}
+          desc={desc}
         />
       </Header>
     </>

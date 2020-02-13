@@ -32,7 +32,6 @@ export default function MarkdownPreview({ markdown }) {
     setHtml(
       marked(markdown, {
         breaks: true,
-        sanitize: true,
       }),
     );
   };

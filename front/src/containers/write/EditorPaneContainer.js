@@ -1,22 +1,20 @@
-import React, { useCallback } from "react";
-import EditorPane from "components/write/EditorPane";
-import { useSelector, useDispatch } from "react-redux";
-import { changeInput } from "modules/stores/write";
+import React, { useCallback } from 'react';
+import EditorPane from 'components/write/EditorPane';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeInput } from 'modules/stores/write';
 
 export default function EditorPaneContainer() {
-  const { title, tags, markdown, desc } = useSelector(state => state.write);
+  const { title, markdown } = useSelector(state => state.write);
   const dispatch = useDispatch();
 
   const handleChangeInput = useCallback(
     (name, value) => dispatch(changeInput({ name, value })),
-    [dispatch]
+    [dispatch],
   );
   return (
     <EditorPane
       title={title}
       markdown={markdown}
-      desc={desc}
-      tags={tags}
       onChangeInput={handleChangeInput}
     />
   );

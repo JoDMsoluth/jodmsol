@@ -1,20 +1,29 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import palette from 'lib/styles/palette';
 import { useDispatch } from 'react-redux';
 import { uploadImg, removeImg } from 'modules/stores/post';
 import WritePostOps from './WritePostOps';
+import { changeInput } from 'modules/stores/write';
 
 export default function WriteOpsPanel({
   onSubmit,
   toggleOps,
   setToggleOps,
   coverImg,
+  tags,
+  desc,
 }) {
-  const [desc, setDesc] = useState('');
   const imageInput = useRef();
   const dispatch = useDispatch();
-  console.log(coverImg);
+
+  const onChangeInput = useCallback(
+    (name, value) => dispatch(changeInput({ name, value })),
+    [dispatch],
+  );
+  const onChangehandle = useCallback(e => {
+    onChangeInput(e.target.name, e.target.value);
+  });
 
   const onChangeImage = useCallback(
     e => {
@@ -37,10 +46,6 @@ export default function WriteOpsPanel({
   const onClickImageUpload = useCallback(e => {
     imageInput.current.click();
   }, []);
-
-  const onChangeHandle = useCallback(e => {
-    setDesc(e.target.value);
-  });
 
   return (
     <>
@@ -88,13 +93,13 @@ export default function WriteOpsPanel({
               name="desc"
               value={desc}
               rows="5"
-              onChange={onChangeHandle}
+              onChange={onChangehandle}
             ></textarea>
           </DescWrap>
         </CommonDesc>
         <CloseButton className="far fa-times-circle" onClick={setToggleOps} />
         <div onClick={onSubmit}>post</div>
-        <WritePostOps />
+        <WritePostOps tags={tags} onChangeInput={onChangeInput} />
       </WriteOpsWrap>
     </>
   );

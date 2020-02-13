@@ -24,7 +24,13 @@ const EditorHeaderContainer = ({ history, match }) => {
   };
 
   return (
-    <EditorHeader onGoBack={onGoBack} onSubmit={onSubmit} coverImg={coverImg} />
+    <EditorHeader
+      onGoBack={onGoBack}
+      onSubmit={onSubmit}
+      coverImg={coverImg}
+      tags={tags}
+      desc={desc}
+    />
   );
 };
 

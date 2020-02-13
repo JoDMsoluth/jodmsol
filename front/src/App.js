@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet';
 import React from 'react';
 import { Switch, BrowserRouter, Route } from 'react-router-dom';
 import {
@@ -6,11 +7,9 @@ import {
   ProfilePage,
   BlogPage,
   WritePost,
-  NotFoundPage,
   ViewPage,
 } from './pages';
 import ResumeContent from './components/profile/Resume/ResumeContent';
-import { Helmet } from 'react-helmet';
 
 function App() {
   return (
