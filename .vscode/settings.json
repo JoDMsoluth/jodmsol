@@ -1,0 +1,10 @@
+{
+  "eslint.workingDirectories": ["./front", "./back"]
+}
+// 폴더 구조가
+// root
+//   - back
+//     - .eslintrc
+//   - front
+//     - .eslintrc
+// 이므로 따로 설정 필요

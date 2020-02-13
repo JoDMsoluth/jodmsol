@@ -5,6 +5,7 @@ export const ProjectPostSchema: Schema = new Schema(
   {
     coverImg: String,
     title: String,
+    desc: String,
     markdown: String,
     category: String
   },

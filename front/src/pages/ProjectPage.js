@@ -1,14 +1,16 @@
 import React from 'react';
 import AppLayoutContainer from 'containers/common/AppLayoutContainer';
-import ProjectContent from 'components/project/content';
 import ProjectHeaderContainer from 'containers/common/BlogHeaderContainer';
+import ProjectNavBar from 'components/project/header/ProjectNavBar';
+import ProjectListContainer from 'containers/project/ProejctListContainer';
 
 const ProjectPage = () => {
   return (
     <>
       <AppLayoutContainer>
         <ProjectHeaderContainer />
-        <ProjectContent />
+        <ProjectNavBar />
+        <ProjectListContainer />
       </AppLayoutContainer>
     </>
   );

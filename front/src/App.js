@@ -28,14 +28,12 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={IntroPage} />
-          <Route path="/project/:category?/:filter?" component={ProjectPage} />
+          <Route path="/projects/:category?" component={ProjectPage} />
           <Route path="/profile" component={ProfilePage} />
           <Route path="/blog/:category?/:filter?" component={BlogPage} />
           <Route path="/print/resume" component={ResumeContent} />
-
           <Route path="/add/:filter/:category/:id?" component={WritePost} />
           <Route path="/:filter/:id" component={ViewPage} />
-
           <Route component={IntroPage} />
         </Switch>
       </BrowserRouter>

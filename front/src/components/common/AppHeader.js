@@ -21,7 +21,7 @@ const AppHeader = () => {
       <StyledLink to="/profile" path={match.path}>
         <span>PROFILE</span>
       </StyledLink>
-      <StyledLink to="/project" path={match.path}>
+      <StyledLink to="/projects/all" path={match.path}>
         <span>PROJECT</span>
       </StyledLink>
       <StyledLink to="/blog/study?page=1" path={match.path}>

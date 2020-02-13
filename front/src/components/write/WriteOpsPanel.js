@@ -1,8 +1,9 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useState } from 'react';
 import styled, { css } from 'styled-components';
 import palette from 'lib/styles/palette';
 import { useDispatch } from 'react-redux';
 import { uploadImg, removeImg } from 'modules/stores/post';
+import WritePostOps from './WritePostOps';
 
 export default function WriteOpsPanel({
   onSubmit,
@@ -10,9 +11,11 @@ export default function WriteOpsPanel({
   setToggleOps,
   coverImg,
 }) {
+  const [desc, setDesc] = useState('');
   const imageInput = useRef();
   const dispatch = useDispatch();
   console.log(coverImg);
+
   const onChangeImage = useCallback(
     e => {
       console.log(e.target.files);
@@ -30,40 +33,68 @@ export default function WriteOpsPanel({
     },
     [dispatch],
   );
+
   const onClickImageUpload = useCallback(e => {
     imageInput.current.click();
   }, []);
 
+  const onChangeHandle = useCallback(e => {
+    setDesc(e.target.value);
+  });
+
   return (
     <>
       <WriteOpsWrap encType="multipart/form-data" toggleOps={toggleOps}>
-        <input id="post" type="radio" name="post" value="post" />
-        <label for="post">Post</label>
-        <input id="series" type="radio" name="series" value="series" />
-        <label for="series">Series</label>
-        <input id="project" type="radio" name="project" value="project" />
-        <label for="project">Project</label>
-        <input
-          id="image"
-          type="file"
-          multiple
-          hidden
-          ref={imageInput}
-          onChange={onChangeImage}
-        />
-        {coverImg ? (
-          <div onClick={onClickImageUpload}>Remove</div>
-        ) : (
-          <div onClick={onClickImageUpload}>Upload</div>
-        )}
-
-        <img
-          src={`${process.env.REACT_APP_SERVER_URL}/${coverImg}`}
-          alt="coverImg"
-          width="100px"
-          height="100px"
-        />
-        <i className="far fa-times-circle" onClick={setToggleOps} />
+        <RadioWrap>
+          <input
+            id="post"
+            type="radio"
+            name="filter"
+            value="post"
+            checked="checked"
+          />
+          <label htmlFor="post">Post</label>
+          <input id="series" type="radio" name="filter" value="series" />
+          <label htmlFor="series">Series</label>
+          <input id="project" type="radio" name="filter" value="project" />
+          <label htmlFor="project">Project</label>
+        </RadioWrap>
+        <CommonDesc>
+          <ImageWrap onClick={onClickImageUpload}>
+            <input
+              id="image"
+              type="file"
+              multiple
+              hidden
+              ref={imageInput}
+              onChange={onChangeImage}
+            />
+            {coverImg ? (
+              <>
+                <img
+                  src={`${process.env.REACT_APP_SERVER_URL}/${coverImg}`}
+                  alt="coverImg"
+                  width="100px"
+                  height="100px"
+                />
+                <span>Remove</span>
+              </>
+            ) : (
+              <span>Upload</span>
+            )}
+          </ImageWrap>
+          <DescWrap>
+            <textarea
+              name="desc"
+              value={desc}
+              rows="5"
+              onChange={onChangeHandle}
+            ></textarea>
+          </DescWrap>
+        </CommonDesc>
+        <CloseButton className="far fa-times-circle" onClick={setToggleOps} />
+        <div onClick={onSubmit}>post</div>
+        <WritePostOps />
       </WriteOpsWrap>
     </>
   );
@@ -76,12 +107,70 @@ const WriteOpsWrap = styled.form`
   right: 0;
   background: ${palette.gray2};
   width: 20rem;
-  height: 0rem;
-  transition: height 1s ease-in
+  height: 20rem;
+  transition: all 1s ease-in;
+  padding: 2rem 1rem;
     ${props =>
       props.toggleOps &&
       css`
-        display: inline-block;
+        padding: 2rem 1rem;
         height: 20rem;
       `};
+`;
+
+const RadioWrap = styled.div`
+  color: ${palette.gray7};
+  margin-bottom: 1rem
+  text-align: center;
+  & > label {
+    margin-right: 1rem;
+  }
+`;
+
+const CommonDesc = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const ImageWrap = styled.div`
+  border: 1px dashed ${palette.gray6};
+  margin-right: 1rem;
+  width: 50%;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  & > span {
+    position: absolute;
+    top: 150%;
+    right: 50%;
+    transform: translateX(50%);
+  }
+  &:hover {
+    border: 2px dashed ${palette.blue5};
+    color: ${palette.blue5};
+    cursor: pointer;
+  }
+  &:hover > span {
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -52%);
+    transition: all 0.3s ease-in;
+  }
+`;
+const DescWrap = styled.div`
+  flex: 1;
+  width: 50%;
+  & > textarea {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const CloseButton = styled.i`
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 2rem;
+  cursor: pointer;
 `;

@@ -1,23 +1,35 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
+import React from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import PropTypes from 'prop-types';
+import kickVillageProjectImg from 'statics/images/kickVillageProject.PNG';
+import { Link } from 'react-router-dom';
 
-export default function ProjectContentCard({ content }) {
+export default function ProjectCard({ project }) {
   return (
     <>
       <ContentCardWrap>
         <CoverImg>
-          <img src={content.coverImg} alt="coverImg" />
+          <Link to={`/project/${project._id}`}>
+            <img
+              src={project.coverImg || kickVillageProjectImg}
+              alt="coverImg"
+            />
+          </Link>
         </CoverImg>
         <Content>
-          <span>{content.title}</span>
-          <span>{content.uploadDate}</span>
-          <div>{content.desc}</div>
+          <span>{project.title}</span>
+          <span>{project.uploadDate}</span>
+          <div>{project.desc}</div>
         </Content>
       </ContentCardWrap>
     </>
   );
 }
+
+ProjectCard.prototype = {
+  project: PropTypes.object,
+};
 
 const ContentCardWrap = styled.div`
   display: inline-block;

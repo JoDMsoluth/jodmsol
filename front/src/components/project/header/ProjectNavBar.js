@@ -1,37 +1,39 @@
-import React from "react";
-import styled from "styled-components";
-import palette from "lib/styles/palette";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import palette from 'lib/styles/palette';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 export default function ProjectNavBar() {
+  const match = useRouteMatch();
+  const { category } = match.params;
   return (
     <>
       <NavBarWrap>
-        <Link to="/project">
+        <Link to={`/projects/all`}>
           <i>
             <i className="far fa-newspaper"></i>
           </i>
           <b>All</b>
         </Link>
-        <Link to="/project">
+        <Link to={`/projects/co`}>
           <i>
             <i className="fas fas fa-building"></i>
           </i>
           <b>Co .</b>
         </Link>
-        <Link to="/project">
+        <Link to={`/projects/team`}>
           <i>
             <i className="fas fa-users"></i>
           </i>
           <b>Team</b>
         </Link>
-        <Link to="/project" style={{ marginRight: "0" }}>
+        <Link to={`/projects/toy`} style={{ marginRight: '0' }}>
           <i>
             <i className="fas fa-user"></i>
           </i>
           <b>Toy</b>
         </Link>
-        <ActiveBar></ActiveBar>
+        <ActiveBar category={category}></ActiveBar>
       </NavBarWrap>
     </>
   );
@@ -79,7 +81,7 @@ const NavBarWrap = styled.div`
     & a:hover i{
         left : calc(50% - 3rem);
     }
-    & a:nth-child(1):hover {
+    & a:nth-child(1):hover ~ div {
             left : 0;
     } 
     & a:nth-child(2):hover ~ div {
@@ -105,4 +107,12 @@ const ActiveBar = styled.div`
     inset 0px 0px 10px 0px ${palette.gray7};
   z-inex: 1;
   transition: all 0.3s ease-in;
+  left: ${props =>
+    props.category === 'co'
+      ? '7.3rem'
+      : props.category === 'team'
+      ? '14.6rem'
+      : props.category === 'toy'
+      ? '21.9rem'
+      : '0rem'};
 `;

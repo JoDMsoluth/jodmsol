@@ -1,6 +1,7 @@
 import React from 'react';
 import SeriesCard from './SeriesCard';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export default function SeriesCardList({ series, seriesError, loading }) {
   if (seriesError) {
@@ -19,6 +20,11 @@ export default function SeriesCardList({ series, seriesError, loading }) {
     </>
   );
 }
+SeriesCardList.prototype = {
+  series: PropTypes.object,
+  seriesError: PropTypes.string,
+  loading: PropTypes.bool,
+};
 
 const ContentContainer = styled.div`
   display: flex;

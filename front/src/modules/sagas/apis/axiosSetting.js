@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // axios setting
 const client = axios.create();
-client.defaults.baseURL = 'http://localhost:3002/';
+client.defaults.baseURL = 'http://localhost:3001/';
 client.defaults.withCredentials = true;
 // intercepter setting
 axios.interceptors.response.use(

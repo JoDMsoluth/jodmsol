@@ -21,21 +21,21 @@ import initializeViews from "lib/initializeViews";
 const MongoStore: mongo.MongoStoreFactory = mongo(session);
 export const mongoUrl: string = process.env.MONGO_DB || "mongodb://127.0.0.1/";
 (<any>mongoose).Promise = global.Promise; // use Node Promise. because promise not exist in mongodb
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
-mongoose.set("useCreateIndex", true);
+
 mongoose
   .connect(mongoUrl, {
+    useUnifiedTopology: true,
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useCreateIndex: true,
+    useFindAndModify: false
   })
   .then(() => {
     console.log("  MongoDB is connected successfully.");
     // createDummyData();
   })
   .catch(err => {
-    console.error(
-      "  MongoDB connection error. Please make sure MongoDB is running. " + err
+    console.log(
+      `MongoDB connection error. Please make sure MongoDB is running. : ${err.message}`
     );
     process.exit();
   });
