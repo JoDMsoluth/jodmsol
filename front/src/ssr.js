@@ -3,6 +3,7 @@ import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import store from 'modules/stores/configure';
+import App from 'App';
 
 const serverRender = async ctx => {
   const html = ReactDOMServer.renderToString(
