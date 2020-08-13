@@ -74,7 +74,7 @@
     "resolve-url-loader": "3.1.1",
     "sass-loader": "8.0.0",
     "semver": "6.3.0",
-    "serialize-javascript": "^2.1.2",
+    "serialize-javascript": "^3.1.0",
     "spectacle": "^5.8.0",
     "style-loader": "1.0.0",
     "styled-components": "^4.4.1",
